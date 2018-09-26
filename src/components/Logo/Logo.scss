@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:700');
+
+div.Logo {
+  position: absolute;
+  top: 30px;
+  left:6%;
+  font-size: 22px;
+  font-weight: 700;
+  font-family: 'Ubuntu', sans-serif;
+  span {
+    background: white;
+    width: 100%;
+    display: inline-block;
+    position: absolute;
+    height: 8px;
+  }
+}
