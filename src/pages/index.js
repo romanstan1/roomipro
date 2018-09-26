@@ -1,7 +1,11 @@
 import Main from './Main/Main'
-import LogIn from './LogIn/LogIn'
+import LogIn from './Auth/LogIn'
+import SendEmail from './Auth/SendEmail'
+import UpdatePassword from './Auth/UpdatePassword'
 
 export {
   Main,
-  LogIn
+  LogIn,
+  SendEmail,
+  UpdatePassword
 }
