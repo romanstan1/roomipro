@@ -1,9 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import ConnectedApp, {App} from './App';
+import {shallow} from 'enzyme'
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
-});
+describe('>>> A P P .js --- Shallow Render REACT COMPONENTS',()=>{
+  let wrapper
+
+  beforeEach(()=>{
+    wrapper = shallow(<App/>)
+  })
+
+  it('+++ render the DUMB component', () => {
+    expect(wrapper.length).toEqual(1)
+  })
+
+})

@@ -1,26 +1,28 @@
 import React, { Component, Fragment } from 'react';
-import {Route,Switch} from 'react-router-dom'
+import {Route, Router} from 'react-router-dom'
 import {connect} from 'react-redux'
+import createBrowserHistory from 'history/createBrowserHistory'
 import { Main, LogIn, SendEmail, UpdatePassword} from 'pages'
 import 'styles/global.css'
 
-const App = ({isAuthenticated}) => {
-  return (
-    <Switch>
-      <Route exact path="/update-password" component={UpdatePassword}/>
-      <Route exact path="/send-email" component={SendEmail}/>
-      <Route component={LogIn}/>
-    </Switch>
-  )
-  // if(isAuthenticated) {
-  //   )
-  // } else {
-  //   return <Route component={Main}/>
-  // }
-}
+export const history = createBrowserHistory()
 
-const mapProps = (state) => ({
+export const App = ({isAuthenticated}) =>
+  <Router history={history}>
+    {
+      isAuthenticated?
+        <Fragment>
+          <Route exact path="/update-password" component={UpdatePassword}/>
+          <Route exact path="/send-email" component={SendEmail}/>
+          <Route component={LogIn}/>
+        </Fragment>
+      :
+      <Route component={Main}/>
+    }
+  </Router>
+
+const mapProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 })
 
-export default (App)
+export default connect(mapProps)(App)

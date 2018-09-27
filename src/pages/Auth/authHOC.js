@@ -16,13 +16,13 @@ const authHoc = (PassedComponent) => class AuthHOC extends Component {
   }
 
   handleSignIn = () => {
-    console.log('handleSignIn')
+    console.log('handleSignIn', this.state.email, this.state.password)
   }
   handleSendEmail = () => {
-    console.log('handleSendEmail')
+    console.log('handleSendEmail', this.state.email)
   }
   handleUpdatePassword = () => {
-    console.log('handleUpdatePassword')
+    console.log('handleUpdatePassword', this.state.password)
   }
 
   render() {

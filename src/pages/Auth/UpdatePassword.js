@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react'
 import authHOC from './authHOC'
 import {PasswordInput, CTAButton, CardFooter} from './AuthModules'
+import PropTypes from 'prop-types';
 
 const UpdatePassword = ({handleChange, handleUpdatePassword, password}) =>
   <Fragment>
@@ -18,4 +19,9 @@ const UpdatePassword = ({handleChange, handleUpdatePassword, password}) =>
     </CardFooter>
   </Fragment>
 
+UpdatePassword.propTypes = {
+  handleUpdatePassword: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  password: PropTypes.string.isRequired,
+}
 export default authHOC(UpdatePassword)
