@@ -2,21 +2,33 @@ import React, {Component} from 'react'
 import {Logo} from 'components'
 import {Title} from './AuthModules'
 import {Link} from 'react-router-dom'
+import {auth, persistence} from 'firebaseInit'
 import './Auth.css'
 
-const authHoc = (PassedComponent) => class AuthHOC extends Component {
+export default (PassedComponent) => class AuthHOC extends Component {
 
   state = {
     email:'',
     password:''
   }
-
+  componentWillMount(){
+    document.addEventListener("keydown", this.handleKeyPress.bind(this))
+  }
+  componentWillUnmount(){
+    document.removeEventListener("keydown", this.handleKeyPress.bind(this))
+  }
   handleChange = (e) => {
     this.setState({[e.target.dataset.type]: e.target.value})
   }
-
+  handleKeyPress = (e) => {
+    if(e.code === "Enter") this.handleSignIn()
+  }
   handleSignIn = () => {
-    console.log('handleSignIn', this.state.email, this.state.password)
+    const {email, password} = this.state
+    auth.setPersistence(persistence.SESSION).then(() =>
+      auth.signInWithEmailAndPassword(email, password)).catch(error => {
+        console.log('error: ', error)
+    })
   }
   handleSendEmail = () => {
     console.log('handleSendEmail', this.state.email)
@@ -24,7 +36,6 @@ const authHoc = (PassedComponent) => class AuthHOC extends Component {
   handleUpdatePassword = () => {
     console.log('handleUpdatePassword', this.state.password)
   }
-
   render() {
     const {email, password} = this.state
     return (
@@ -45,5 +56,3 @@ const authHoc = (PassedComponent) => class AuthHOC extends Component {
     )
   }
 }
-
-export default authHoc

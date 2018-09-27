@@ -1,21 +1,24 @@
-import { AUTH_SUCCESSFUL, LOG_OUT } from '../constants/actionTypes';
+import { LOG_IN_SUCCESSFUL, LOG_OUT } from '../constants/actionTypes';
 
 export const initialState = {
-  isAuthenticated: true,
+  isAuthenticated: false,
+  user: null
 }
 
 export default function authReducer(state = initialState, action) {
   switch (action.type) {
-    case AUTH_SUCCESSFUL: {
+    case LOG_IN_SUCCESSFUL: {
       return {
         ...state,
-        isAuthenticated: true
+        isAuthenticated: true,
+        user: action.payload
       }
     }
     case LOG_OUT: {
       return {
         ...state,
-        isAuthenticated: false
+        isAuthenticated: false,
+        user: null
       }
     }
     default:

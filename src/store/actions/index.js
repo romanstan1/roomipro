@@ -1,3 +1,3 @@
-import {logOut} from './authActions.js'
+import {logOut, logInSuccessful} from './authActions.js'
 
-export {logOut}
+export {logOut, logInSuccessful}

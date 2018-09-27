@@ -6,8 +6,8 @@ import rootReducer from './reducers'
 
 const logger = store => next => action => {
   let result = next(action)
-  // console.log('action.type:', action.type)
-  // console.log("store: ",store.getState())
+  console.log('action.type:', action.type)
+  console.log("store: ",store.getState())
   return result
 }
 

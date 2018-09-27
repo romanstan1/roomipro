@@ -17,6 +17,7 @@ export const EmailInput = ({handleChange, email}) =>
   />
 
 export const PasswordInput = ({handleChange, password}) =>
+<form action="">  
   <input
     type="password"
     value={password}
@@ -24,11 +25,13 @@ export const PasswordInput = ({handleChange, password}) =>
     data-type='password'
     placeholder='password'
   />
+</form>
 
 export const CTAButton = ({handleClick, children}) =>
   <div
     className='CTAButton'
-    onClick={handleClick}>
+    onClick={handleClick}
+  >
     {children}
   </div>
 
