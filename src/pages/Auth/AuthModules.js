@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 
 export const Title = () =>
@@ -27,13 +27,30 @@ export const PasswordInput = ({handleChange, password}) =>
   />
 </form>
 
-export const CTAButton = ({handleClick, children}) =>
-  <div
-    className='CTAButton'
-    onClick={handleClick}
-  >
-    {children}
-  </div>
+export class CTAButton extends Component {
+  state = {
+    pressDown: false
+  }
+  handlePress = () => {
+    this.setState({ pressDown: !this.state.pressDown})
+  }
+  render() {
+    const {handleClick, children} = this.props
+    const {pressDown} = this.state
+    return (
+      <div
+        className={pressDown? 'CTAButton pressDown' : 'CTAButton'}
+        onClick={handleClick}
+        onMouseDown={this.handlePress}
+        onMouseUp={this.handlePress}
+        onTouchStart={this.handlePress}
+        onTouchEnd={this.handlePress}
+        >
+          {children}
+        </div>
+    )
+  }
+}
 
 export const CardFooter = ({link, children}) =>
   <div className="CardFooter">
@@ -42,10 +59,17 @@ export const CardFooter = ({link, children}) =>
     </Link>
   </div>
 
+export const OutlookLink = ({link, children}) =>
+  <div className="OutlookLink">
+    <a href={link} target="_blank">
+      {children}
+    </a>
+  </div>
+
 export const Message = ({children, error}) =>
 <div className="Message">
   {
      children &&
-    <p className={error? 'error':''}>{children}</p>
+    <p className={error? 'error':''} dangerouslySetInnerHTML={{ __html: children }}/>
   }
 </div>

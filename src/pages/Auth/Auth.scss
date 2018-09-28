@@ -6,7 +6,7 @@ div.Auth {
   div.titles {
     position: relative;
     margin: 0px auto;
-    padding-top: 35px;
+    padding: 35px 0 20px 0;
     width: 70%;
     min-width: 300px;
     max-width: 700px;
@@ -19,7 +19,7 @@ div.Auth {
       // margin: 15px 0;
     }
     h2 {
-      margin: 24px 0 0 0;
+      margin: 24px 0 0px 0;
       line-height: 150%;
       font-size: 24px;
       font-weight: 300;
@@ -31,22 +31,27 @@ div.Auth {
     // background: ghostwhite;
     position: relative;
     margin: 40px auto 0px auto;
-    height: 50px;
+    height: 20px;
     display: flex;
     justify-content: center;
     align-items:flex-end;
     p {
-      animation-duration: 2.4s;
-      animation-name: createBox;
-      white-space: nowrap;
-      overflow: hidden;
-      width: auto;
-      max-width: 0px;
-      height: 35px;
-      line-height: 35px;
+      // animation-duration: 2.4s;
+      // animation-name: createBox;
+      // white-space: nowrap;
+      // overflow: hidden;
+      width: 90%;
+      // max-width: 0px;
+      // height: 35px;
+      text-align: center;
+      line-height: 28px;
       color: $brightGreen;
-      font-weight: 600;
+      font-weight: 300;
       font-size: 16px;
+      padding: 10px 0;
+      span {
+        font-weight: 700;
+      }
       &.error {
         color: $brightRed;
       }
@@ -100,6 +105,20 @@ div.Auth {
       -webkit-box-shadow: 0px 4px 40px -4pxrgba(0,0,0,0.20);
       -moz-box-shadow: 0px 4px 40px -4px rgba(0,0,0,0.20);
       box-shadow: 0px 4px 40px -4px rgba(0,0,0,0.20);
+      -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+      -khtml-user-select: none; /* Konqueror HTML */
+      -moz-user-select: none; /* Firefox */
+      -ms-user-select: none; /* Internet Explorer/Edge */
+      user-select: none;
+       -webkit-tap-highlight-color: transparent;
+      &.pressDown {
+        transform: translate3d(0, 0%, 0) !important;
+        background: $brightBlueHover;
+        -webkit-box-shadow: 0px 10px 20px -4px rgba(0,0,0,0.30);
+        -moz-box-shadow:    0px 10px 20px -4px rgba(0,0,0,0.30);
+        box-shadow:         0px 10px 20px -4px rgba(0,0,0,0.30);
+      }
       &:hover {
         transform: translate3d(0, -5%, 0);
         background: $brightBlueHover;
@@ -116,6 +135,17 @@ div.Auth {
         &:hover {
           text-decoration: underline;
           color: $navyBlue;
+        }
+      }
+    }
+    div.OutlookLink {
+      margin: 45px 0;
+      a {
+        color: $brightBlue;
+        transition: 0.1s ease;
+        &:hover {
+          text-decoration: underline;
+          color: $brightBlueHover;
         }
       }
     }

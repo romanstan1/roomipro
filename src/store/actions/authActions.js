@@ -7,9 +7,7 @@ import {
 } from '../constants/actionTypes'
 
 export const logOut = () => dispatch =>
-  dispatch({
-    type: LOG_OUT
-  })
+  dispatch({ type: LOG_OUT })
 
 export const logInSuccessful = user => dispatch =>
   dispatch({
@@ -18,7 +16,6 @@ export const logInSuccessful = user => dispatch =>
   })
 
 export const emailSuccess = email => dispatch => {
-  clearMessage(dispatch)
   return dispatch({
     type: EMAIL_SUCCESS,
     payload: email
@@ -26,7 +23,6 @@ export const emailSuccess = email => dispatch => {
 }
 
 export const errorMessage = error => dispatch => {
-  clearMessage(dispatch)
   return dispatch({
     type: ERROR_MESSAGE,
     payload: error
@@ -34,7 +30,8 @@ export const errorMessage = error => dispatch => {
 }
 
 function clearMessage(dispatch) {
-  setTimeout(()=>{
-    dispatch({ type: CLEAR_MESSAGE })
-  }, 2500)
+  dispatch({ type: CLEAR_MESSAGE })
+
+  // setTimeout(()=>{
+  // }, 2500)
 }

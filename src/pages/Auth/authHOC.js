@@ -49,7 +49,7 @@ const authHOC = PassedComponent => class AuthHOC extends Component {
 
   render() {
     const {email, password} = this.state
-    const {error, userMessage} = this.props
+    const {error, emailWasASuccess, userMessage} = this.props
     return (
       <div className='Auth'>
         <Logo/>
@@ -62,6 +62,7 @@ const authHOC = PassedComponent => class AuthHOC extends Component {
             handleChange={this.handleChange}
             handleSignIn={this.handleSignIn}
             handleSendEmail={this.handleSendEmail}
+            emailSuccess={emailWasASuccess}
           />
         </div>
       </div>
@@ -75,7 +76,8 @@ const mapDispatch = {
 }
 const mapState = state => ({
   userMessage: state.auth.userMessage,
-  error: state.auth.error
+  error: state.auth.error,
+  emailWasASuccess: state.auth.emailSuccess
 })
 
 export default compose(connect(mapState, mapDispatch),authHOC)
