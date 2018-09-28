@@ -29,9 +29,5 @@ export const errorMessage = error => dispatch => {
   })
 }
 
-function clearMessage(dispatch) {
+export const clearMessage = () => dispatch =>
   dispatch({ type: CLEAR_MESSAGE })
-
-  // setTimeout(()=>{
-  // }, 2500)
-}

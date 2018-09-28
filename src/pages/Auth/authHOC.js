@@ -8,7 +8,6 @@ import {connect} from 'react-redux'
 import {compose} from "redux";
 import './Auth.css'
 
-
 const authHOC = PassedComponent => class AuthHOC extends Component {
 
   state = {
@@ -29,18 +28,17 @@ const authHOC = PassedComponent => class AuthHOC extends Component {
     const {email} = this.state
     const domain = email.replace(/.*@/, "")
 
-    if(domain === 'theuniprogroup.com') { // checks if it is a unipro email address
+    if(domain === 'theuniprogroup.com') { // 0 checks if it is a unipro email address
       secondaryAuth.createUserWithEmailAndPassword(email, 'default') // 1 trys to create new user by default
-      .then(firebaseUser => secondaryAuth.signOut()) // 2 if succeed, signs out
-      .then(() => this.sendResetEmail(email))  // 3 then sents reset email to that address
-      .catch(error => {
-        if(error.code === 'auth/email-already-in-use') this.sendResetEmail(email)  // 4 if fails, ie user already exists, just sends reset email
-        else this.props.errorMessage(error) // 5 if fails for another reason, therefore sends error message
-      })
+        .then(firebaseUser => secondaryAuth.signOut()) // 2 if succeed, signs out
+        .then(() => this.sendResetEmail(email))  // 3 then sents reset email to that address
+        .catch(error => {
+          if(error.code === 'auth/email-already-in-use') this.sendResetEmail(email)  // 4 if fails, ie user already exists, just sends reset email
+          else this.props.errorMessage(error) // 5 if fails for another reason, therefore sends error message
+        })
     } else {
       this.props.errorMessage({message: "Not a valid Unipro email address"})
     }
-
   }
 
   sendResetEmail = (email) => {
@@ -74,6 +72,7 @@ const mapDispatch = {
   emailSuccess,
   errorMessage
 }
+
 const mapState = state => ({
   userMessage: state.auth.userMessage,
   error: state.auth.error,
