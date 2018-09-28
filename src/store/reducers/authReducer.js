@@ -1,8 +1,16 @@
-import { LOG_IN_SUCCESSFUL, LOG_OUT } from '../constants/actionTypes';
+import {
+  LOG_OUT,
+  LOG_IN_SUCCESSFUL,
+  EMAIL_SUCCESS,
+  ERROR_MESSAGE,
+  CLEAR_MESSAGE
+} from '../constants/actionTypes'
 
 export const initialState = {
   isAuthenticated: false,
-  user: null
+  user: null,
+  userMessage: null,
+  error: false
 }
 
 export default function authReducer(state = initialState, action) {
@@ -11,7 +19,8 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         isAuthenticated: true,
-        user: action.payload
+        user: action.payload,
+        error: false
       }
     }
     case LOG_OUT: {
@@ -19,6 +28,27 @@ export default function authReducer(state = initialState, action) {
         ...state,
         isAuthenticated: false,
         user: null
+      }
+    }
+    case EMAIL_SUCCESS: {
+      return {
+        ...state,
+        userMessage: `A password reset link has been sent to ${action.payload}. Please check your inbox.`,
+        error: false
+      }
+    }
+    case ERROR_MESSAGE: {
+      return {
+        ...state,
+        userMessage: action.payload.message,
+        error: true
+      }
+    }
+    case CLEAR_MESSAGE: {
+      return {
+        ...state,
+        userMessage: null,
+        error: false
       }
     }
     default:

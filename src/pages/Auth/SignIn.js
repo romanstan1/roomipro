@@ -3,7 +3,7 @@ import {EmailInput, PasswordInput, CTAButton, CardFooter} from './AuthModules'
 import authHOC from './authHOC'
 import PropTypes from 'prop-types';
 
-const LogIn = ({handleSignIn, handleChange, password, email}) =>
+const SignIn = ({handleSignIn, handleChange, password, email}) =>
   <Fragment>
     <EmailInput
       email={email}
@@ -23,11 +23,11 @@ const LogIn = ({handleSignIn, handleChange, password, email}) =>
     </CardFooter>
   </Fragment>
 
-LogIn.propTypes = {
+SignIn.propTypes = {
   handleSignIn: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
   password: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired
 }
 
-export default authHOC(LogIn)
+export default authHOC(SignIn)

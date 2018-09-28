@@ -1,47 +1,60 @@
 import React, {Component} from 'react'
 import {Logo} from 'components'
-import {Title} from './AuthModules'
+import {Title, Message} from './AuthModules'
+import { emailSuccess, errorMessage } from 'store/actions'
 import {Link} from 'react-router-dom'
-import {auth, persistence} from 'firebaseInit'
+import {auth, persistence, secondaryAuth} from 'firebaseInit'
+import {connect} from 'react-redux'
+import {compose} from "redux";
 import './Auth.css'
 
-export default (PassedComponent) => class AuthHOC extends Component {
+
+const authHOC = PassedComponent => class AuthHOC extends Component {
 
   state = {
     email:'',
     password:''
   }
-  componentWillMount(){
-    document.addEventListener("keydown", this.handleKeyPress.bind(this))
-  }
-  componentWillUnmount(){
-    document.removeEventListener("keydown", this.handleKeyPress.bind(this))
-  }
-  handleChange = (e) => {
-    this.setState({[e.target.dataset.type]: e.target.value})
-  }
-  handleKeyPress = (e) => {
-    if(e.code === "Enter") this.handleSignIn()
-  }
+
+  handleChange = (e) => this.setState({[e.target.dataset.type]: e.target.value})
+
   handleSignIn = () => {
     const {email, password} = this.state
     auth.setPersistence(persistence.SESSION).then(() =>
-      auth.signInWithEmailAndPassword(email, password)).catch(error => {
-        console.log('error: ', error)
-    })
+      auth.signInWithEmailAndPassword(email, password)).catch(error => this.props.errorMessage(error)
+    )
   }
+
   handleSendEmail = () => {
-    console.log('handleSendEmail', this.state.email)
+    const {email} = this.state
+    const domain = email.replace(/.*@/, "")
+
+    if(domain === 'theuniprogroup.com') { // checks if it is a unipro email address
+      secondaryAuth.createUserWithEmailAndPassword(email, 'default') // 1 trys to create new user by default
+      .then(firebaseUser => secondaryAuth.signOut()) // 2 if succeed, signs out
+      .then(() => this.sendResetEmail(email))  // 3 then sents reset email to that address
+      .catch(error => {
+        if(error.code === 'auth/email-already-in-use') this.sendResetEmail(email)  // 4 if fails, ie user already exists, just sends reset email
+        else this.props.errorMessage(error) // 5 if fails for another reason, therefore sends error message
+      })
+    } else {
+      this.props.errorMessage({message: "Not a valid Unipro email address"})
+    }
+
   }
-  handleUpdatePassword = () => {
-    console.log('handleUpdatePassword', this.state.password)
+
+  sendResetEmail = (email) => {
+    auth.sendPasswordResetEmail(email).then(() => this.props.emailSuccess(email))
   }
+
   render() {
     const {email, password} = this.state
+    const {error, userMessage} = this.props
     return (
       <div className='Auth'>
         <Logo/>
         <Title/>
+        <Message error={error}>{userMessage}</Message>
         <div className="card">
           <PassedComponent
             email={email}
@@ -49,10 +62,20 @@ export default (PassedComponent) => class AuthHOC extends Component {
             handleChange={this.handleChange}
             handleSignIn={this.handleSignIn}
             handleSendEmail={this.handleSendEmail}
-            handleUpdatePassword={this.handleUpdatePassword}
           />
         </div>
       </div>
     )
   }
 }
+
+const mapDispatch = {
+  emailSuccess,
+  errorMessage
+}
+const mapState = state => ({
+  userMessage: state.auth.userMessage,
+  error: state.auth.error
+})
+
+export default compose(connect(mapState, mapDispatch),authHOC)

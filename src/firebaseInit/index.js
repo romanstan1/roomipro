@@ -7,4 +7,6 @@ firebase.initializeApp(config);
 const auth = firebase.auth();
 const persistence = firebase.auth.Auth.Persistence
 
-export {auth, persistence};
+const secondaryAuth = firebase.initializeApp(config, "Secondary").auth()
+
+export {auth, persistence, secondaryAuth};

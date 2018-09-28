@@ -1,9 +1,10 @@
+@import "src/styles/_variables";
 @import url('https://fonts.googleapis.com/css?family=Ubuntu:700');
 
 div.Logo {
   position: absolute;
   top: 30px;
-  left:6%;
+  left:50px;
   font-size: 22px;
   font-weight: 700;
   font-family: 'Ubuntu', sans-serif;
@@ -13,5 +14,12 @@ div.Logo {
     display: inline-block;
     position: absolute;
     height: 8px;
+  }
+  &.invert {
+    color: white;
+    span {
+      // color: $navyBlue;
+      background: $navyBlue;
+    }
   }
 }

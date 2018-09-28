@@ -17,7 +17,7 @@ export const EmailInput = ({handleChange, email}) =>
   />
 
 export const PasswordInput = ({handleChange, password}) =>
-<form action="">  
+<form action="">
   <input
     type="password"
     value={password}
@@ -41,3 +41,11 @@ export const CardFooter = ({link, children}) =>
       {children}
     </Link>
   </div>
+
+export const Message = ({children, error}) =>
+<div className="Message">
+  {
+     children &&
+    <p className={error? 'error':''}>{children}</p>
+  }
+</div>

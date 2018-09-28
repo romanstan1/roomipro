@@ -12,48 +12,66 @@ div.Auth {
     max-width: 700px;
     text-align: center;
     h1{
-      font-size: 44px;
+      font-size: 40px;
       font-weight: 400;
       padding-top: 70px;
       letter-spacing: 0.9px;
       // margin: 15px 0;
     }
     h2 {
-      margin: 25px 0;
+      margin: 24px 0 0 0;
       line-height: 150%;
-      font-size: 26px;
+      font-size: 24px;
       font-weight: 300;
       color: $stripeDark;
     }
   }
-
-
-
-
-
+  div.Message {
+    display: block;
+    // background: ghostwhite;
+    position: relative;
+    margin: 40px auto 0px auto;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items:flex-end;
+    p {
+      animation-duration: 2.4s;
+      animation-name: createBox;
+      white-space: nowrap;
+      overflow: hidden;
+      width: auto;
+      max-width: 0px;
+      height: 35px;
+      line-height: 35px;
+      color: $brightGreen;
+      font-weight: 600;
+      font-size: 16px;
+      &.error {
+        color: $brightRed;
+      }
+    }
+  }
 
   div.card {
     position: relative;
-    margin: 50px auto;
+    margin: 0px auto;
     max-width: 600px;
-    // height: 75%;
-    padding-top: 40px;
     width: 70%;
-    -webkit-box-shadow: 0px 4px 40px -4pxrgba(0,0,0,0.20);
-    -moz-box-shadow: 0px 4px 40px -4px rgba(0,0,0,0.20);
-    box-shadow: 0px 4px 40px -4px rgba(0,0,0,0.20);
+    // -webkit-box-shadow: 0px 4px 40px -4pxrgba(0,0,0,0.20);
+    // -moz-box-shadow: 0px 4px 40px -4px rgba(0,0,0,0.20);
+    // box-shadow: 0px 4px 40px -4px rgba(0,0,0,0.20);
     border-radius: 5px;
     text-align: center;
-
     input {
       transition: 0.2s ease;
       margin: 4px 0;
       border-radius: 5px;
       border: 2px solid $stripeLight;
-      line-height: 48px;
+      line-height: 44px;
       width: 70%;
       outline:none;
-      font-size: 17px;
+      font-size: 16px;
       text-indent: 15px;
       background: $stripeLight;
       &:focus {
@@ -65,15 +83,17 @@ div.Auth {
     }
 
     div.CTAButton {
-      margin: 30px 0 40px 0;
+      margin: 28px 0 35px 0;
       background: $brightBlue;
       color: white;
       display: inline-block;
-      padding: 12px 100px;
+      padding: 12px 0;
+      width: 280px;
       cursor: pointer;
       border-radius: 5px;
       text-transform: uppercase;
       font-weight: 600;
+      font-size: 600;
       transition: 0.2s ease;
       letter-spacing: 1.2px;
       transform: translate3d(0, 0, 0);
@@ -86,9 +106,25 @@ div.Auth {
       }
     }
     div.CardFooter {
-      height: 60px;
-      background: $stripeLight;
-      line-height: 60px;
+      height: 50px;
+      // background: $stripeLight;
+      line-height: 50px;
+      font-size: 14px;
+      a {
+        color: $stripeDark;
+        transition: 0.1s ease;
+        &:hover {
+          text-decoration: underline;
+          color: $navyBlue;
+        }
+      }
     }
   }
+}
+
+@keyframes createBox{
+  0%   {max-width: 0px;}
+  10%   {max-width: 1000px;}
+  90%  {max-width: 1000px;}
+  100% {max-width: 0px;}
 }

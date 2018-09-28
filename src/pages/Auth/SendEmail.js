@@ -14,7 +14,7 @@ const SendEmail = ({handleChange, handleSendEmail, email}) =>
       Send Reset Email
     </CTAButton>
     <CardFooter
-      link='/'>
+      link='/sign-in'>
       Back to sign in
     </CardFooter>
   </Fragment>

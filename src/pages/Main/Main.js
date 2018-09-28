@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react'
-import {Nav} from 'components'
+import Location from './Location/Location'
+import './Main.css'
 
 // renders 3 column layout
 // checks screen width,
@@ -11,11 +12,9 @@ import {Nav} from 'components'
 export default class Main extends Component {
   render() {
     return (
-      <Fragment>
-        <div className='Main'>
-          Main
-        </div>
-      </Fragment>
+      <div className='Main'>
+        <Location/>
+      </div>
     )
   }
 }

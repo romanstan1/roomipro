@@ -1,3 +1,17 @@
-import {logOut, logInSuccessful} from './authActions.js'
+import {
+  logOut,
+  logInSuccessful,
+  logInFailure,
+  emailFailure,
+  emailSuccess,
+  errorMessage
+} from './authActions.js'
 
-export {logOut, logInSuccessful}
+export {
+  logOut,
+  logInSuccessful,
+  logInFailure,
+  emailFailure,
+  emailSuccess,
+  errorMessage
+}

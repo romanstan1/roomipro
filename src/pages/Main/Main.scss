@@ -1,0 +1,33 @@
+@import "src/styles/_variables";
+
+div.Main {
+  display: flex;
+  height: 100%;
+  div.Location {
+    position: relative;
+    background: $navyBlue;
+    width: 320px;
+    color: white;
+    nav {
+      // background: grey;
+      height: 90px;
+      position: relative;
+      border-bottom: $navyBlue;
+      div.icon {
+        position: absolute;
+        right: 50px;
+        top:30px;
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+        background: white;
+        cursor: pointer;
+        opacity: 0.4;
+        &:hover {
+          opacity: 0.6;
+        }
+      }
+    }
+
+  }
+}
