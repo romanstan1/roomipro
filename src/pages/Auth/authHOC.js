@@ -6,9 +6,18 @@ import {Link} from 'react-router-dom'
 import {auth, persistence, secondaryAuth} from 'firebaseInit'
 import {connect} from 'react-redux'
 import {compose} from "redux";
+import PropTypes from 'prop-types'
 import './Auth.css'
 
 const authHOC = PassedComponent => class AuthHOC extends Component {
+
+  static propTypes = {
+    userMessage: PropTypes.string,
+    error: PropTypes.bool.isRequired,
+    emailWasASuccess: PropTypes.bool.isRequired,
+    emailSuccess: PropTypes.bool.isRequired,
+    errorMessage: PropTypes.func.isRequired,
+  }
 
   state = {
     email:'',
@@ -37,7 +46,7 @@ const authHOC = PassedComponent => class AuthHOC extends Component {
           else this.props.errorMessage(error) // 5 if fails for another reason, therefore sends error message
         })
     } else {
-      this.props.errorMessage({message: "Not a valid Unipro email address"})
+      this.props.errorMessage({message: "This is not a valid Unipro email address"})
     }
   }
 

@@ -1,0 +1,67 @@
+@import "src/styles/_variables";
+
+div.Location {
+  position: relative;
+  background: $navyBlue;
+  width: 320px;
+  color: white;
+}
+
+nav {
+  display: flex;
+  // background: grey;
+  height: 90px;
+  position: relative;
+  border-bottom: $navyBlue;
+  justify-content:flex-end;
+  padding: 0 20px;
+  align-items: center;
+  button {
+    min-width: 50px !important;
+    min-height: 50px !important;
+    width: 30px !important;
+    height: 30px !important;
+    padding: 0 !important;
+    margin: 0;
+    line-height: 0px !important;
+    box-sizing: border-box;
+    position: absolute;
+    // background: green !important;
+    border-radius: 50% !important;
+    span{
+      // min-width: 50px !important;
+      //   line-height: 0px !important;
+      // min-height: 50px !important;
+      // width: 30px !important;
+      // height: 30px !important;
+      // background: green !important;
+      // border-radius: 50% !important;
+      background: white;
+      cursor: pointer;
+      // opacity: 0.4;
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+  }
+}
+
+#simple-menu {
+  div:last-child {
+    background: red;
+    outline: none !important;
+    span {
+      outline: none !important;
+    }
+    ul {
+      padding: 10px 0;
+      outline: none !important;
+      li {
+        padding: 5px 50px;
+        font-size: 13px;
+        outline: none;
+        outline: none !important;
+      }
+    }
+  }
+}
