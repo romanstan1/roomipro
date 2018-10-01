@@ -47,7 +47,6 @@ class Main extends Component {
       .onSnapshot(querySnapshot => {
         let data = {}
         querySnapshot.forEach(doc => {
-          // console.log(doc.id, doc.data())
           data = {
             ...data,
             [doc.id]: {
@@ -61,23 +60,35 @@ class Main extends Component {
   }
 
   resize = (e) => {
-    const width = window.innerWidth
-    || document.documentElement.clientWidth
-    || document.body.clientWidth;
+    const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
     this.setState({width})
   }
-
 
   componentWillUnmount() {
     this.unsubscribe()
   }
 
   render() {
-    return (
-      <div className='Main'>
-        <Location/>
-      </div>
-    )
+    const {width} = this.state
+    if(width > 650) {
+      return (
+        <div className='Main'>
+          <Location/>
+        </div>
+      )
+    } else {
+      return (
+        <SwipeableViews>
+          <Location/>
+          <div>
+            slide n°2
+          </div>
+          <div>
+            slide n°3
+          </div>
+        </SwipeableViews>
+      )
+    }
   }
 }
 
