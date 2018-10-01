@@ -44,7 +44,8 @@ nav {
   div:last-child {
     outline: none !important;
     transform: translate(-86%, 35px) !important;
-    // transform-origin: 20% 40%;
+    transform-origin: 0% 0% !important;
+    left: 255px !important;
     span {
       outline: none !important;
     }

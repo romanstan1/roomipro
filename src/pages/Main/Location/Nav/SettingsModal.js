@@ -9,6 +9,7 @@ export default ({handleClose, open, anchorEl, handleLogOut, children}) =>
     open={open}
     onClose={handleClose}
     anchorEl={anchorEl}
+    aria-owns={open ? 'menu-list-grow' : null}
     >
     <span>
       <MenuItem onClick={handleLogOut}>

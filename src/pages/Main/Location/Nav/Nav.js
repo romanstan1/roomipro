@@ -40,7 +40,6 @@ class Nav extends Component {
   render() {
     const {anchorEl} = this.state
     const {user} = this.props
-    console.log('user', user)
     return (
       <nav>
         <Logo invert/>

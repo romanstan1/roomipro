@@ -1,3 +1,4 @@
+// Auth
 import {
   logOut,
   logInSuccessful,
@@ -6,10 +7,18 @@ import {
   clearMessage
 } from './authActions.js'
 
+// Database
+import {
+  updateLocationData
+} from './databaseActions.js'
+
 export {
+  // Auth
   logOut,
   logInSuccessful,
   emailSuccess,
   errorMessage,
-  clearMessage
+  clearMessage,
+  // Database
+  updateLocationData
 }
