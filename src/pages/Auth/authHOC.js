@@ -15,7 +15,7 @@ const authHOC = PassedComponent => class AuthHOC extends Component {
     userMessage: PropTypes.string,
     error: PropTypes.bool.isRequired,
     emailWasASuccess: PropTypes.bool.isRequired,
-    emailSuccess: PropTypes.bool.isRequired,
+    emailSuccess: PropTypes.func.isRequired,
     errorMessage: PropTypes.func.isRequired,
   }
 

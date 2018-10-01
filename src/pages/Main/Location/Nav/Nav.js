@@ -5,16 +5,25 @@ import {connect} from 'react-redux'
 import {auth} from 'firebaseInit'
 import SettingsModal from './SettingsModal'
 import Button from '@material-ui/core/Button';
-
+import PropTypes from 'prop-types'
 
 class Nav extends Component {
+
+  static propTypes = {
+    user: PropTypes.object.isRequired,
+    logOut: PropTypes.func.isRequired,
+  }
+
   state = {
     anchorEl: null
   }
 
   handleLogOut = () => {
     auth.signOut()
-      .then(() => this.props.logOut())
+      .then(() => {
+        this.handleClose()
+        this.props.logOut()
+      })
       .catch((error) => {
         console.log('Sign-out error:', error)
       })
@@ -28,12 +37,10 @@ class Nav extends Component {
    this.setState({ anchorEl: null });
   }
 
-  handleLogOut = () => {
-    this.handleClose()
-  }
-
   render() {
     const {anchorEl} = this.state
+    const {user} = this.props
+    console.log('user', user)
     return (
       <nav>
         <Logo invert/>
@@ -43,7 +50,7 @@ class Nav extends Component {
           aria-haspopup="true"
           onClick={this.handleOpen}
         >
-          R
+          {user.email.charAt(0)}
         </Button>
 
         <SettingsModal
@@ -51,7 +58,9 @@ class Nav extends Component {
           handleLogOut={this.handleLogOut}
           open={Boolean(anchorEl)}
           anchorEl={anchorEl}
-        />
+        >
+        {user.email}
+        </SettingsModal>
       </nav>
     )
   }

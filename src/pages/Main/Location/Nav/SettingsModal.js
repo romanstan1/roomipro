@@ -3,7 +3,7 @@ import Dialog from '@material-ui/core/Dialog';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
-export default ({handleClose, open, anchorEl, handleLogOut}) =>
+export default ({handleClose, open, anchorEl, handleLogOut, children}) =>
   <Menu
     id="simple-menu"
     open={open}
@@ -11,6 +11,9 @@ export default ({handleClose, open, anchorEl, handleLogOut}) =>
     anchorEl={anchorEl}
     >
     <span>
-      <MenuItem onClick={handleLogOut}>Logout</MenuItem>
+      <MenuItem onClick={handleLogOut}>
+        <div>Sign Out</div>
+        <div>{children}</div>
+      </MenuItem>
     </span>
   </Menu>

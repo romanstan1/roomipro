@@ -1,4 +1,5 @@
 @import "src/styles/_variables";
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700');
 
 div.Location {
   position: relative;
@@ -9,16 +10,16 @@ div.Location {
 
 nav {
   display: flex;
-  // background: grey;
-  height: 90px;
+  height: 63px;
   position: relative;
   border-bottom: $navyBlue;
   justify-content:flex-end;
-  padding: 0 20px;
-  align-items: center;
+  padding: 0px 30px;
+  margin-bottom: 10px;
+  align-items:flex-end;
   button {
-    min-width: 50px !important;
-    min-height: 50px !important;
+    min-width: 35px !important;
+    min-height: 35px !important;
     width: 30px !important;
     height: 30px !important;
     padding: 0 !important;
@@ -26,30 +27,24 @@ nav {
     line-height: 0px !important;
     box-sizing: border-box;
     position: absolute;
-    // background: green !important;
+    background: $stripeDark !important;
     border-radius: 50% !important;
     span{
-      // min-width: 50px !important;
-      //   line-height: 0px !important;
-      // min-height: 50px !important;
-      // width: 30px !important;
-      // height: 30px !important;
-      // background: green !important;
-      // border-radius: 50% !important;
-      background: white;
-      cursor: pointer;
-      // opacity: 0.4;
-      &:hover {
-        opacity: 0.6;
+      &:last-child {
+        border: 2px solid white;
       }
+      cursor: pointer;
+      color: white;
+      font-weight: 600;
     }
   }
 }
 
 #simple-menu {
   div:last-child {
-    background: red;
     outline: none !important;
+    transform: translate(-86%, 35px) !important;
+    // transform-origin: 20% 40%;
     span {
       outline: none !important;
     }
@@ -57,10 +52,27 @@ nav {
       padding: 10px 0;
       outline: none !important;
       li {
-        padding: 5px 50px;
-        font-size: 13px;
+        &:hover {
+          background: $stripeMid;
+        }
+        height: auto !important;
+        padding: 4px 20px;
+        min-width: 120px;
+        font-size: 12px;
         outline: none;
         outline: none !important;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        text-align: left;
+        > div {
+          font-family: 'Open Sans', sans-serif;
+          display: block !important;
+          &:last-of-type{
+            font-size: 11px;
+          }
+        }
       }
     }
   }
