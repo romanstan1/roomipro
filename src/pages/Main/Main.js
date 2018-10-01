@@ -5,6 +5,7 @@ import {firestore} from 'firebaseInit'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {updateLocationData} from 'store/actions'
+import SwipeableViews from 'react-swipeable-views';
 
 // renders 3 column layout
 // checks screen width,
@@ -35,8 +36,14 @@ class Main extends Component {
     updateLocationData:PropTypes.func.isRequired
   }
 
+  state = {
+    width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+  }
+
   componentDidMount() {
-    firestore.collection("locations")
+    window.addEventListener('resize', this.resize)
+
+    this.unsubscribe = firestore.collection("locations")
       .onSnapshot(querySnapshot => {
         let data = {}
         querySnapshot.forEach(doc => {
@@ -53,9 +60,16 @@ class Main extends Component {
       })
   }
 
+  resize = (e) => {
+    const width = window.innerWidth
+    || document.documentElement.clientWidth
+    || document.body.clientWidth;
+    this.setState({width})
+  }
+
+
   componentWillUnmount() {
-    const unsubscribe = firestore.collection("locations").onSnapshot(function () {})
-    unsubscribe()
+    this.unsubscribe()
   }
 
   render() {
