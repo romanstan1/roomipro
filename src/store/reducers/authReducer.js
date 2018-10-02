@@ -7,10 +7,10 @@ import {
 } from '../constants/actionTypes'
 
 export const initialState = {
-  // isAuthenticated: false,
-  // user: null,
-  user: {email: 'roman@stankiewicz.com'},
-  isAuthenticated: true,
+  isAuthenticated: false,
+  user: null,
+  // user: {email: 'roman@stankiewicz.com'},
+  // isAuthenticated: true,
   userMessage: null,
   error: false,
   emailSuccess: false

@@ -3,7 +3,7 @@ import {Logo} from 'components'
 import {Title, Message} from './AuthModules'
 import { emailSuccess, errorMessage } from 'store/actions'
 import {Link} from 'react-router-dom'
-import {auth, persistence, secondaryAuth} from 'firebaseInit'
+import {auth, persistence, secondaryAuth, firestore} from 'firebaseInit'
 import {connect} from 'react-redux'
 import {compose} from "redux";
 import PropTypes from 'prop-types'
@@ -29,17 +29,33 @@ const authHOC = PassedComponent => class AuthHOC extends Component {
   handleSignIn = () => {
     const {email, password} = this.state
     auth.setPersistence(persistence.SESSION).then(() =>
-      auth.signInWithEmailAndPassword(email, password)).catch(error => this.props.errorMessage(error)
+      auth.signInWithEmailAndPassword(email, password))
+      .then(firebaseUser => this.uploadUserData(email, firebaseUser))
+      .catch(error => this.props.errorMessage(error)
     )
+  }
+
+  uploadUserData = (email, firebaseUser) => {
+    const names = email.split("@")[0].split(".")
+    firestore.collection("users").doc(firebaseUser.user.uid).set({
+      email,
+      firstName: names[0],
+      lastName: names[1],
+    })
+    .catch(error => {
+      console.log('Error on user upload::', error)
+    })
   }
 
   handleSendEmail = () => {
     const {email} = this.state
     const domain = email.replace(/.*@/, "")
+    const names = email.split("@")[0].split(".")
 
-    if(domain === 'theuniprogroup.com') { // 0 checks if it is a unipro email address
-      secondaryAuth.createUserWithEmailAndPassword(email, 'default') // 1 trys to create new user by default
-        .then(firebaseUser => secondaryAuth.signOut()) // 2 if succeed, signs out
+    if(domain === 'theuniprogroup.com' && names.length === 2) { // 0 checks if it is a unipro email address
+      const password = Math.random().toString(36).slice(-8)
+      secondaryAuth.createUserWithEmailAndPassword(email, password) // 1 trys to create new user by default
+        .then(() => secondaryAuth.signOut()) // 2 if succeed, signs out
         .then(() => this.sendResetEmail(email))  // 3 then sents reset email to that address
         .catch(error => {
           if(error.code === 'auth/email-already-in-use') this.sendResetEmail(email)  // 4 if fails, ie user already exists, just sends reset email
