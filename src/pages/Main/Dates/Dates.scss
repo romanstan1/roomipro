@@ -1,0 +1,34 @@
+@import "src/styles/_variables";
+
+div.Dates {
+  overflow: hidden;
+  // width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  // border-right: 2px solid $stripeLight;
+  h2 {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  button {
+    overflow: hidden;
+    border-radius: 12px;
+    margin: 5px 0;
+    div.date {
+      overflow: hidden;
+      background: $stripeMid;
+      padding: 15px 25px;
+      // border-radius: 12px;
+      text-align: center;
+      width: 200px;
+      li {
+        text-align: center !important;
+        span {
+          text-align: center !important;
+        }
+      }
+    }
+  }
+}

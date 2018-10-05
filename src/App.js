@@ -17,7 +17,7 @@ class App extends Component {
   }
   componentDidMount() {
     auth.onAuthStateChanged(user => {
-      if(user) this.props.logInSuccessful(user)
+      if(user) this.props.logInSuccessful(user)      
     })
   }
   render() {

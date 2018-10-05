@@ -30,10 +30,13 @@ const authHOC = PassedComponent => class AuthHOC extends Component {
     const {email, password} = this.state
     auth.setPersistence(persistence.SESSION).then(() =>
       auth.signInWithEmailAndPassword(email, password))
-      .then(firebaseUser => this.uploadUserData(email, firebaseUser))
+      .then(firebaseUser => {
+        this.uploadUserData(email, firebaseUser)
+      })
       .catch(error => this.props.errorMessage(error)
     )
   }
+
 
   uploadUserData = (email, firebaseUser) => {
     const names = email.split("@")[0].split(".")
@@ -41,6 +44,7 @@ const authHOC = PassedComponent => class AuthHOC extends Component {
       email,
       firstName: names[0],
       lastName: names[1],
+      admin: false
     })
     .catch(error => {
       console.log('Error on user upload::', error)

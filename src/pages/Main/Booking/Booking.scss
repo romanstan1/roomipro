@@ -1,0 +1,12 @@
+@import "src/styles/_variables";
+
+div.Booking {
+  // width: 40%;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  // border-right: 2px solid $stripeLight;
+
+}

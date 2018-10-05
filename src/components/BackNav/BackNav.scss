@@ -1,0 +1,23 @@
+@import "src/styles/_variables";
+
+div.BackNav {
+  height: 50px;
+  background: white;
+  width: 100%;
+  display: flex;
+  // justify-content:space-between;
+  align-items: center;
+  overflow:hidden;
+  // -webkit-box-shadow: 0 8px 10px -6px rgba(230, 235, 241,1);
+  // -moz-box-shadow: 0px 3px 7px 0px rgba(230, 235, 241,1);
+  box-shadow: 0px 2px 3px 0px rgba(107, 124, 147,0.3);
+  margin-bottom: 20px;
+  svg {
+    margin: 0 10px;
+    fill: $navyBlue;
+  }
+  a {
+
+    font-size: 14px;
+  }
+}
