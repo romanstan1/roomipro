@@ -62,12 +62,7 @@ class Main extends Component {
       <SwipeableViews>
         <Location/>
         <Dates/>
-        <div>
-          slide n°2
-        </div>
-        <div>
-          slide n°3
-        </div>
+        <Booking/>
       </SwipeableViews>
     )
   }

@@ -10,7 +10,8 @@ import {
 // Database
 import {
   updateLocationData,
-  selectLocation
+  selectLocation,
+  selectDate
 } from './databaseActions.js'
 
 export {
@@ -22,5 +23,6 @@ export {
   clearMessage,
   // Database
   updateLocationData,
-  selectLocation
+  selectLocation,
+  selectDate
 }

@@ -2,26 +2,22 @@ import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import './Dates.css'
 import {BackNav} from 'components';
+import {selectDate} from 'store/actions'
 import ButtonBase from '@material-ui/core/ButtonBase';
 
 
-const SingleDate = ({date, handleClick}) =>
+const SingleDate = ({date, handleSelectDate}) =>
   <ButtonBase>
     <div
       data-value={date.date}
       className="date"
-      onClick={handleClick}
+      onClick={() => handleSelectDate(date)}
       >
         {date.date}
     </div>
   </ButtonBase>
 
 class Dates extends Component {
-
-  handleClick = e => {
-    console.log('clicked', e)
-  }
-
   render() {
     const {locations, dates, selectedLocation} = this.props
     return (
@@ -38,7 +34,7 @@ class Dates extends Component {
         {
           selectedLocation && dates.map(date =>
             <SingleDate
-              handleClick={this.handleClick}
+              handleSelectDate={this.props.selectDate}
               key={date.id}
               date={date}
             />
@@ -51,8 +47,12 @@ class Dates extends Component {
 
 const mapProps = state => ({
   locations: state.data.locations,
-  dates:  state.data.dates,
+  dates: state.data.dates,
   selectedLocation: state.data.selectedLocation
 })
 
-export default connect(mapProps)(Dates)
+const mapDispatch = {
+  selectDate
+}
+
+export default connect(mapProps, mapDispatch)(Dates)
