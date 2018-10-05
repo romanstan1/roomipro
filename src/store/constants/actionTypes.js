@@ -9,3 +9,4 @@ export const CLEAR_MESSAGE = 'CLEAR_MESSAGE'
 // Database action types
 
 export const UPDATE_LOCATION_DATA = 'UPDATE_LOCATION_DATA'
+export const SELECT_LOCATION = 'SELECT_LOCATION'

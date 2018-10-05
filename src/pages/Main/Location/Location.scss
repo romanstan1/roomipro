@@ -50,7 +50,9 @@ nav {
 }
 
 div.SingleLocation {
-  li {
+  display: flex;
+  flex-direction: column;
+  button {
     color: white;
     display: flex;
     flex-direction: column;
@@ -59,9 +61,15 @@ div.SingleLocation {
     align-items: flex-end;
     padding: 30px 20px;
     h3 {
-      font-weight: 300 !important;
+      font-weight: 500 !important;
       font-size: 14px;
       text-align: right;
+    }
+    h4 {
+      font-weight: 300 !important;
+      font-size: 13px;
+      text-align: right;
+      font-style: italic;
     }
   }
 }

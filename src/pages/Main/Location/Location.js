@@ -1,15 +1,16 @@
 import React, {Component, Fragment} from 'react'
 import Nav from './Nav/Nav.js'
 import {connect} from 'react-redux'
+import {selectLocation} from 'store/actions'
+import ButtonBase from '@material-ui/core/ButtonBase';
 import './Location.css'
-import MenuItem from '@material-ui/core/MenuItem';
 
-const SingleLocation = ({location}) =>
+const SingleLocation = ({location, selectLocation}) =>
   <div className='SingleLocation'>
-    <MenuItem>
-      <h3>{location.main} - {location.secondary}</h3>
-      {/* <h4>Seats {location.seats}</h4> */}
-    </MenuItem>
+    <ButtonBase onClick={()=> selectLocation(location)}>
+      <h3>{location.main}</h3>
+      <h4>{location.secondary}</h4>
+    </ButtonBase>
   </div>
 
 class Location extends Component {
@@ -22,6 +23,7 @@ class Location extends Component {
         {
           locations.map(location =>
             <SingleLocation
+              selectLocation={this.props.selectLocation}
               key={location.id}
               location={location}
             />
@@ -36,4 +38,8 @@ const mapProps = state => ({
   locations: state.data.locations
 })
 
-export default connect(mapProps)(Location)
+const mapDispatch = {
+  selectLocation
+}
+
+export default connect(mapProps, mapDispatch)(Location)

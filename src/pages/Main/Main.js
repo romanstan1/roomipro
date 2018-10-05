@@ -2,14 +2,13 @@ import React, {Component, Fragment} from 'react'
 import Location from './Location/Location'
 import Dates from './Dates/Dates'
 import Booking from './Booking/Booking'
-import './Main.css'
 import {firestore} from 'firebaseInit'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {updateLocationData} from 'store/actions'
 import SwipeableViews from 'react-swipeable-views';
 import { Resize, ResizeHorizon } from "react-resize-layout";
-
+import './Main.css'
 
 class Main extends Component {
 

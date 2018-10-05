@@ -2,6 +2,7 @@ import moment from 'moment'
 
 import {
   UPDATE_LOCATION_DATA,
+  SELECT_LOCATION
 } from '../constants/actionTypes'
 
 function createDate(days, weeks) {
@@ -33,6 +34,12 @@ export default function databaseReducer(state = initialState, action) {
       return {
         ...state,
         locations: Object.values(action.payload)
+      }
+    }
+    case SELECT_LOCATION: {
+      return {
+        ...state,
+        selectedLocation: action.payload
       }
     }
     default:

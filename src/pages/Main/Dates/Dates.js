@@ -23,17 +23,20 @@ class Dates extends Component {
   }
 
   render() {
-    const {locations, dates} = this.props
+    const {locations, dates, selectedLocation} = this.props
     return (
       <div className='Dates'>
         <BackNav
           route='somwhere'
           mobile={true}
           >
-          Somewhere
+          {
+            selectedLocation &&
+            <Fragment>{selectedLocation.main} - {selectedLocation.secondary}</Fragment>
+          }
         </BackNav>
         {
-          dates.map(date =>
+          selectedLocation && dates.map(date =>
             <SingleDate
               handleClick={this.handleClick}
               key={date.id}
@@ -48,7 +51,8 @@ class Dates extends Component {
 
 const mapProps = state => ({
   locations: state.data.locations,
-  dates:  state.data.dates
+  dates:  state.data.dates,
+  selectedLocation: state.data.selectedLocation
 })
 
 export default connect(mapProps)(Dates)
