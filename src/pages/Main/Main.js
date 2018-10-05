@@ -45,31 +45,20 @@ class Main extends Component {
   render() {
     const {width} = this.state
     if(width > 650) return (
-
-
-        <div className='Main'>
-
-          <Resize handleWidth="2px" handleColor='#e6ebf1'>
-
-            <ResizeHorizon width="300px" minWidth="270px">
-              <Location/>
-            </ResizeHorizon>
-
-            <ResizeHorizon width="400px" minWidth="270px">
-              <Dates/>
-            </ResizeHorizon>
-            <ResizeHorizon width="350px" minWidth="350px">
-              <Booking/>
-            </ResizeHorizon>
-          </Resize>
-
-
-          {/* <Location/>
-          <Dates/>
-          <Booking/> */}
-
-        </div>
-      )
+      <div className='Main'>
+        <Resize handleWidth="2px" handleColor='#e6ebf1'>
+          <ResizeHorizon width="300px" minWidth="270px">
+            <Location/>
+          </ResizeHorizon>
+          <ResizeHorizon width="400px" minWidth="270px">
+            <Dates/>
+          </ResizeHorizon>
+          <ResizeHorizon width="350px" minWidth="350px">
+            <Booking/>
+          </ResizeHorizon>
+        </Resize>
+      </div>
+    )
     else return (
       <SwipeableViews>
         <Location/>
