@@ -3,11 +3,16 @@ import Nav from './Nav/Nav.js'
 import {connect} from 'react-redux'
 import {selectLocation} from 'store/actions'
 import ButtonBase from '@material-ui/core/ButtonBase';
+import {push} from 'react-router-redux'
 import './Location.css'
 
-const SingleLocation = ({location, selectLocation}) =>
+const SingleLocation = ({location, selectLocation, pushRoute}) =>
   <div className='SingleLocation'>
-    <ButtonBase onClick={()=> selectLocation(location)}>
+    <ButtonBase onClick={() => {
+      pushRoute('/location/'+location.id)
+      selectLocation(location)
+      }
+    }>
       <h3>{location.main}</h3>
       <h4>{location.secondary}</h4>
     </ButtonBase>
@@ -15,7 +20,7 @@ const SingleLocation = ({location, selectLocation}) =>
 
 class Location extends Component {
   render() {
-    const {locations} = this.props
+    const {locations, push} = this.props
     return (
       <div className='Location'>
         <Nav/>
@@ -23,6 +28,7 @@ class Location extends Component {
         {
           locations.map(location =>
             <SingleLocation
+              pushRoute={push}
               selectLocation={this.props.selectLocation}
               key={location.id}
               location={location}
@@ -39,7 +45,8 @@ const mapProps = state => ({
 })
 
 const mapDispatch = {
-  selectLocation
+  selectLocation,
+  push
 }
 
 export default connect(mapProps, mapDispatch)(Location)

@@ -17,7 +17,7 @@ class App extends Component {
   }
   componentDidMount() {
     auth.onAuthStateChanged(user => {
-      if(user) this.props.logInSuccessful(user)      
+      if(user) this.props.logInSuccessful(user)
     })
   }
   render() {
@@ -29,6 +29,7 @@ class App extends Component {
           <Fragment>
             <Switch>
               <Route exact path="/" component={Main}/>
+              <Route path="/location/:location" component={Main}/>
               <Redirect to="/"/>
             </Switch>
           </Fragment>

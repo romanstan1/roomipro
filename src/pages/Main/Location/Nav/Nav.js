@@ -49,7 +49,7 @@ class Nav extends Component {
           aria-haspopup="true"
           onClick={this.handleOpen}
         >
-          {user.email.charAt(0)}
+          {user && user.email.charAt(0)}
         </Button>
 
         <SettingsModal
@@ -58,7 +58,7 @@ class Nav extends Component {
           open={Boolean(anchorEl)}
           anchorEl={anchorEl}
         >
-        {user.email}
+        {user && user.email}
         </SettingsModal>
       </nav>
     )
