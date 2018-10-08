@@ -59,7 +59,10 @@ class Main extends Component {
       </div>
     )
     else return (
-      <SwipeableViews>
+      <SwipeableViews
+        index={0}
+        // disabled={true}
+        >
         <Location/>
         <Dates/>
         <Booking/>

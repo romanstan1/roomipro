@@ -30,6 +30,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Main}/>
               <Route path="/location/:location" component={Main}/>
+              <Route path="/location/:location/:date" component={Main}/>
               <Redirect to="/"/>
             </Switch>
           </Fragment>

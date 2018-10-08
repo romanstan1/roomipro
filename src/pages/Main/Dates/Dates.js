@@ -4,14 +4,17 @@ import './Dates.css'
 import {BackNav} from 'components';
 import {selectDate} from 'store/actions'
 import ButtonBase from '@material-ui/core/ButtonBase';
+import {push} from 'react-router-redux'
 
-
-const SingleDate = ({date, handleSelectDate}) =>
+const SingleDate = ({date, handleSelectDate, pushRoute, selectedLocation}) =>
   <ButtonBase>
     <div
       data-value={date.date}
       className="date"
-      onClick={() => handleSelectDate(date)}
+      onClick={() => {
+        pushRoute('/location/' + selectedLocation.id + '/' + date.id)
+        handleSelectDate(date)
+      }}
       >
         {date.date}
     </div>
@@ -19,7 +22,7 @@ const SingleDate = ({date, handleSelectDate}) =>
 
 class Dates extends Component {
   render() {
-    const {locations, dates, selectedLocation} = this.props
+    const {locations, dates, selectedLocation, push} = this.props
     return (
       <div className='Dates'>
         <BackNav
@@ -34,6 +37,8 @@ class Dates extends Component {
         {
           selectedLocation && dates.map(date =>
             <SingleDate
+              pushRoute={push}
+              selectedLocation={selectedLocation}
               handleSelectDate={this.props.selectDate}
               key={date.id}
               date={date}
@@ -45,14 +50,17 @@ class Dates extends Component {
   }
 }
 
-const mapProps = state => ({
+const mapProps = (state, ownProps) => ({
+  // pathname: state.routing.location.pathname,
+  // location: state.routing.location,
   locations: state.data.locations,
   dates: state.data.dates,
   selectedLocation: state.data.selectedLocation
 })
 
 const mapDispatch = {
-  selectDate
+  selectDate,
+  push
 }
 
 export default connect(mapProps, mapDispatch)(Dates)
