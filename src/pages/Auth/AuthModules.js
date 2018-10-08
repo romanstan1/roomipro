@@ -24,6 +24,7 @@ export const PasswordInput = ({handleChange, password}) =>
     onChange={handleChange}
     data-type='password'
     placeholder='password'
+    autoComplete='password'
   />
 </form>
 

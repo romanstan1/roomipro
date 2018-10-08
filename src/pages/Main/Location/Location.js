@@ -11,8 +11,7 @@ const SingleLocation = ({location, selectLocation, pushRoute}) =>
     <ButtonBase onClick={() => {
       pushRoute('/location/'+location.id)
       selectLocation(location)
-      }
-    }>
+    }}>
       <h3>{location.main}</h3>
       <h4>{location.secondary}</h4>
     </ButtonBase>

@@ -3,7 +3,7 @@ import {Route, Router, Redirect, Switch} from 'react-router-dom'
 import {connect} from 'react-redux'
 import createBrowserHistory from 'history/createBrowserHistory'
 import { Main, SignIn, SendEmail} from 'pages'
-import {auth, persistence} from 'firebaseInit'
+import {auth, persistence, firestore} from 'firebaseInit'
 import {logInSuccessful} from 'store/actions'
 import PropTypes from 'prop-types'
 import 'styles/global.css'
@@ -17,7 +17,12 @@ class App extends Component {
   }
   componentDidMount() {
     auth.onAuthStateChanged(user => {
-      if(user) this.props.logInSuccessful(user)
+      if(user) {
+        firestore.collection('users').doc(user.uid).get().then(userData => {
+          const thisUser = userData.data()
+          this.props.logInSuccessful({...user, ...thisUser})
+        })
+      }
     })
   }
   render() {

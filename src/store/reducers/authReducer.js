@@ -13,7 +13,8 @@ export const initialState = {
   // isAuthenticated: true,
   userMessage: null,
   error: false,
-  emailSuccess: false
+  emailSuccess: false,
+  admin: false
 }
 
 export default function authReducer(state = initialState, action) {

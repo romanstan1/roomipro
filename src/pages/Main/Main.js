@@ -21,7 +21,7 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.resize)
+    window.addEventListener('resize', this.resize)    
     this.unsubscribe = firestore.collection("locations")
       .onSnapshot(querySnapshot => {
         let data = {}
