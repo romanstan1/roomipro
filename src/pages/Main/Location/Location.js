@@ -4,10 +4,11 @@ import {connect} from 'react-redux'
 import {selectLocation} from 'store/actions'
 import ButtonBase from '@material-ui/core/ButtonBase';
 import {push} from 'react-router-redux'
-import {UpdateLocationModal, NotificationModal} from './Modals'
+import {LocationModal, NotificationModal} from './Modals'
 import './Location.css'
+import {firestore} from 'firebaseInit'
 
-const SingleLocation = ({location, selectLocation, pushRoute}) =>
+const SingleLocation = ({location, selectLocation, pushRoute, toggleLocationModal}) =>
   <div className='SingleLocation'>
     <ButtonBase onClick={() => {
       pushRoute('/location/'+location.id)
@@ -16,21 +17,39 @@ const SingleLocation = ({location, selectLocation, pushRoute}) =>
       <h3>{location.main}</h3>
       <h4>{location.secondary}</h4>
     </ButtonBase>
+    <div
+      onClick={toggleLocationModal(location)}
+      className="edit">
+      Edit Details
+    </div>
   </div>
 
 class Location extends Component {
 
   state ={
     notificationOpen: false,
+    locationOpen: false,
+    focusedLocation: {}
   }
 
-  toggleNotificationModal = () => {
-    this.setState(prevState => ({ ...prevState, notificationOpen: !prevState.notificationOpen }))
+  toggleNotificationModal = () => this.setState(prevState =>
+    ({ ...prevState, notificationOpen: !prevState.notificationOpen }))
+
+  toggleLocationModal = (location) => (e) => {
+    if(location) this.setState(prevState => ({ ...prevState, focusedLocation: location }))
+    this.setState(prevState => ({ ...prevState, locationOpen: !prevState.locationOpen }))
+  }
+
+  updateLocation = (location) => {
+    firestore
+      .collection("locations")
+      .doc(location.id)
+      .set({ ...location }, { merge: true })
   }
 
   render() {
     const {locations, push, user} = this.props
-    const {notificationOpen, focusedPost} = this.state
+    const {notificationOpen, locationOpen, focusedLocation} = this.state
     return (
       <Fragment>
         {
@@ -38,6 +57,15 @@ class Location extends Component {
           <NotificationModal
             notificationOpen={notificationOpen}
             closeNotification={this.toggleNotificationModal}
+          />
+        }
+        {
+          locationOpen &&
+          <LocationModal
+            locationOpen={locationOpen}
+            closeLocation={this.toggleLocationModal}
+            focusedLocation={focusedLocation}
+            updateLocation={this.updateLocation}
           />
         }
         <div className='Location'>
@@ -61,6 +89,7 @@ class Location extends Component {
                 selectLocation={this.props.selectLocation}
                 key={location.id}
                 location={location}
+                toggleLocationModal={this.toggleLocationModal}
               />
             )
           }

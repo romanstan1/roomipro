@@ -69,6 +69,7 @@ nav {
 div.SingleLocation {
   display: flex;
   flex-direction: column;
+  position: relative;
   button {
     color: white;
     display: flex;
@@ -87,6 +88,18 @@ div.SingleLocation {
       font-size: 13px;
       text-align: right;
       font-style: italic;
+    }
+  }
+  div.edit {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    font-size: 13px;
+    transform: translate(0%,-50%);
+    cursor: pointer;
+    padding: 10px;
+    &:hover {
+      text-decoration: underline;
     }
   }
 }

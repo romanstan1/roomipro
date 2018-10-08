@@ -1,4 +1,4 @@
-import UpdateLocationModal from './UpdateLocationModal'
+import LocationModal from './LocationModal'
 import NotificationModal from './NotificationModal'
 
-export {UpdateLocationModal, NotificationModal}
+export {LocationModal, NotificationModal}
