@@ -6,7 +6,7 @@ export default class LocationModal extends Component {
     main: '',
     secondary: '',
     url: '',
-    seats: '',
+    seats: 0,
     id:''
   }
 
@@ -25,7 +25,10 @@ export default class LocationModal extends Component {
     this.props.closeLocation()()
   }
 
-  handleTextInput = e => this.setState({[e.target.dataset.type]: e.target.value})
+  handleTextInput = e => {
+    if(e.target.dataset.type !== 'seats') this.setState({[e.target.dataset.type]: e.target.value})
+    else this.setState({seats: parseInt(e.target.value)})
+  }
 
   render () {
     const {closeLocation, locationOpen, focusedLocation} = this.props
@@ -45,7 +48,7 @@ export default class LocationModal extends Component {
             <div>Image Url</div>
             <input onChange={this.handleTextInput} value={url} data-type='url' type="text"/>
             <div>Max Seats</div>
-            <input onChange={this.handleTextInput} value={seats} data-type='seats' type="text"/>
+            <input onChange={this.handleTextInput} value={seats} data-type='seats' type="number"/>
           </div>
           <div className='upload-post'>
             <div className='button bright' onClick={this.updateLocation}>Update Location</div>
