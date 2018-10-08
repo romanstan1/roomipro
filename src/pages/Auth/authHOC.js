@@ -37,17 +37,21 @@ const authHOC = PassedComponent => class AuthHOC extends Component {
     )
   }
 
-
   uploadUserData = (email, firebaseUser) => {
     const names = email.split("@")[0].split(".")
-    firestore.collection("users").doc(firebaseUser.user.uid).set({
-      email,
-      firstName: names[0],
-      lastName: names[1],
-      admin: false
-    })
-    .catch(error => {
-      console.log('Error on user upload::', error)
+    const docRef = firestore.collection("users").doc(firebaseUser.user.uid)
+    docRef.get().then(doc => {
+      if (!doc.exists) {
+        docRef.set({
+          email,
+          firstName: names[0],
+          lastName: names[1],
+          admin: false
+        })
+        .catch(error => console.log('Error on user upload::', error))
+      }
+    }).catch(error => {
+      console.log("Error getting document:", error);
     })
   }
 
