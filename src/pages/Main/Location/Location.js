@@ -70,7 +70,8 @@ class Location extends Component {
         }
         <div className='Location'>
           <Nav/>
-          {user.admin &&
+          {
+            user.admin &&
             <Fragment>
               <h3>You have admin privileges</h3>
               <div className='compose-notification'>
@@ -80,7 +81,6 @@ class Location extends Component {
               </div>
             </Fragment>
           }
-
           <h2>Locations</h2>
           {
             locations.map(location =>

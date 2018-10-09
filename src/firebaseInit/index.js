@@ -9,9 +9,10 @@ const auth = firebase.auth()
 const persistence = firebase.auth.Auth.Persistence
 const secondaryAuth = firebase.initializeApp(config, "Secondary").auth()
 const firestore = firebase.firestore()
+const arrayUnion = firebase.firestore.FieldValue.arrayUnion
 const settings = {timestampsInSnapshots: true}
 
 firestore.settings(settings)
 firestore.enablePersistence()
 
-export {auth, persistence, secondaryAuth, firestore}
+export {auth, persistence, secondaryAuth, firestore, arrayUnion}

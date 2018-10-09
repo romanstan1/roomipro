@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Dialog from '@material-ui/core/Dialog';
 
 export default class LocationModal extends Component {
-  state ={
+  state = {
     main: '',
     secondary: '',
     url: '',
