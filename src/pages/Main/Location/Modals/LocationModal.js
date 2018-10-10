@@ -11,17 +11,25 @@ export default class LocationModal extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if(prevState.id === '') return {
-      id: nextProps.focusedLocation.id,
-      main: nextProps.focusedLocation.main,
-      secondary: nextProps.focusedLocation.secondary,
-      url: nextProps.focusedLocation.url,
-      seats:  nextProps.focusedLocation.seats
+    const {focusedLocation} = nextProps
+    if(focusedLocation === 'add') return prevState
+    else if(prevState.id === '') return {
+      id: focusedLocation.id,
+      main: focusedLocation.main,
+      secondary: focusedLocation.secondary,
+      url: focusedLocation.url,
+      seats:  focusedLocation.seats
     }
+    else return null
   }
 
   updateLocation = () => {
     this.props.updateLocation(this.state)
+    this.props.closeLocation()()
+  }
+
+  addLocation = () => {
+    this.props.addLocation(this.state)
     this.props.closeLocation()()
   }
 
@@ -32,14 +40,17 @@ export default class LocationModal extends Component {
 
   render () {
     const {closeLocation, locationOpen, focusedLocation} = this.props
-    const {url, secondary, main, seats} = this.state
+    const {url, secondary, main, seats, id} = this.state
     return (
       <Dialog
         open={locationOpen}
         onClose={closeLocation()}
         >
         <div className='modal notification'>
-          <h4>Update "{focusedLocation.id}"</h4>
+          { id === ''?
+            <h4>Add a Location</h4> :
+            <h4>Update "{focusedLocation.id}"</h4>
+          }
           <div className='display-post'>
             <div>Main</div>
             <input onChange={this.handleTextInput} value={main} data-type='main' type="text"/>
@@ -51,7 +62,15 @@ export default class LocationModal extends Component {
             <input onChange={this.handleTextInput} value={seats} data-type='seats' type="number"/>
           </div>
           <div className='upload-post'>
-            <div className='button bright' onClick={this.updateLocation}>Update Location</div>
+            {
+              id === ''?
+              <div className='button bright' onClick={this.addLocation}>
+                Add Location
+              </div> :
+              <div className='button bright' onClick={this.updateLocation}>
+                Update Location
+              </div>
+            }
           </div>
         </div>
       </Dialog>

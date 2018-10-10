@@ -24,6 +24,11 @@ const SingleLocation = ({location, selectLocation, pushRoute, toggleLocationModa
     </div>
   </div>
 
+const PlusCircle = ({handleClick}) =>
+  <svg viewBox="0 0 24 24" onClick={handleClick('add')}>
+    <path d="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M13,7H11V11H7V13H11V17H13V13H17V11H13V7Z" />
+  </svg>
+
 class Location extends Component {
 
   state ={
@@ -37,6 +42,7 @@ class Location extends Component {
 
   toggleLocationModal = (location) => (e) => {
     if(location) this.setState(prevState => ({ ...prevState, focusedLocation: location }))
+    else if (location === 'add') this.setState(prevState => ({ ...prevState, focusedLocation: {} }))
     this.setState(prevState => ({ ...prevState, locationOpen: !prevState.locationOpen }))
   }
 
@@ -45,6 +51,14 @@ class Location extends Component {
       .collection("locations")
       .doc(location.id)
       .set({ ...location }, { merge: true })
+  }
+
+  addLocation = (location) => {
+    const id = (location.main.replace(/ /g,"-") + '-' + location.secondary.replace(/ /g,"-")).toLowerCase()
+    firestore
+      .collection("locations")
+      .doc(id)
+      .set({ ...location, id })
   }
 
   render() {
@@ -66,6 +80,7 @@ class Location extends Component {
             closeLocation={this.toggleLocationModal}
             focusedLocation={focusedLocation}
             updateLocation={this.updateLocation}
+            addLocation={this.addLocation}
           />
         }
         <div className='Location'>
@@ -81,7 +96,14 @@ class Location extends Component {
               </div>
             </Fragment>
           }
-          <h2>Locations</h2>
+          <div className="location-title">
+            <h2>Locations</h2>
+            { user.admin &&
+              <PlusCircle
+                handleClick={this.toggleLocationModal}
+              />
+            }
+          </div>
           {
             locations.map(location =>
               <SingleLocation
