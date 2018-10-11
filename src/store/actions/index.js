@@ -11,7 +11,8 @@ import {
 import {
   updateLocationData,
   selectLocation,
-  selectDate
+  selectDate,
+  addDateToLocation
 } from './databaseActions.js'
 
 export {
@@ -24,5 +25,6 @@ export {
   // Database
   updateLocationData,
   selectLocation,
-  selectDate
+  selectDate,
+  addDateToLocation
 }

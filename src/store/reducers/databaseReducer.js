@@ -3,7 +3,8 @@ import moment from 'moment'
 import {
   UPDATE_LOCATION_DATA,
   SELECT_LOCATION,
-  SELECT_DATE
+  SELECT_DATE,
+  ADD_DATE_TO_LOCATION
 } from '../constants/actionTypes'
 
 function createDate(days, weeks) {
@@ -12,19 +13,19 @@ function createDate(days, weeks) {
   return { id, date }
 }
 
-function createFortnight() {
-  let i = new Date().getDay() - 28
+const dates = (function createFortnight() {
+  let i = new Date().getDay()
   const limit = i + 14 + 28
   let dates = []
   for(i; i < limit; i++) {
-    if((i%7 !== 6 ) && (i%7 !== 0)) dates.push(createDate(i, 0))
+    if((i%7 !== 6 ) && (i%7 !== 0)) dates.push(createDate(i - 28 , 0))
   }
   return dates
-}
+})()
 
 export const initialState = {
   locations: [],
-  dates: createFortnight(),
+  dates: dates,
   selectedLocation: null,
   selectedDate: null
 }
@@ -34,7 +35,7 @@ export default function databaseReducer(state = initialState, action) {
     case UPDATE_LOCATION_DATA: {
       return {
         ...state,
-        locations: Object.values(action.payload)
+        locations: Object.values(action.payload).map(location => ({...location, dates:[]}))
       }
     }
     case SELECT_LOCATION: {
@@ -47,6 +48,19 @@ export default function databaseReducer(state = initialState, action) {
       return {
         ...state,
         selectedDate: action.payload
+      }
+    }
+    case ADD_DATE_TO_LOCATION: {
+      return {
+        ...state,
+        locations: state.locations.map(location => (
+          location.id === action.payload.id?
+          {
+            ...location,
+            dates: action.payload.dates
+          }:
+          location
+        ))
       }
     }
     default:
