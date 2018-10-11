@@ -22,10 +22,12 @@ class Booking extends Component {
       .get()
       .then(doc => {
         if(doc.exists) dateRef.update({
+          "id": selectedDate.id,
           "date": selectedDate.date,
           "people": arrayUnion(bookingUser)
         })
         else dateRef.set({
+          "id": selectedDate.id,
           "date": selectedDate.date,
           "people": [bookingUser]
         })

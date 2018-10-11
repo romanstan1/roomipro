@@ -34,17 +34,19 @@ class Dates extends Component {
             <Fragment>{selectedLocation.main} - {selectedLocation.secondary}</Fragment>
           }
         </BackNav>
-        {
-          selectedLocation && dates.map(date =>
-            <SingleDate
-              pushRoute={push}
-              selectedLocation={selectedLocation}
-              handleSelectDate={this.props.selectDate}
-              key={date.id}
-              date={date}
-            />
-          )
-        }
+        <div className='date-scroll'>
+          {
+            selectedLocation && dates.map(date =>
+              <SingleDate
+                pushRoute={push}
+                selectedLocation={selectedLocation}
+                handleSelectDate={this.props.selectDate}
+                key={date.id}
+                date={date}
+              />
+            )
+          }
+        </div>
       </div>
     )
   }

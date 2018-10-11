@@ -1,12 +1,12 @@
 @import "src/styles/_variables";
 
 div.Booking {
-  // width: 40%;
-  display: flex;
+  display: inline-flex;
   overflow: hidden;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  width: 100%;
   // border-right: 2px solid $stripeLight;
   p {
     margin: 10px 0;
@@ -21,4 +21,11 @@ div.Response {
   cursor: pointer;
   color: white;
   font-size: 12px;
+}
+
+
+@media screen and (min-width: 650px) {
+  div.Booking {
+    width: 40%;
+  }
 }

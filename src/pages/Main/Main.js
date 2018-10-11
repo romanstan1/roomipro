@@ -21,7 +21,7 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.resize)    
+    window.addEventListener('resize', this.resize)
     this.unsubscribe = firestore.collection("locations")
       .onSnapshot(querySnapshot => {
         let data = {}
@@ -45,17 +45,9 @@ class Main extends Component {
     const {width} = this.state
     if(width > 650) return (
       <div className='Main'>
-        <Resize handleWidth="2px" handleColor='#e6ebf1'>
-          <ResizeHorizon width="300px" minWidth="270px">
-            <Location/>
-          </ResizeHorizon>
-          <ResizeHorizon width="400px" minWidth="270px">
-            <Dates/>
-          </ResizeHorizon>
-          <ResizeHorizon width="350px" minWidth="350px">
-            <Booking/>
-          </ResizeHorizon>
-        </Resize>
+        <Location/>
+        <Dates/>
+        <Booking/>
       </div>
     )
     else return (

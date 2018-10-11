@@ -13,8 +13,8 @@ function createDate(days, weeks) {
 }
 
 function createFortnight() {
-  let i = new Date().getDay()
-  const limit = i + 14
+  let i = new Date().getDay() - 28
+  const limit = i + 14 + 28
   let dates = []
   for(i; i < limit; i++) {
     if((i%7 !== 6 ) && (i%7 !== 0)) dates.push(createDate(i, 0))

@@ -1,28 +1,11 @@
 import React, {Component, Fragment} from 'react'
 import Nav from './Nav/Nav.js'
 import {connect} from 'react-redux'
-import {selectLocation} from 'store/actions'
 import ButtonBase from '@material-ui/core/ButtonBase';
-import {push} from 'react-router-redux'
 import {LocationModal, NotificationModal} from './Modals'
-import './Location.css'
 import {firestore} from 'firebaseInit'
-
-const SingleLocation = ({location, selectLocation, pushRoute, toggleLocationModal}) =>
-  <div className='SingleLocation'>
-    <ButtonBase onClick={() => {
-      pushRoute('/location/'+location.id)
-      selectLocation(location)
-    }}>
-      <h3>{location.main}</h3>
-      <h4>{location.secondary}</h4>
-    </ButtonBase>
-    <div
-      onClick={toggleLocationModal(location)}
-      className="edit">
-      Edit Details
-    </div>
-  </div>
+import SingleLocation from './SingleLocation'
+import './Location.css'
 
 const PlusCircle = ({handleClick}) =>
   <svg viewBox="0 0 24 24" onClick={handleClick('add')}>
@@ -98,7 +81,8 @@ class Location extends Component {
           }
           <div className="location-title">
             <h2>Locations</h2>
-            { user.admin &&
+            {
+              user.admin &&
               <PlusCircle
                 handleClick={this.toggleLocationModal}
               />
@@ -107,8 +91,6 @@ class Location extends Component {
           {
             locations.map(location =>
               <SingleLocation
-                pushRoute={push}
-                selectLocation={this.props.selectLocation}
                 key={location.id}
                 location={location}
                 toggleLocationModal={this.toggleLocationModal}
@@ -126,9 +108,4 @@ const mapProps = state => ({
   user: state.auth.user
 })
 
-const mapDispatch = {
-  selectLocation,
-  push
-}
-
-export default connect(mapProps, mapDispatch)(Location)
+export default connect(mapProps)(Location)
