@@ -17,20 +17,21 @@ div.Dates {
     button {
       overflow: hidden;
       border-radius: 12px;
-      margin: 5px 20px;
-      div.date {
+      margin: 10px calc(50% - 100px);
+      div.SingleDate {
         overflow: hidden;
         background: $stripeMid;
-        padding: 15px 25px;
+        padding: 30px 25px;
         // border-radius: 12px;
         text-align: center;
         width: 200px;
-        li {
+        span {
           text-align: center !important;
-          span {
-            text-align: center !important;
-          }
+          color: $brightGreen;
         }
+        // li {
+        //   text-align: center !important;
+        // }
       }
     }
   }
