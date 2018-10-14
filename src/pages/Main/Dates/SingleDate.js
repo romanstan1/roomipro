@@ -2,6 +2,9 @@ import React, {Component, Fragment} from 'react'
 import ButtonBase from '@material-ui/core/ButtonBase';
 
 const SingleDate = ({date, handleSelectDate, pushRoute, selectedLocation, locationDate, user}) => {
+
+
+  // console.log('locationDate!::', locationDate)
   let attending = false
   let people = []
   if(locationDate) {
@@ -13,8 +16,8 @@ const SingleDate = ({date, handleSelectDate, pushRoute, selectedLocation, locati
       data-value={date.date}
       className="SingleDate"
       onClick={() => {
-        pushRoute('/location/' + selectedLocation.id + '/' + date.id)
-        handleSelectDate(date, attending, people)
+        pushRoute('/' + selectedLocation.id + '/' + date.id)
+        // handleSelectDate(date, attending, people)
       }}
       >
         {date.date} <br/>

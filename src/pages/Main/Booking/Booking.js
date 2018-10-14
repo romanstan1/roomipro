@@ -45,9 +45,6 @@ class Booking extends Component {
 
   render() {
     const {selectedLocation, selectedDate, attendingOnDate, locations, attendees} = this.props
-    // if(selectedLocation) {
-    //   console.log('locations[selectLocation.id]', locations.find(selectedLocation.id]))
-    // }
     return (
       <div className='Booking'>
         <BackNav
@@ -72,7 +69,10 @@ class Booking extends Component {
             <h4>Attendees:</h4>
             <p>
               {
-                attendees.map(attendee => <span>{attendee.name}</span>)
+                attendees.map(attendee =>
+                  <span key={attendee.id}>
+                    {attendee.name}
+                  </span>)
               }
             </p>
 

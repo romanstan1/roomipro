@@ -9,6 +9,7 @@ const logger = store => next => action => {
   let result = next(action)
   console.log('action.type:', action.type)
   console.log("store: ",store.getState())
+  console.log(" ")
   if(action.type === '@@router/LOCATION_CHANGE') store.dispatch(clearMessage())
   return result
 }

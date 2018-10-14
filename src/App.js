@@ -7,6 +7,8 @@ import {auth, persistence, firestore} from 'firebaseInit'
 import {logInSuccessful} from 'store/actions'
 import PropTypes from 'prop-types'
 import 'styles/global.css'
+import {selectLocation, selectDate} from 'store/actions'
+
 
 export const history = createBrowserHistory()
 
@@ -15,6 +17,41 @@ class App extends Component {
   static propTypes = {
     isAuthenticated: PropTypes.bool.isRequired
   }
+
+  state = {
+
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    console.log('getDerivedStateFromProps', nextProps, prevState)
+    const route = nextProps.pathname.split('/')
+    console.log('route', route)
+
+    const {selectedLocation, locations, dates, user} = nextProps
+
+    if(route.length === 2) {
+      const selectThisLocation = locations.find(location => location.id === route[1])
+      nextProps.selectLocation(selectThisLocation)
+    } else if( route.length === 3) {
+
+      const date = dates.find(date => date.id === parseInt(route[2]))
+      if(selectedLocation) {
+
+        const locationDate = locations
+          .find(location => location.id === selectedLocation.id).dates
+          .find(locationDate => date.id === locationDate.id)
+        let attending = false
+        let people = []
+        if(locationDate) {
+          attending = !!locationDate.people.find(person => person.id === user.uid)
+          people = locationDate.people
+        }
+        nextProps.selectDate(date, attending, people)
+      }
+    }
+    return null
+  }
+
   componentDidMount() {
     auth.onAuthStateChanged(user => {
       if(user) {
@@ -34,8 +71,8 @@ class App extends Component {
           <Fragment>
             <Switch>
               <Route exact path="/" component={Main}/>
-              <Route path="/location/:location" component={Main}/>
-              <Route path="/location/:location/:date" component={Main}/>
+              <Route path="/:location" component={Main}/>
+              <Route path="/:location/:date" component={Main}/>
               <Redirect to="/"/>
             </Switch>
           </Fragment>
@@ -54,11 +91,18 @@ class App extends Component {
 }
 
 const mapProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  pathname: state.routing.location.pathname,
+  locations: state.data.locations,
+  dates: state.data.dates,
+  selectedLocation: state.data.selectedLocation,
+  user: state.auth.user
 })
 
 const mapDispatch = {
-  logInSuccessful
+  logInSuccessful,
+  selectLocation,
+  selectDate
 }
 
 export default connect(mapProps, mapDispatch)(App)

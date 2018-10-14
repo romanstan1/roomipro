@@ -9,6 +9,7 @@ import SingleDate from './SingleDate'
 class Dates extends Component {
   render() {
     const {locations, dates, selectedLocation, push, user} = this.props
+    // console.log('pathname', pathname)
     return (
       <div className='Dates'>
         <BackNav
@@ -28,8 +29,6 @@ class Dates extends Component {
                 .find(location => location.id === selectedLocation.id).dates
                 .find(locationDate => date.id === locationDate.id)
 
-              // if(attending) attending = attending.people.find(person => person.id === userId)
-
               return <SingleDate
                 pushRoute={push}
                 selectedLocation={selectedLocation}
@@ -38,7 +37,6 @@ class Dates extends Component {
                 date={date}
                 locationDate={locationDate}
                 user={user}
-                // attending={!!attending}
               />
             })
           }
