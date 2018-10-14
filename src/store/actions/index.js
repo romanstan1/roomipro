@@ -12,7 +12,8 @@ import {
   updateLocationData,
   selectLocation,
   selectDate,
-  addDateToLocation
+  addDateToLocation,
+  placeBooking
 } from './databaseActions.js'
 
 export {
@@ -26,5 +27,6 @@ export {
   updateLocationData,
   selectLocation,
   selectDate,
-  addDateToLocation
+  addDateToLocation,
+  placeBooking
 }

@@ -2,7 +2,8 @@ import {
   UPDATE_LOCATION_DATA,
   SELECT_LOCATION,
   SELECT_DATE,
-  ADD_DATE_TO_LOCATION
+  ADD_DATE_TO_LOCATION,
+  PLACE_BOOKING
 } from '../constants/actionTypes'
 
 export const updateLocationData = data => dispatch =>
@@ -17,14 +18,20 @@ export const selectLocation = location => dispatch =>
     payload: location
   })
 
-export const selectDate = date => dispatch =>
+export const selectDate = (date, attending, people) => dispatch =>
   dispatch({
     type: SELECT_DATE,
-    payload: date
+    payload: {date, attending, people}
   })
 
 export const addDateToLocation = (id, dates) => dispatch =>
   dispatch({
     type: ADD_DATE_TO_LOCATION,
     payload: {id, dates}
+  })
+
+export const  placeBooking = (bookingUser) => dispatch =>
+  dispatch({
+    type: PLACE_BOOKING,
+    payload: bookingUser
   })

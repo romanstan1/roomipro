@@ -3,13 +3,15 @@ import {connect} from 'react-redux'
 import './Booking.css'
 import {BackNav} from 'components';
 import Response from './Response';
+import {placeBooking} from 'store/actions'
 import ButtonBase from '@material-ui/core/ButtonBase';
-import {firestore, arrayUnion} from 'firebaseInit'
+import {firestore, arrayUnion, arrayRemove} from 'firebaseInit'
 
 class Booking extends Component {
+
   handleResponse = () => {
 
-    const {locations, selectedDate, selectedLocation, user} = this.props
+    const {locations, selectedDate, selectedLocation, user, attendingOnDate, placeBooking} = this.props
     const locationRef = firestore.collection("locations")
     const bookingUser = { id: user.uid, name: user.firstName + ' ' + user.lastName}
 
@@ -21,21 +23,31 @@ class Booking extends Component {
     dateRef
       .get()
       .then(doc => {
-        if(doc.exists) dateRef.update({
+        if(doc.exists && !attendingOnDate) dateRef.update({
           "id": selectedDate.id,
           "date": selectedDate.date,
           "people": arrayUnion(bookingUser)
+        })
+        else if(doc.exists && attendingOnDate) dateRef.update({
+          "id": selectedDate.id,
+          "date": selectedDate.date,
+          "people": arrayRemove(bookingUser)
         })
         else dateRef.set({
           "id": selectedDate.id,
           "date": selectedDate.date,
           "people": [bookingUser]
         })
+      }).then(() => {
+        placeBooking(bookingUser)
       })
   }
 
   render() {
-    const {selectedLocation, selectedDate} = this.props
+    const {selectedLocation, selectedDate, attendingOnDate, locations, attendees} = this.props
+    // if(selectedLocation) {
+    //   console.log('locations[selectLocation.id]', locations.find(selectedLocation.id]))
+    // }
     return (
       <div className='Booking'>
         <BackNav
@@ -50,11 +62,18 @@ class Booking extends Component {
           selectedDate &&
           <Fragment>
             <Response
+              attendingOnDate={attendingOnDate}
               handleClick={this.handleResponse}
             />
-
             <p>
-              Max number of seats: {selectedLocation.seats}
+              {attendees.length} seats filled out of {selectedLocation.seats}
+            </p>
+
+            <h4>Attendees:</h4>
+            <p>
+              {
+                attendees.map(attendee => <span>{attendee.name}</span>)
+              }
             </p>
 
           </Fragment>
@@ -67,10 +86,15 @@ class Booking extends Component {
 
 const mapProps = state => ({
   selectedDate: state.data.selectedDate,
+  attendingOnDate: state.data.attendingOnDate,
   selectedLocation: state.data.selectedLocation,
   locations: state.data.locations,
-  user: state.auth.user
-
+  user: state.auth.user,
+  attendees: state.data.attendees
 })
 
-export default connect(mapProps)(Booking)
+const mapDispatch = {
+  placeBooking
+}
+
+export default connect(mapProps, mapDispatch)(Booking)

@@ -10,17 +10,27 @@ div.Booking {
   // border-right: 2px solid $stripeLight;
   p {
     margin: 10px 0;
+    span {
+      display: block;
+    }
   }
 }
 
 div.Response {
   margin: 50px 0;
-  background: $brightGreen;
-  border-radius: 60px;
-  padding: 12px 60px;
-  cursor: pointer;
-  color: white;
-  font-size: 12px;
+  span {
+    border-radius: 60px;
+    padding: 12px 60px;
+    cursor: pointer;
+    color: white;
+    font-size: 12px;
+    &.will-not-attend {
+      background: $brightRed;
+    }
+    &.will-attend {
+      background: $brightGreen;
+    }
+  }
 }
 
 

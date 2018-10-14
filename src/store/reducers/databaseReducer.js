@@ -4,7 +4,8 @@ import {
   UPDATE_LOCATION_DATA,
   SELECT_LOCATION,
   SELECT_DATE,
-  ADD_DATE_TO_LOCATION
+  ADD_DATE_TO_LOCATION,
+  PLACE_BOOKING
 } from '../constants/actionTypes'
 
 function createDate(days, weeks) {
@@ -27,7 +28,9 @@ export const initialState = {
   locations: [],
   dates: dates,
   selectedLocation: null,
-  selectedDate: null
+  selectedDate: null,
+  attendingOnDate: false,
+  attendees: []
 }
 
 export default function databaseReducer(state = initialState, action) {
@@ -41,13 +44,24 @@ export default function databaseReducer(state = initialState, action) {
     case SELECT_LOCATION: {
       return {
         ...state,
-        selectedLocation: action.payload
+        selectedLocation: action.payload,
+        selectedDate: null,
+        attendees: []
       }
     }
     case SELECT_DATE: {
       return {
         ...state,
-        selectedDate: action.payload
+        selectedDate: action.payload.date,
+        attendingOnDate: action.payload.attending,
+        attendees: action.payload.people
+      }
+    }
+    case PLACE_BOOKING: {
+      return {
+        ...state,
+        attendingOnDate: !state.attendingOnDate,
+        attendees: [].concat(state.attendees, action.payload)
       }
     }
     case ADD_DATE_TO_LOCATION: {
