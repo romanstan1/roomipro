@@ -13,7 +13,7 @@ class Dates extends Component {
     return (
       <div className='Dates'>
         <BackNav
-          route='somwhere'
+          route='/'
           mobile={true}
           >
           {

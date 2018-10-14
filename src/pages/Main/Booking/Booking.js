@@ -48,7 +48,7 @@ class Booking extends Component {
     return (
       <div className='Booking'>
         <BackNav
-          route='somwhere'
+          route={selectedLocation? '/'+ selectedLocation.id : ''}
           mobile={true}
           >
           {
