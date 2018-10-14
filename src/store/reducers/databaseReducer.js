@@ -5,7 +5,8 @@ import {
   SELECT_LOCATION,
   SELECT_DATE,
   ADD_DATE_TO_LOCATION,
-  PLACE_BOOKING
+  PLACE_BOOKING,
+  SWITCH_PAGE
 } from '../constants/actionTypes'
 
 function createDate(days, weeks) {
@@ -30,7 +31,8 @@ export const initialState = {
   selectedLocation: null,
   selectedDate: null,
   attendingOnDate: false,
-  attendees: []
+  attendees: [],
+  page: 0
 }
 
 export default function databaseReducer(state = initialState, action) {
@@ -75,6 +77,12 @@ export default function databaseReducer(state = initialState, action) {
           }:
           location
         ))
+      }
+    }
+    case SWITCH_PAGE: {
+      return {
+        ...state,
+        page:action.payload
       }
     }
     default:

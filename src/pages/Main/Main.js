@@ -52,8 +52,8 @@ class Main extends Component {
     )
     else return (
       <SwipeableViews
-        index={0}
-        // disabled={true}
+        index={this.props.page}
+        disabled={true}
         >
         <Location/>
         <Dates/>
@@ -67,4 +67,8 @@ const mapDispatch = {
   updateLocationData
 }
 
-export default connect(null,mapDispatch)(Main)
+const mapProps = state => ({
+  page: state.data.page
+})
+
+export default connect(mapProps,mapDispatch)(Main)

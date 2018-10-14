@@ -7,7 +7,7 @@ import {auth, persistence, firestore} from 'firebaseInit'
 import {logInSuccessful} from 'store/actions'
 import PropTypes from 'prop-types'
 import 'styles/global.css'
-import {selectLocation, selectDate} from 'store/actions'
+import {selectLocation, selectDate, switchPage} from 'store/actions'
 
 
 export const history = createBrowserHistory()
@@ -18,25 +18,21 @@ class App extends Component {
     isAuthenticated: PropTypes.bool.isRequired
   }
 
-  state = {
-
-  }
+  state = {}
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    console.log('getDerivedStateFromProps', nextProps, prevState)
     const route = nextProps.pathname.split('/')
-    console.log('route', route)
-
     const {selectedLocation, locations, dates, user} = nextProps
+
+    console.log('route', route)
 
     if(route.length === 2) {
       const selectThisLocation = locations.find(location => location.id === route[1])
       nextProps.selectLocation(selectThisLocation)
+      nextProps.switchPage(1)
     } else if( route.length === 3) {
-
       const date = dates.find(date => date.id === parseInt(route[2]))
       if(selectedLocation) {
-
         const locationDate = locations
           .find(location => location.id === selectedLocation.id).dates
           .find(locationDate => date.id === locationDate.id)
@@ -47,7 +43,11 @@ class App extends Component {
           people = locationDate.people
         }
         nextProps.selectDate(date, attending, people)
+        nextProps.switchPage(2)
       }
+    }
+    if(route.length <= 1 || route[1] === 'sign-in' || route[1] === '') {
+      nextProps.switchPage(0)
     }
     return null
   }
@@ -64,6 +64,7 @@ class App extends Component {
   }
   render() {
     const {isAuthenticated} = this.props
+    const {page} = this.state
     return (
       <Router history={history}>
         {
@@ -102,7 +103,8 @@ const mapProps = state => ({
 const mapDispatch = {
   logInSuccessful,
   selectLocation,
-  selectDate
+  selectDate,
+  switchPage
 }
 
 export default connect(mapProps, mapDispatch)(App)

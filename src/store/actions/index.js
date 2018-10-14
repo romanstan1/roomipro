@@ -13,7 +13,8 @@ import {
   selectLocation,
   selectDate,
   addDateToLocation,
-  placeBooking
+  placeBooking,
+  switchPage
 } from './databaseActions.js'
 
 export {
@@ -28,5 +29,6 @@ export {
   selectLocation,
   selectDate,
   addDateToLocation,
-  placeBooking
+  placeBooking,
+  switchPage
 }
