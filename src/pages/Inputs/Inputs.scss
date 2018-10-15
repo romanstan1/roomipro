@@ -1,0 +1,9 @@
+div.Inputs {
+  display: flex;
+  flex-direction:row;
+  div.input-section {
+    height: 100%;
+    font-size: 14px;
+    width: 100%;
+  }
+}

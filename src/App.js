@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import {Route, Router, Redirect, Switch} from 'react-router-dom'
 import {connect} from 'react-redux'
 import createBrowserHistory from 'history/createBrowserHistory'
-import { Main, SignIn, SendEmail} from 'pages'
+import { Main, SignIn, SendEmail, Inputs } from 'pages'
 import {auth, persistence, firestore} from 'firebaseInit'
 import {logInSuccessful} from 'store/actions'
 import PropTypes from 'prop-types'
@@ -69,6 +69,7 @@ class App extends Component {
           <Fragment>
             <Switch>
               <Route exact path="/sign-in" render={() => <Redirect to="/" />} />
+              <Route exact path="/update-location" component={Inputs}/>
               <Route exact path="/" component={Main}/>
               <Route path="/:location" component={Main}/>
               <Route path="/:location/:date" component={Main}/>

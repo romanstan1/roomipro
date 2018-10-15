@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react'
-import Location from './Location/Location'
+import {Location} from 'components'
 import Dates from './Dates/Dates'
 import Booking from './Booking/Booking'
 import {firestore} from 'firebaseInit'
