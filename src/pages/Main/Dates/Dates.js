@@ -8,13 +8,12 @@ import SingleDate from './SingleDate'
 
 class Dates extends Component {
   render() {
-    const {locations, dates, selectedLocation, push, user} = this.props
-    // console.log('pathname', pathname)
+    const {locations, dates, selectedLocation, push, user, width} = this.props
     return (
       <div className='Dates'>
         <BackNav
           route='/'
-          mobile={true}
+          mobile={width > 650? false : true}
           >
           {
             selectedLocation &&
@@ -47,12 +46,11 @@ class Dates extends Component {
 }
 
 const mapProps = (state, ownProps) => ({
-  // pathname: state.routing.location.pathname,
-  // location: state.routing.location,
   user: state.auth.user,
   locations: state.data.locations,
   dates: state.data.dates,
-  selectedLocation: state.data.selectedLocation
+  selectedLocation: state.data.selectedLocation,
+  width: state.data.width
 })
 
 const mapDispatch = {

@@ -14,7 +14,6 @@ class Booking extends Component {
     const {locations, selectedDate, selectedLocation, user, attendingOnDate, placeBooking} = this.props
     const locationRef = firestore.collection("locations")
     const bookingUser = { id: user.uid, name: user.firstName + ' ' + user.lastName}
-
     const dateRef = locationRef
       .doc(selectedLocation.id)
       .collection('dates')
@@ -44,16 +43,14 @@ class Booking extends Component {
   }
 
   render() {
-    const {selectedLocation, selectedDate, attendingOnDate, locations, attendees} = this.props
+    const {selectedLocation, selectedDate, attendingOnDate, locations, attendees, width} = this.props
     return (
       <div className='Booking'>
         <BackNav
           route={selectedLocation? '/'+ selectedLocation.id : ''}
-          mobile={true}
+          mobile={width > 650? false : true}
           >
-          {
-            selectedDate && <Fragment>{selectedDate.date}</Fragment>
-          }
+          { selectedDate && <Fragment>{selectedDate.date}</Fragment> }
         </BackNav>
         {
           selectedDate &&
@@ -65,7 +62,6 @@ class Booking extends Component {
             <p>
               {attendees.length} seats filled out of {selectedLocation.seats}
             </p>
-
             <h4>Attendees:</h4>
             <p>
               {
@@ -75,10 +71,8 @@ class Booking extends Component {
                   </span>)
               }
             </p>
-
           </Fragment>
         }
-
       </div>
     )
   }
@@ -90,7 +84,8 @@ const mapProps = state => ({
   selectedLocation: state.data.selectedLocation,
   locations: state.data.locations,
   user: state.auth.user,
-  attendees: state.data.attendees
+  attendees: state.data.attendees,
+  width: state.data.width
 })
 
 const mapDispatch = {

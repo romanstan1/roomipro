@@ -6,7 +6,8 @@ import {
   SELECT_DATE,
   ADD_DATE_TO_LOCATION,
   PLACE_BOOKING,
-  SWITCH_PAGE
+  SWITCH_PAGE,
+  UPDATE_WIDTH
 } from '../constants/actionTypes'
 
 function createDate(days, weeks) {
@@ -32,7 +33,8 @@ export const initialState = {
   selectedDate: null,
   attendingOnDate: false,
   attendees: [],
-  page: 0
+  page: 0,
+  width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
 }
 
 export default function databaseReducer(state = initialState, action) {
@@ -83,6 +85,12 @@ export default function databaseReducer(state = initialState, action) {
       return {
         ...state,
         page:action.payload
+      }
+    }
+    case UPDATE_WIDTH: {
+      return {
+        ...state,
+        width:action.payload
       }
     }
     default:

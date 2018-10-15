@@ -23,9 +23,6 @@ class App extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     const route = nextProps.pathname.split('/')
     const {selectedLocation, locations, dates, user} = nextProps
-
-    console.log('route', route)
-
     if(route.length === 2) {
       const selectThisLocation = locations.find(location => location.id === route[1])
       nextProps.selectLocation(selectThisLocation)

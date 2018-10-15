@@ -10,8 +10,14 @@ const Arrow = () =>
 
 const BackNav = ({route, children, mobile}) =>
   <div className='BackNav'>
-    {mobile? <Arrow/> : null }
-    <Link to={`${route}`}>{children}</Link>
+    {
+      mobile?
+      <Link to={`${route}`}>
+        <Arrow/>
+      </Link>
+      : null
+    }
+    {children}
   </div>
 
 export default BackNav

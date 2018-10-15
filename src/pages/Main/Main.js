@@ -5,7 +5,7 @@ import Booking from './Booking/Booking'
 import {firestore} from 'firebaseInit'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {updateLocationData} from 'store/actions'
+import {updateLocationData, updateWidth} from 'store/actions'
 import SwipeableViews from 'react-swipeable-views';
 import { Resize, ResizeHorizon } from "react-resize-layout";
 import './Main.css'
@@ -14,10 +14,6 @@ class Main extends Component {
 
   static propTypes = {
     updateLocationData:PropTypes.func.isRequired
-  }
-
-  state = {
-    width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
   }
 
   componentDidMount() {
@@ -34,7 +30,7 @@ class Main extends Component {
 
   resize = (e) => {
     const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
-    this.setState({width})
+    this.props.updateWidth(width)
   }
 
   componentWillUnmount() {
@@ -42,7 +38,7 @@ class Main extends Component {
   }
 
   render() {
-    const {width} = this.state
+    const {width} = this.props
     if(width > 650) return (
       <div className='Main'>
         <Location/>
@@ -64,11 +60,13 @@ class Main extends Component {
 }
 
 const mapDispatch = {
-  updateLocationData
+  updateLocationData,
+  updateWidth
 }
 
 const mapProps = state => ({
-  page: state.data.page
+  page: state.data.page,
+  width: state.data.width
 })
 
 export default connect(mapProps,mapDispatch)(Main)

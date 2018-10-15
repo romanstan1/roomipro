@@ -12,7 +12,7 @@ html, body {
   // overflow: hidden;
   font-family: 'Open Sans', sans-serif;
   color: $navyBlue;
-    font-size: 15px;
+  font-size: 15px;
 }
 
 input {
@@ -58,4 +58,11 @@ a {
 div#root {
   height: 100%;
   overflow: hidden;
+  >div {
+    font-size: 0px;
+    height: 100%;
+    div.react-swipeable-view-container {
+      height: 100%;
+    }
+  }
 }

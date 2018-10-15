@@ -4,7 +4,8 @@ import {
   SELECT_DATE,
   ADD_DATE_TO_LOCATION,
   PLACE_BOOKING,
-  SWITCH_PAGE
+  SWITCH_PAGE,
+  UPDATE_WIDTH
 } from '../constants/actionTypes'
 
 export const updateLocationData = data => dispatch =>
@@ -31,14 +32,20 @@ export const addDateToLocation = (id, dates) => dispatch =>
     payload: {id, dates}
   })
 
-export const  placeBooking = (bookingUser) => dispatch =>
+export const placeBooking = (bookingUser) => dispatch =>
   dispatch({
     type: PLACE_BOOKING,
     payload: bookingUser
   })
 
-export const  switchPage = (page) => dispatch =>
+export const switchPage = (page) => dispatch =>
   dispatch({
     type: SWITCH_PAGE,
     payload: page
+  })
+
+export const updateWidth = (width) => dispatch =>
+  dispatch({
+    type: UPDATE_WIDTH,
+    payload: width
   })

@@ -14,7 +14,8 @@ import {
   selectDate,
   addDateToLocation,
   placeBooking,
-  switchPage
+  switchPage,
+  updateWidth
 } from './databaseActions.js'
 
 export {
@@ -30,5 +31,6 @@ export {
   selectDate,
   addDateToLocation,
   placeBooking,
-  switchPage
+  switchPage,
+  updateWidth
 }
