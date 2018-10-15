@@ -3,8 +3,6 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 
 const SingleDate = ({date, handleSelectDate, pushRoute, selectedLocation, locationDate, user}) => {
 
-
-  // console.log('locationDate!::', locationDate)
   let attending = false
   let people = []
   if(locationDate) {
@@ -17,7 +15,6 @@ const SingleDate = ({date, handleSelectDate, pushRoute, selectedLocation, locati
       className="SingleDate"
       onClick={() => {
         pushRoute('/' + selectedLocation.id + '/' + date.id)
-        // handleSelectDate(date, attending, people)
       }}
       >
         {date.date} <br/>

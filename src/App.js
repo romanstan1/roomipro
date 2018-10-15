@@ -35,7 +35,7 @@ class App extends Component {
           .find(locationDate => date.id === locationDate.id)
         let attending = false
         let people = []
-        if(locationDate) {
+        if(locationDate && user) {
           attending = !!locationDate.people.find(person => person.id === user.uid)
           people = locationDate.people
         }
@@ -68,6 +68,7 @@ class App extends Component {
           isAuthenticated?
           <Fragment>
             <Switch>
+              <Route exact path="/sign-in" render={() => <Redirect to="/" />} />
               <Route exact path="/" component={Main}/>
               <Route path="/:location" component={Main}/>
               <Route path="/:location/:date" component={Main}/>

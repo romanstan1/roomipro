@@ -17,7 +17,6 @@ export const EmailInput = ({handleChange, email}) =>
   />
 
 export const PasswordInput = ({handleChange, password}) =>
-<form action="">
   <input
     type="password"
     value={password}
@@ -26,7 +25,8 @@ export const PasswordInput = ({handleChange, password}) =>
     placeholder='password'
     autoComplete='password'
   />
-</form>
+  // {/* <form action=""> */}
+// </form>
 
 export class CTAButton extends Component {
   state = {

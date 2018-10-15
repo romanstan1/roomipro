@@ -65,8 +65,8 @@ class Booking extends Component {
             <h4>Attendees:</h4>
             <p>
               {
-                attendees.map(attendee =>
-                  <span key={attendee.id}>
+                attendees.map((attendee, i) =>
+                  <span key={attendee.id + attendee.name + i}>
                     {attendee.name}
                   </span>)
               }
