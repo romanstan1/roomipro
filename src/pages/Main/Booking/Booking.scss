@@ -1,4 +1,5 @@
 @import "src/styles/_variables";
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700');
 
 div.Booking {
   display: inline-flex;
@@ -18,12 +19,13 @@ div.Booking {
 
 div.Response {
   margin: 50px 0;
-  span {
+  button {
     border-radius: 60px;
     padding: 12px 60px;
     cursor: pointer;
     color: white;
     font-size: 12px;
+    font-family: 'Open Sans', sans-serif;
     &.will-not-attend {
       background: $brightRed;
     }

@@ -38,7 +38,7 @@ class Booking extends Component {
           "people": [bookingUser]
         })
       }).then(() => {
-        placeBooking(bookingUser)
+        // placeBooking(bookingUser)
       })
   }
 

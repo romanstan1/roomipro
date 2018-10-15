@@ -6,12 +6,13 @@ const Response = ({handleClick, attendingOnDate}) =>
     className='Response'>
     {
       attendingOnDate?
-      <span onClick={handleClick} className='will-not-attend'>
+      <ButtonBase onClick={handleClick} className='will-not-attend'>
         Cancel attendance
-      </span>:
-      <span onClick={handleClick} className='will-attend'>
+      </ButtonBase>
+      :
+      <ButtonBase onClick={handleClick} className='will-attend'>
         I will attend
-      </span>
+      </ButtonBase>
     }
   </div>
 
