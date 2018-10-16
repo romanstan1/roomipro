@@ -42,7 +42,7 @@ class Nav extends Component {
     const {user} = this.props
     return (
       <nav>
-        <Logo invert/>
+        <Logo/>
 
         <Button
           aria-owns={anchorEl ? 'simple-menu' : null}

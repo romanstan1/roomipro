@@ -66,3 +66,19 @@ div#root {
     }
   }
 }
+
+button.CTAbutton {
+  display: inline-block;
+  color: white;
+  padding: 10px 25px;
+  border-radius: 3px;
+  background: $brightBlue;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 13px;
+  transition: 0.3s ease;
+  font-family: 'Open Sans', sans-serif;
+  &:hover {
+    background: $brightBlueHover;
+  }
+}

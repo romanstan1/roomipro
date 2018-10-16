@@ -8,18 +8,19 @@ div.Logo {
   font-size: 22px;
   font-weight: 700;
   font-family: 'Ubuntu', sans-serif;
+  color: $navyBlue;
   span {
-    background: white;
+    // background: white;
     width: 100%;
     display: inline-block;
     position: absolute;
     height: 8px;
   }
-  &.invert {
-    color: white;
-    span {
-      // color: $navyBlue;
-      background: $navyBlue;
-    }
-  }
+  // &.invert {
+  //   color: white;
+  //   span {
+  //     // color: $navyBlue;
+  //     background: $navyBlue;
+  //   }
+  // }
 }

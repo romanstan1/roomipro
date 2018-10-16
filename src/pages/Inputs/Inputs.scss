@@ -1,9 +1,88 @@
+@import "src/styles/_variables";
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700');
+
+
 div.Inputs {
   display: flex;
   flex-direction:row;
   div.input-section {
     height: 100%;
-    font-size: 14px;
+    font-size: 15px;
     width: 100%;
+    padding: 10px;
+    div.input-box {
+      margin: 15px 10px;
+      border: 0px solid $stripeDark;
+      padding: 0px;
+      position: relative;
+      div {
+        input {
+          width: 100%;
+          border: 1px solid $stripeMidBlue;
+          border-radius: 3px;
+          display: inline-block;
+          outline: none;
+          font-size: 14px;
+          padding: 5px 10px;
+          height: 42px;
+          font-family: 'Open Sans', sans-serif;
+          color: $navyBlue;
+          transition: 0.5s ease;
+          &:focus {
+            border: 1px solid $brightBlueHover;
+          }
+          &::placeholder{
+            font-family: 'Open Sans', sans-serif;
+            color: $stripeMidBlue;
+            opacity: 1;
+            font-weight: 600;
+          }
+          width: 100%;
+        }
+      }
+    }
+
+    div.numbers-inline {
+      display: flex;
+      flex-direction: row;
+      margin: 0px 2px;
+      padding: 0px;
+      div.input-box {
+        display: inline-block;
+        width: 35%;
+        border: 1px solid $stripeMidBlue;
+        border-radius: 3px;
+        margin: 0px 8px;
+        padding: 2px 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        span {
+          transform: translateY(1px);
+          height: 30px;
+          line-height: 30px;
+          text-transform: uppercase;
+          font-size: 12px;
+          font-weight: 700;
+          text-align: right;
+          color: $stripeDark;
+          white-space: nowrap;
+          display: inline-block;
+          word-break:keep-all;
+        }
+        div {
+          display: inline-block;
+          width: 100%;
+          input {
+            text-indent: 5px;
+            border: 0px solid transparent;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+  button.CTAbutton {
+    margin: 30px 10px;
   }
 }

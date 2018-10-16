@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import './Logo.css'
 
-const Logo = ({invert}) =>
-  <div className={invert? 'Logo invert': 'Logo'}>
+const Logo = () =>
+  <div className='Logo'>
     <span></span>
     <Link to='/'>roomipro</Link>
   </div>
