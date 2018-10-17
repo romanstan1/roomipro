@@ -7,7 +7,8 @@ import {
   ADD_DATE_TO_LOCATION,
   PLACE_BOOKING,
   SWITCH_PAGE,
-  UPDATE_WIDTH
+  UPDATE_WIDTH,
+  FOCUS_ON_LOCATION
 } from '../constants/actionTypes'
 
 function createDate(days, weeks) {
@@ -30,6 +31,7 @@ export const initialState = {
   locations: [],
   dates: dates,
   selectedLocation: null,
+  focusedLocation: null,
   selectedDate: null,
   attendingOnDate: false,
   attendees: [],
@@ -51,6 +53,12 @@ export default function databaseReducer(state = initialState, action) {
         selectedLocation: action.payload,
         selectedDate: null,
         attendees: []
+      }
+    }
+    case FOCUS_ON_LOCATION: {
+      return {
+        ...state,
+        focusedLocation: action.payload
       }
     }
     case SELECT_DATE: {

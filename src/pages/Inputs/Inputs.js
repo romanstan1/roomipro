@@ -3,23 +3,9 @@ import {connect} from 'react-redux'
 import {push} from 'react-router-redux'
 import {Location} from 'components'
 import ButtonBase from '@material-ui/core/ButtonBase';
+import {firestore} from 'firebaseInit'
+import InputBox from './InputBox'
 import './Inputs.css'
-// import {selectDate} from 'store/actions'
-
-const InputBox = ({handleInput, value, type, dataType, name, placeholder}) =>
-  <div className='input-box'>
-    {name && <span>{name}</span>}
-    <div>
-      <input
-        onChange={handleInput}
-        value={value}
-        data-type={dataType}
-        type={type}
-        placeholder={placeholder}
-      />
-    </div>
-  </div>
-
 
 class Inputs extends Component {
   state = {
@@ -32,6 +18,12 @@ class Inputs extends Component {
     id:''
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { main, secondary, url, seats, lat, lng, id } = nextProps.focusedLocation
+    if(prevState.id !== id) return { main, secondary, url, seats, lat, lng, id }
+    return null
+  }
+
   handleTextInput = e => {
     this.setState({[e.target.dataset.type]: e.target.value})
   }
@@ -40,16 +32,24 @@ class Inputs extends Component {
     this.setState({[e.target.dataset.type]: e.target.value})
   }
 
-  render() {
+  updateLocation = () => {
+    firestore
+      .collection("locations")
+      .doc(this.state.id)
+      .set({ ...this.state }, { merge: true })
+  }
 
+  render() {
+    const {focusedLocation} = this.props
     const {main, secondary, url, seats, lat, lng, id} = this.state
     return (
       <div className='Inputs'>
         <Location/>
         <div className='input-section'>
 
+          <h2>Edit "{id}"</h2>
+
           <InputBox
-            // name='Main Location'
             placeholder='Enter the main location'
             handleInput={this.handleTextInput}
             value={main}
@@ -57,7 +57,6 @@ class Inputs extends Component {
             type='text'
           />
           <InputBox
-            // name='Secondary Location'
             placeholder='Enter the secondary location'
             handleInput={this.handleTextInput}
             value={secondary}
@@ -65,7 +64,6 @@ class Inputs extends Component {
             type='text'
           />
           <InputBox
-            // name='Image URL'
             placeholder='Enter the image url for this location'
             handleInput={this.handleTextInput}
             value={url}
@@ -96,7 +94,7 @@ class Inputs extends Component {
               type='number'
             />
           </div>
-          <ButtonBase className='CTAbutton'>
+          <ButtonBase className='CTAbutton' onClick={this.updateLocation}>
             Update Location
           </ButtonBase>
         </div>
@@ -109,7 +107,7 @@ const mapProps = (state, ownProps) => ({
   // user: state.auth.user,
   // locations: state.data.locations,
   // dates: state.data.dates,
-  // selectedLocation: state.data.selectedLocation
+  focusedLocation: state.data.focusedLocation
 })
 
 const mapDispatch = {

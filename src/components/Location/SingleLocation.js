@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import {push} from 'react-router-redux'
 import ButtonBase from '@material-ui/core/ButtonBase';
-import {addDateToLocation} from 'store/actions'
+import {addDateToLocation, focusOnLocation} from 'store/actions'
 import {firestore} from 'firebaseInit'
 
 class SingleLocation extends Component {
@@ -17,7 +17,7 @@ class SingleLocation extends Component {
     this.setState({hover: false})
   }
   handleClick = () => {
-    const {location, toggleLocationModal, user, push, minDate, maxDate, addDateToLocation} = this.props
+    const {location, user, push, minDate, maxDate, addDateToLocation} = this.props
     push('/'+location.id)
     this.unsubscribe = firestore
     .collection("locations")
@@ -31,9 +31,16 @@ class SingleLocation extends Component {
       addDateToLocation(location.id, dates)
     })
   }
+  handleEditClick = () => {
+    const {location,focusOnLocation,addDateToLocation,push} = this.props
+    const {dates, ...noDates} = location
+    focusOnLocation(noDates)
+    push('/update-location')
+  }
+
 
   render() {
-    const {location, toggleLocationModal, user, push, width} = this.props
+    const {location, user, push, width} = this.props
     return (
       <div
         className='SingleLocation'
@@ -42,16 +49,15 @@ class SingleLocation extends Component {
         style={{backgroundImage: `url(${location.url})`}}
         >
         <ButtonBase onClick={this.handleClick}>
-          <h3>{location.main}</h3>
-          <h4>{location.secondary}</h4>
+          <span>
+            <h3>{location.main}</h3>
+            <h4>{location.secondary}</h4>
+          </span>
         </ButtonBase>
         {
           user.admin && this.state.hover && width > 650 &&
           <div
-            onClick={() => {
-              toggleLocationModal(location)()
-              push('/update-location')
-            }}
+            onClick={this.handleEditClick}
             className="edit">
             Edit Details
           </div>
@@ -71,7 +77,8 @@ const mapProps = state => ({
 
 const mapDispatch = {
   push,
-  addDateToLocation
+  addDateToLocation,
+  focusOnLocation
 }
 
 export default connect(mapProps, mapDispatch)(SingleLocation)

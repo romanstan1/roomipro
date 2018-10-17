@@ -5,7 +5,8 @@ import {
   ADD_DATE_TO_LOCATION,
   PLACE_BOOKING,
   SWITCH_PAGE,
-  UPDATE_WIDTH
+  UPDATE_WIDTH,
+  FOCUS_ON_LOCATION
 } from '../constants/actionTypes'
 
 export const updateLocationData = data => dispatch =>
@@ -48,4 +49,10 @@ export const updateWidth = (width) => dispatch =>
   dispatch({
     type: UPDATE_WIDTH,
     payload: width
+  })
+
+export const focusOnLocation = (location) => dispatch =>
+  dispatch({
+    type: FOCUS_ON_LOCATION,
+    payload: location
   })

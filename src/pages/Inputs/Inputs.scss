@@ -10,6 +10,13 @@ div.Inputs {
     font-size: 15px;
     width: 100%;
     padding: 10px;
+    h2 {
+      font-size: 19px;
+      margin: 10px;
+      font-weight: 700;
+      border-bottom: 1px solid $stripeMid;
+      padding: 10px 0 12px 0;
+    }
     div.input-box {
       margin: 15px 10px;
       border: 0px solid $stripeDark;
