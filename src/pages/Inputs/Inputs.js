@@ -19,8 +19,10 @@ class Inputs extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    const { main, secondary, url, seats, lat, lng, id } = nextProps.focusedLocation
-    if(prevState.id !== id) return { main, secondary, url, seats, lat, lng, id }
+    if(nextProps.focusedLocation) {
+      const { main, secondary, url, seats, lat, lng, id } = nextProps.focusedLocation
+      if(prevState.id !== id) return { main, secondary, url, seats, lat, lng, id }
+    }
     return null
   }
 
@@ -39,15 +41,27 @@ class Inputs extends Component {
       .set({ ...this.state }, { merge: true })
   }
 
+  addLocation = (id) => () => {
+    firestore
+      .collection("locations")
+      .doc(id)
+      .set({ ...this.state, id })
+  }
+
   render() {
     const {focusedLocation} = this.props
     const {main, secondary, url, seats, lat, lng, id} = this.state
+    const newId = (main.replace(/ /g,"-") + '-' + secondary.replace(/ /g,"-")).toLowerCase()
     return (
       <div className='Inputs'>
         <Location/>
         <div className='input-section'>
 
-          <h2>Edit "{id}"</h2>
+          {
+            !id?
+            <h2>Add a new location with ID: "{newId}"</h2>:
+            <h2>Edit "{id}"</h2>
+          }
 
           <InputBox
             placeholder='Enter the main location'
@@ -94,19 +108,25 @@ class Inputs extends Component {
               type='number'
             />
           </div>
-          <ButtonBase className='CTAbutton' onClick={this.updateLocation}>
-            Update Location
-          </ButtonBase>
+          {
+            !id?
+            <ButtonBase className='CTAbutton' onClick={this.addLocation(newId)}>
+              Add Location
+            </ButtonBase>:
+            <ButtonBase className='CTAbutton' onClick={this.updateLocation}>
+              Update Location
+            </ButtonBase>
+          }
+
+
+
         </div>
       </div>
     )
   }
 }
 
-const mapProps = (state, ownProps) => ({
-  // user: state.auth.user,
-  // locations: state.data.locations,
-  // dates: state.data.dates,
+const mapProps = state => ({
   focusedLocation: state.data.focusedLocation
 })
 

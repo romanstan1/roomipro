@@ -7,7 +7,7 @@ import {auth, persistence, firestore} from 'firebaseInit'
 import {logInSuccessful} from 'store/actions'
 import PropTypes from 'prop-types'
 import 'styles/global.css'
-import {selectLocation, selectDate, switchPage} from 'store/actions'
+import {selectLocation, selectDate, switchPage, focusOnLocation} from 'store/actions'
 
 
 export const history = createBrowserHistory()
@@ -23,11 +23,30 @@ class App extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     const route = nextProps.pathname.split('/')
     const {selectedLocation, locations, dates, user} = nextProps
-    if(route.length === 2) {
+
+    if(route.length === 2 && route[1] === 'add-location') {
+      /// data for add a new location
+      const state = {
+        main: '', secondary: '', url: '',
+        seats: 0, lat: 0, lng: 0,
+        id:''
+      }
+      nextProps.focusOnLocation(state)
+
+    } else if(route.length === 3 && route[1] === 'update-location' && locations.length) {
+      /// data for edit/update or add location
+      const selectThisLocation = locations.find(location => location.id === route[2])
+      const {dates, ...noDates} = selectThisLocation
+      nextProps.focusOnLocation(noDates)
+
+    } else if(route.length === 2) {
+      // data for selection of location
       const selectThisLocation = locations.find(location => location.id === route[1])
       nextProps.selectLocation(selectThisLocation)
       nextProps.switchPage(1)
+
     } else if( route.length === 3) {
+      // data for selection of location
       const date = dates.find(date => date.id === parseInt(route[2]))
       if(selectedLocation) {
         const locationDate = locations
@@ -43,9 +62,12 @@ class App extends Component {
         nextProps.switchPage(2)
       }
     }
+
     if(route.length <= 1 || route[1] === 'sign-in' || route[1] === '') {
+      // switch to 1 if sign in/ login
       nextProps.switchPage(0)
     }
+
     return null
   }
 
@@ -59,6 +81,7 @@ class App extends Component {
       }
     })
   }
+  
   render() {
     const {isAuthenticated} = this.props
     const {page} = this.state
@@ -69,7 +92,8 @@ class App extends Component {
           <Fragment>
             <Switch>
               <Route exact path="/sign-in" render={() => <Redirect to="/" />} />
-              <Route exact path="/update-location" component={Inputs}/>
+              <Route path="/update-location" component={Inputs}/>
+              <Route path="/add-location" component={Inputs}/>
               <Route exact path="/" component={Main}/>
               <Route path="/:location" component={Main}/>
               <Route path="/:location/:date" component={Main}/>
@@ -103,7 +127,8 @@ const mapDispatch = {
   logInSuccessful,
   selectLocation,
   selectDate,
-  switchPage
+  switchPage,
+  focusOnLocation
 }
 
 export default connect(mapProps, mapDispatch)(App)

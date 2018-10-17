@@ -2,8 +2,9 @@ import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import {push} from 'react-router-redux'
 import ButtonBase from '@material-ui/core/ButtonBase';
-import {addDateToLocation, focusOnLocation} from 'store/actions'
+import {addDateToLocation} from 'store/actions'
 import {firestore} from 'firebaseInit'
+import {EditIcon} from './Icons'
 
 class SingleLocation extends Component {
 
@@ -31,11 +32,10 @@ class SingleLocation extends Component {
       addDateToLocation(location.id, dates)
     })
   }
+
   handleEditClick = () => {
-    const {location,focusOnLocation,addDateToLocation,push} = this.props
-    const {dates, ...noDates} = location
-    focusOnLocation(noDates)
-    push('/update-location')
+    const {location, push} = this.props
+    push('/update-location/'+location.id)
   }
 
 
@@ -56,10 +56,8 @@ class SingleLocation extends Component {
         </ButtonBase>
         {
           user.admin && this.state.hover && width > 650 &&
-          <div
-            onClick={this.handleEditClick}
-            className="edit">
-            Edit Details
+          <div className='edit' onClick={this.handleEditClick}>
+            <EditIcon/>
           </div>
         }
     </div>
@@ -67,6 +65,11 @@ class SingleLocation extends Component {
   }
 }
 
+// {/* <div
+//   onClick={this.handleEditClick}
+//   className="edit">
+//   Edit Details
+// </div> */}
 
 const mapProps = state => ({
   user: state.auth.user,
@@ -77,8 +80,7 @@ const mapProps = state => ({
 
 const mapDispatch = {
   push,
-  addDateToLocation,
-  focusOnLocation
+  addDateToLocation
 }
 
 export default connect(mapProps, mapDispatch)(SingleLocation)
