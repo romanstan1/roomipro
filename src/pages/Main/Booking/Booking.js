@@ -25,17 +25,20 @@ class Booking extends Component {
         if(doc.exists && !attendingOnDate) dateRef.update({
           "id": selectedDate.id,
           "date": selectedDate.date,
-          "people": arrayUnion(bookingUser)
+          "people": arrayUnion(bookingUser),
+          "seats": selectedLocation.seats
         })
         else if(doc.exists && attendingOnDate) dateRef.update({
           "id": selectedDate.id,
           "date": selectedDate.date,
-          "people": arrayRemove(bookingUser)
+          "people": arrayRemove(bookingUser),
+          "seats": selectedLocation.seats
         })
         else dateRef.set({
           "id": selectedDate.id,
           "date": selectedDate.date,
-          "people": [bookingUser]
+          "people": [bookingUser],
+          "seats": selectedLocation.seats
         })
       }).then(() => {
         // placeBooking(bookingUser)
@@ -43,7 +46,7 @@ class Booking extends Component {
   }
 
   render() {
-    const {selectedLocation, selectedDate, attendingOnDate, locations, attendees, width} = this.props
+    const {selectedLocation, selectedDate, attendingOnDate, locations, attendees, width, maxSeats} = this.props
     return (
       <div className='Booking'>
         <BackNav
@@ -60,7 +63,7 @@ class Booking extends Component {
               handleClick={this.handleResponse}
             />
             <p>
-              {attendees.length} seats filled out of {selectedLocation.seats}
+              {attendees.length} seats filled out of {maxSeats}
             </p>
             <h4>Attendees:</h4>
             <p>
@@ -85,7 +88,8 @@ const mapProps = state => ({
   locations: state.data.locations,
   user: state.auth.user,
   attendees: state.data.attendees,
-  width: state.data.width
+  width: state.data.width,
+  maxSeats: state.data.maxSeats
 })
 
 const mapDispatch = {

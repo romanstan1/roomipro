@@ -2,7 +2,6 @@ import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import './Dates.css'
 import {BackNav} from 'components';
-import {selectDate} from 'store/actions'
 import {push} from 'react-router-redux'
 import SingleDate from './SingleDate'
 
@@ -31,7 +30,6 @@ class Dates extends Component {
               return <SingleDate
                 pushRoute={push}
                 selectedLocation={selectedLocation}
-                handleSelectDate={this.props.selectDate}
                 key={date.id}
                 date={date}
                 locationDate={locationDate}
@@ -54,7 +52,6 @@ const mapProps = (state, ownProps) => ({
 })
 
 const mapDispatch = {
-  selectDate,
   push
 }
 

@@ -35,6 +35,7 @@ export const initialState = {
   selectedDate: null,
   attendingOnDate: false,
   attendees: [],
+  maxSeats: 0,
   page: 0,
   width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
 }
@@ -66,7 +67,8 @@ export default function databaseReducer(state = initialState, action) {
         ...state,
         selectedDate: action.payload.date,
         attendingOnDate: action.payload.attending,
-        attendees: action.payload.people
+        attendees: action.payload.people,
+        maxSeats: action.payload.seats
       }
     }
     case PLACE_BOOKING: {

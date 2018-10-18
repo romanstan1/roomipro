@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react'
 import ButtonBase from '@material-ui/core/ButtonBase';
 
-const SingleDate = ({date, handleSelectDate, pushRoute, selectedLocation, locationDate, user}) => {
+const SingleDate = ({date, pushRoute, selectedLocation, locationDate, user}) => {
 
   let attending = false
   let people = []

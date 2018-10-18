@@ -54,11 +54,14 @@ class App extends Component {
           .find(locationDate => date.id === locationDate.id)
         let attending = false
         let people = []
+        let seats = 0
         if(locationDate && user) {
           attending = !!locationDate.people.find(person => person.id === user.uid)
           people = locationDate.people
+          seats = locationDate.seats
+          console.log('seats', seats)
         }
-        nextProps.selectDate(date, attending, people)
+        nextProps.selectDate(date, attending, people, seats)
         nextProps.switchPage(2)
       }
     }
@@ -81,7 +84,7 @@ class App extends Component {
       }
     })
   }
-  
+
   render() {
     const {isAuthenticated} = this.props
     const {page} = this.state

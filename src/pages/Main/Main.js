@@ -20,11 +20,30 @@ class Main extends Component {
     window.addEventListener('resize', this.resize)
     this.unsubscribe = firestore.collection("locations")
       .onSnapshot(querySnapshot => {
+
         let data = {}
         querySnapshot.forEach(doc => {
           data = { ...data, [doc.id]: {...doc.data(), id: doc.id}}
         })
+
         this.props.updateLocationData(data)
+
+        // Object.values(data).forEach(location => {
+        //   // fetch(`https://api.darksky.net/forecast/${process.env.REACT_APP_ROOMIPRO_DARKSKY}/${location.lat},${location.lng}`)
+        //   fetch(`api.openweathermap.org/data/2.5/forecast?lat=${location.lat}&lon=${location.lng}`)
+        //     .then(res => {
+        //       console.log('res', res)
+        //       res.json()
+        //     })
+        //     .then(result => {
+        //       console.log('result')
+        //       console.log('result:: ', JSON.stringify(result));
+        //     })
+        //     .catch(error => {
+        //       console.log('error!: ',error)
+        //     })
+        // })
+
       })
   }
 

@@ -21,10 +21,10 @@ export const selectLocation = location => dispatch =>
     payload: location
   })
 
-export const selectDate = (date, attending, people) => dispatch =>
+export const selectDate = (date, attending, people, seats) => dispatch =>
   dispatch({
     type: SELECT_DATE,
-    payload: {date, attending, people}
+    payload: {date, attending, people, seats}
   })
 
 export const addDateToLocation = (id, dates) => dispatch =>
