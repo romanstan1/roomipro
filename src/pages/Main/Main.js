@@ -5,7 +5,7 @@ import Booking from './Booking/Booking'
 import {firestore} from 'firebaseInit'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {updateLocationData, updateWidth} from 'store/actions'
+import {updateLocationData, updateWidth, addDateToLocation} from 'store/actions'
 import SwipeableViews from 'react-swipeable-views';
 import { Resize, ResizeHorizon } from "react-resize-layout";
 import './Main.css'
@@ -17,6 +17,8 @@ class Main extends Component {
   }
 
   componentDidMount() {
+    const {minDate, maxDate, addDateToLocation, updateLocationData} = this.props
+
     window.addEventListener('resize', this.resize)
     this.unsubscribe = firestore.collection("locations")
       .onSnapshot(querySnapshot => {
@@ -24,9 +26,19 @@ class Main extends Component {
         let data = {}
         querySnapshot.forEach(doc => {
           data = { ...data, [doc.id]: {...doc.data(), id: doc.id}}
+          firestore.collection("locations")
+            .doc(doc.id)
+            .collection("dates")
+            .where("id", ">=", minDate)
+            .where("id", "<=", maxDate)
+            .onSnapshot(querySnapshot => {
+              let dates = []
+              querySnapshot.forEach(docQuery => dates.push(docQuery.data()))
+              addDateToLocation(doc.id, dates)
+            })
         })
 
-        this.props.updateLocationData(data)
+        updateLocationData(data)
 
         // Object.values(data).forEach(location => {
         //   // fetch(`https://api.darksky.net/forecast/${process.env.REACT_APP_ROOMIPRO_DARKSKY}/${location.lat},${location.lng}`)
@@ -80,12 +92,15 @@ class Main extends Component {
 
 const mapDispatch = {
   updateLocationData,
-  updateWidth
+  updateWidth,
+  addDateToLocation
 }
 
 const mapProps = state => ({
   page: state.data.page,
-  width: state.data.width
+  width: state.data.width,
+  minDate: state.data.dates[0].id,
+  maxDate: state.data.dates[state.data.dates.length - 1].id
 })
 
 export default connect(mapProps,mapDispatch)(Main)

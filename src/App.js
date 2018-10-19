@@ -77,6 +77,17 @@ class App extends Component {
   componentDidMount() {
     auth.onAuthStateChanged(user => {
       if(user) {
+        console.log('user::', user.qa)
+
+        // auth.currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+        //   // Send token to your backend via HTTPS
+        //   // ...
+        //   console.log('token::', idToken)
+        //   console.log('TRUE?::', idToken === user.qa)
+        // }).catch(function(error) {
+        //   // Handle error
+        // });
+
         firestore.collection('users').doc(user.uid).get().then(userData => {
           const thisUser = userData.data()
           this.props.logInSuccessful({...user, ...thisUser})

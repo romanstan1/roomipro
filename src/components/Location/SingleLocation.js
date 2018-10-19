@@ -18,29 +18,15 @@ class SingleLocation extends Component {
     this.setState({hover: false})
   }
   handleClick = () => {
-    const {location, user, push, minDate, maxDate, addDateToLocation} = this.props
-    push('/'+location.id)
-    this.unsubscribe = firestore
-    .collection("locations")
-    .doc(location.id)
-    .collection("dates")
-    .where("id", ">=", minDate)
-    .where("id", "<=", maxDate)
-    .onSnapshot(querySnapshot => {
-      let dates = []
-      querySnapshot.forEach(doc => dates.push(doc.data()))
-      addDateToLocation(location.id, dates)
-    })
+    const {location} = this.props
+    this.props.push('/'+location.id)
   }
-
   handleEditClick = () => {
-    const {location, push} = this.props
-    push('/update-location/'+location.id)
+    const {location} = this.props
+    this.props.push('/update-location/'+location.id)
   }
-
-
   render() {
-    const {location, user, push, width} = this.props
+    const {location, user, width} = this.props
     return (
       <div
         className='SingleLocation'
@@ -65,22 +51,13 @@ class SingleLocation extends Component {
   }
 }
 
-// {/* <div
-//   onClick={this.handleEditClick}
-//   className="edit">
-//   Edit Details
-// </div> */}
-
 const mapProps = state => ({
   user: state.auth.user,
-  minDate: state.data.dates[0].id,
-  maxDate: state.data.dates[state.data.dates.length - 1].id,
   width: state.data.width
 })
 
 const mapDispatch = {
-  push,
-  addDateToLocation
+  push
 }
 
 export default connect(mapProps, mapDispatch)(SingleLocation)

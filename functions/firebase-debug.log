@@ -1,0 +1,29 @@
+[debug] [2018-10-18T22:17:39.316Z] ----------------------------------------------------------------------
+[debug] [2018-10-18T22:17:39.318Z] Command:       /Users/romanstankiewicz/.nvm/versions/node/v10.12.0/bin/node /Users/romanstankiewicz/.nvm/versions/node/v10.12.0/bin/firebase serve --only functions
+[debug] [2018-10-18T22:17:39.318Z] CLI Version:   5.1.1
+[debug] [2018-10-18T22:17:39.318Z] Platform:      darwin
+[debug] [2018-10-18T22:17:39.318Z] Node Version:  v10.12.0
+[debug] [2018-10-18T22:17:39.319Z] Time:          Thu Oct 18 2018 23:17:39 GMT+0100 (British Summer Time)
+[debug] [2018-10-18T22:17:39.319Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-10-18T22:17:39.329Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-10-18T22:17:39.329Z] > authorizing via signed-in user
+[debug] [2018-10-18T22:17:39.329Z] [iam] checking project room-ipro for permissions ["firebase.projects.get"]
+[debug] [2018-10-18T22:17:39.331Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/room-ipro:testIamPermissions  
+
+[debug] [2018-10-18T22:17:40.207Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-18T22:17:40.208Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/room-ipro  
+ 
+[debug] [2018-10-18T22:17:41.021Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/romanstankiewicz/development/roomipro'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2018-10-18T22:17:41.586Z] Fetching environment
+[debug] [2018-10-18T22:17:41.588Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/855552313275:getServerAppConfig  
+ 
+[debug] [2018-10-18T22:17:41.815Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-18T22:17:41.816Z] Starting @google-cloud/functions-emulator
+[debug] [2018-10-18T22:17:43.381Z] Parsing function triggers
+[info] ✔  functions: helloWorld: http://localhost:5000/room-ipro/us-central1/helloWorld
+[info] ✔  functions: app: http://localhost:5000/room-ipro/us-central1/app
