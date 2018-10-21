@@ -4,7 +4,7 @@ import {push} from 'react-router-redux'
 import ButtonBase from '@material-ui/core/ButtonBase';
 import {addDateToLocation} from 'store/actions'
 import {firestore} from 'firebaseInit'
-import {EditIcon} from './Icons'
+import {EditIcon, DeleteIcon} from './Icons'
 
 class SingleLocation extends Component {
 
@@ -25,6 +25,10 @@ class SingleLocation extends Component {
     const {location} = this.props
     this.props.push('/update-location/'+location.id)
   }
+  handleDeleteClick = () => {
+    const {location} = this.props
+    this.props.push('/delete-location/'+location.id)
+  }
   render() {
     const {location, user, width} = this.props
     return (
@@ -42,9 +46,14 @@ class SingleLocation extends Component {
         </ButtonBase>
         {
           user.admin && this.state.hover && width > 650 &&
-          <div className='edit' onClick={this.handleEditClick}>
-            <EditIcon/>
-          </div>
+          <Fragment>
+            <div className='edit' onClick={this.handleEditClick}>
+              <EditIcon/>
+            </div>
+            <div className='delete' onClick={this.handleDeleteClick}>
+              <DeleteIcon/>
+            </div>
+          </Fragment>
         }
     </div>
     )

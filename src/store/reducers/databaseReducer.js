@@ -8,7 +8,8 @@ import {
   PLACE_BOOKING,
   SWITCH_PAGE,
   UPDATE_WIDTH,
-  FOCUS_ON_LOCATION
+  FOCUS_ON_LOCATION,
+  REMOVE_LOADING_DATA
 } from '../constants/actionTypes'
 
 function createDate(days, weeks) {
@@ -37,6 +38,7 @@ export const initialState = {
   attendees: [],
   maxSeats: 0,
   page: 0,
+  loadingThesePages: [],
   width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
 }
 
@@ -74,8 +76,13 @@ export default function databaseReducer(state = initialState, action) {
     case PLACE_BOOKING: {
       return {
         ...state,
-        attendingOnDate: !state.attendingOnDate,
-        attendees: [].concat(state.attendees, action.payload)
+        loadingThesePages: [].concat(state.loadingThesePages, action.payload)
+      }
+    }
+    case REMOVE_LOADING_DATA: {
+      return {
+        ...state,
+        loadingThesePages: state.loadingThesePages.filter(page => page.location !== action.payload)
       }
     }
     case ADD_DATE_TO_LOCATION: {

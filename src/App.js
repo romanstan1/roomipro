@@ -2,13 +2,12 @@ import React, { Component, Fragment } from 'react';
 import {Route, Router, Redirect, Switch} from 'react-router-dom'
 import {connect} from 'react-redux'
 import createBrowserHistory from 'history/createBrowserHistory'
-import { Main, SignIn, SendEmail, Inputs } from 'pages'
+import { Main, SignIn, SendEmail, Inputs, DeleteInput } from 'pages'
 import {auth, persistence, firestore} from 'firebaseInit'
 import {logInSuccessful} from 'store/actions'
 import PropTypes from 'prop-types'
 import 'styles/global.css'
 import {selectLocation, selectDate, switchPage, focusOnLocation} from 'store/actions'
-
 
 export const history = createBrowserHistory()
 
@@ -33,8 +32,9 @@ class App extends Component {
       }
       nextProps.focusOnLocation(state)
 
-    } else if(route.length === 3 && route[1] === 'update-location' && locations.length) {
-      /// data for edit/update or add location
+    } else if(route.length === 3 && locations.length &&
+      (route[1] === 'update-location' || route[1] === 'delete-location' )) {
+      /// data for edit/update or delete location
       const selectThisLocation = locations.find(location => location.id === route[2])
       const {dates, ...noDates} = selectThisLocation
       nextProps.focusOnLocation(noDates)
@@ -59,7 +59,6 @@ class App extends Component {
           attending = !!locationDate.people.find(person => person.id === user.uid)
           people = locationDate.people
           seats = locationDate.seats
-          console.log('seats', seats)
         }
         nextProps.selectDate(date, attending, people, seats)
         nextProps.switchPage(2)
@@ -108,6 +107,7 @@ class App extends Component {
               <Route exact path="/sign-in" render={() => <Redirect to="/" />} />
               <Route path="/update-location" component={Inputs}/>
               <Route path="/add-location" component={Inputs}/>
+              <Route path="/delete-location" component={DeleteInput}/>
               <Route exact path="/" component={Main}/>
               <Route path="/:location" component={Main}/>
               <Route path="/:location/:date" component={Main}/>

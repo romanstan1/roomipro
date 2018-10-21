@@ -162,10 +162,9 @@ div.SingleLocation {
       // font-style: italic;
     }
   }
-  div.edit {
+  div.edit, div.delete {
     position: absolute;
     right: 12px;
-    bottom: 5px;
     font-size: 20px;
     cursor: pointer;
     padding: 0px;
@@ -177,6 +176,12 @@ div.SingleLocation {
     &:hover {
       text-decoration: underline;
     }
+  }
+  div.edit {
+    bottom: 5px;
+  }
+  div.delete {
+    top: 13px;
   }
 }
 

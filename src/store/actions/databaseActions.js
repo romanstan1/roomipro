@@ -6,7 +6,8 @@ import {
   PLACE_BOOKING,
   SWITCH_PAGE,
   UPDATE_WIDTH,
-  FOCUS_ON_LOCATION
+  FOCUS_ON_LOCATION,
+  REMOVE_LOADING_DATA
 } from '../constants/actionTypes'
 
 export const updateLocationData = data => dispatch =>
@@ -33,10 +34,10 @@ export const addDateToLocation = (id, dates) => dispatch =>
     payload: {id, dates}
   })
 
-export const placeBooking = (bookingUser) => dispatch =>
+export const placeBooking = (location, date) => dispatch =>
   dispatch({
     type: PLACE_BOOKING,
-    payload: bookingUser
+    payload: {location, date}
   })
 
 export const switchPage = (page) => dispatch =>
@@ -54,5 +55,11 @@ export const updateWidth = (width) => dispatch =>
 export const focusOnLocation = (location) => dispatch =>
   dispatch({
     type: FOCUS_ON_LOCATION,
+    payload: location
+  })
+
+export const removeLoadingData = (location) => dispatch =>
+  dispatch({
+    type: REMOVE_LOADING_DATA,
     payload: location
   })

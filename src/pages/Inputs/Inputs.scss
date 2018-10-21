@@ -91,5 +91,9 @@ div.Inputs {
   }
   button.CTAbutton {
     margin: 30px 10px;
+    &.disable {
+      background: $stripeMid;
+      cursor:not-allowed;
+    }
   }
 }

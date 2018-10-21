@@ -9,11 +9,28 @@ import {firestore, arrayUnion, arrayRemove} from 'firebaseInit'
 
 class Booking extends Component {
 
+  state = {
+    loading: false
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const {selectedLocation, loadingThesePages, selectedDate} = nextProps
+    if(selectedDate && selectedLocation) {
+      const loading = loadingThesePages.find(page =>
+        page.location === selectedLocation.id && page.date === selectedDate.id)
+      if(!!loading) return {loading: true}
+    }
+    return {loading: false}
+  }
+
   handleResponse = () => {
 
     const {locations, selectedDate, selectedLocation, user, attendingOnDate, placeBooking} = this.props
     const locationRef = firestore.collection("locations")
     const bookingUser = { id: user.uid, name: user.firstName + ' ' + user.lastName}
+
+    placeBooking(selectedLocation.id, selectedDate.id)
+
     const dateRef = locationRef
       .doc(selectedLocation.id)
       .collection('dates')
@@ -40,13 +57,13 @@ class Booking extends Component {
           "people": [bookingUser],
           "seats": selectedLocation.seats
         })
-      }).then(() => {
-        // placeBooking(bookingUser)
       })
   }
 
   render() {
-    const {selectedLocation, selectedDate, attendingOnDate, locations, attendees, width, maxSeats} = this.props
+    const {selectedLocation, selectedDate, attendingOnDate, locations, attendees, width, maxSeats, loadingThesePages} = this.props
+    const {loading} = this.state
+
     return (
       <div className='Booking'>
         <BackNav
@@ -55,6 +72,7 @@ class Booking extends Component {
           >
           { selectedDate && <Fragment>{selectedDate.date}</Fragment> }
         </BackNav>
+        <div className={loading? "animated-gradient loading" : "animated-gradient"}/>
         {
           selectedDate &&
           <Fragment>
@@ -89,7 +107,8 @@ const mapProps = state => ({
   user: state.auth.user,
   attendees: state.data.attendees,
   width: state.data.width,
-  maxSeats: state.data.maxSeats
+  maxSeats: state.data.maxSeats,
+  loadingThesePages: state.data.loadingThesePages
 })
 
 const mapDispatch = {

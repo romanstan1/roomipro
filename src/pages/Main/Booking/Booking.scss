@@ -36,6 +36,28 @@ div.Response {
 }
 
 
+div.animated-gradient {
+  background: repeating-linear-gradient(to right, $brightGreen 0%, blue 50%, $brightGreen 100%);
+  width: 100%;
+  background-size: 200% auto;
+  height: 10px;
+  background-position: 0 100%;
+  animation: gradient 2s infinite;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+  opacity: 0;
+  transition: 0.1s ease;
+  &.loading {
+    opacity: 1;
+  }
+}
+
+@keyframes gradient {
+  0%   { background-position: 0 0; }
+  100% { background-position: -200% 0; }
+}
+
+
 @media screen and (min-width: 650px) {
   div.Booking {
     width: 40%;

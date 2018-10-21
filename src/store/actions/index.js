@@ -16,7 +16,8 @@ import {
   placeBooking,
   switchPage,
   updateWidth,
-  focusOnLocation
+  focusOnLocation,
+  removeLoadingData
 } from './databaseActions.js'
 
 export {
@@ -34,5 +35,6 @@ export {
   placeBooking,
   switchPage,
   updateWidth,
-  focusOnLocation
+  focusOnLocation,
+  removeLoadingData
 }

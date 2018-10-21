@@ -5,7 +5,7 @@ import Booking from './Booking/Booking'
 import {firestore} from 'firebaseInit'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {updateLocationData, updateWidth, addDateToLocation} from 'store/actions'
+import {updateLocationData, updateWidth, addDateToLocation, removeLoadingData} from 'store/actions'
 import SwipeableViews from 'react-swipeable-views';
 import { Resize, ResizeHorizon } from "react-resize-layout";
 import './Main.css'
@@ -17,7 +17,7 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    const {minDate, maxDate, addDateToLocation, updateLocationData} = this.props
+    const {minDate, maxDate, addDateToLocation, updateLocationData, removeLoadingData} = this.props
 
     window.addEventListener('resize', this.resize)
     this.unsubscribe = firestore.collection("locations")
@@ -34,6 +34,8 @@ class Main extends Component {
             .onSnapshot(querySnapshot => {
               let dates = []
               querySnapshot.forEach(docQuery => dates.push(docQuery.data()))
+              // console.log('doc.id , dates', doc.id, dates)
+              removeLoadingData(doc.id)
               addDateToLocation(doc.id, dates)
             })
         })
@@ -93,7 +95,8 @@ class Main extends Component {
 const mapDispatch = {
   updateLocationData,
   updateWidth,
-  addDateToLocation
+  addDateToLocation,
+  removeLoadingData
 }
 
 const mapProps = state => ({
