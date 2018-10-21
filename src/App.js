@@ -8,6 +8,7 @@ import {logInSuccessful} from 'store/actions'
 import PropTypes from 'prop-types'
 import 'styles/global.css'
 import {selectLocation, selectDate, switchPage, focusOnLocation} from 'store/actions'
+import { Offline } from "react-detect-offline";
 
 export const history = createBrowserHistory()
 
@@ -100,6 +101,12 @@ class App extends Component {
     const {page} = this.state
     return (
       <Router history={history}>
+        <Fragment>
+        <Offline>
+          <div className="offline">
+          It appears that you have a bad internet connection
+          </div>
+        </Offline>
         {
           isAuthenticated?
           <Fragment>
@@ -123,6 +130,7 @@ class App extends Component {
             </Switch>
           </Fragment>
         }
+        </Fragment>
       </Router>
     )
   }
