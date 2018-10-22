@@ -3,12 +3,13 @@ import {
   GET_DARKSKY_FAILURE
 } from '../constants/actionTypes'
 
-export const getDarkSky = (token, lat, lng) => dispatch => {
+export const getDarkSky = (token, location) => dispatch => {
+  const {lat, lng} = location
   const myHeaders = new Headers({
     'Content-Type': 'application/json',
     'Authorization': 'Bearer ' + token
   })
-  return fetch('http://localhost:5000/room-ipro/us-central1/app/darksky', {
+  return fetch(`http://localhost:5000/room-ipro/us-central1/app/darksky/${lat}/${lng}`, {
     method: 'GET',
     headers: myHeaders,
   })
@@ -19,15 +20,15 @@ export const getDarkSky = (token, lat, lng) => dispatch => {
   .then(data => {
     console.log('darksky data:', data)
     return dispatch({
-      type: GET_DARKSKY_SUCCESSFUL
-      // payload: user
+      type: GET_DARKSKY_SUCCESSFUL,
+      payload: {location: location.id, weather: data}
     })
   })
   .catch(error => {
-    console.error(error);
+    console.error('GET_DARKSKY_FAILURE', error);
     return dispatch({
       type: GET_DARKSKY_FAILURE,
-      payload: error
+      payload: {location: location.id, weather: error}
     })
   })
 }

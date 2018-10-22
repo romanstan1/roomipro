@@ -19,15 +19,15 @@ class Main extends Component {
   componentDidMount() {
     const {minDate, maxDate, addDateToLocation, updateLocationData, removeLoadingData, user, getDarkSky} = this.props
 
-    console.log('user', user);
-
     window.addEventListener('resize', this.resize)
     this.unsubscribe = firestore.collection("locations")
       .onSnapshot(querySnapshot => {
 
         let data = {}
         querySnapshot.forEach(doc => {
-          data = { ...data, [doc.id]: {...doc.data(), id: doc.id}}
+          const locationData = doc.data()
+          data = { ...data, [doc.id]: {...locationData, id: doc.id}}
+          getDarkSky(user.qa, locationData)          
           firestore.collection("locations")
             .doc(doc.id)
             .collection("dates")
@@ -36,8 +36,6 @@ class Main extends Component {
             .onSnapshot(querySnapshot => {
               let dates = []
               querySnapshot.forEach(docQuery => dates.push(docQuery.data()))
-              console.log('doc , dates', data, dates)
-              getDarkSky(user.qa, 12, 12)
               removeLoadingData(doc.id)
               addDateToLocation(doc.id, dates)
             })
