@@ -85,10 +85,14 @@ button.CTAbutton {
 
 
 div.offline {
-  background: $brightBlue;
+  background: $brightBlueHover;
   color: white;
   text-align: center;
-  height: 30px !important;
-  line-height: 30px !important;
+  height: 40px !important;
+  min-height: 30px !important;
+  line-height: 25px !important;
   font-size: 14px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

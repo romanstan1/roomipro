@@ -47,7 +47,7 @@ class App extends Component {
       nextProps.switchPage(1)
 
     } else if( route.length === 3) {
-      // data for selection of location
+      // data for selection of date
       const date = dates.find(date => date.id === parseInt(route[2]))
       if(selectedLocation) {
         const locationDate = locations
@@ -55,11 +55,13 @@ class App extends Component {
           .find(locationDate => date.id === locationDate.id)
         let attending = false
         let people = []
-        let seats = 0
+        let seats = parseInt(selectedLocation.seats)
+        console.log('selectedLocation::', selectedLocation);
         if(locationDate && user) {
           attending = !!locationDate.people.find(person => person.id === user.uid)
           people = locationDate.people
           seats = locationDate.seats
+          console.log('seatsseatsseats locationDate', locationDate);
         }
         nextProps.selectDate(date, attending, people, seats)
         nextProps.switchPage(2)
@@ -76,7 +78,6 @@ class App extends Component {
   componentDidMount() {
     auth.onAuthStateChanged(user => {
       if(user) {
-        // console.log('user::', user.qa)
         firestore.collection('users').doc(user.uid).get().then(userData => {
           const thisUser = userData.data()
           this.props.logInSuccessful({...user, ...thisUser})
@@ -92,7 +93,7 @@ class App extends Component {
       <Router history={history}>
         <Fragment>
           <Offline>
-            <div className="offline"> It appears that you have a bad internet connection</div>
+            <div className="offline"> No internet detected. Roomipro will automatically try to connect when it detects an internet connection. </div>
           </Offline>
           {
             isAuthenticated?

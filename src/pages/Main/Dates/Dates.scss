@@ -13,25 +13,55 @@ div.Dates {
     overflow-y: scroll;
     height: calc(100% - 50px);
     text-align: center;
-    padding: 10px 0;
+    padding: 0px 0;
     button {
       margin: 1px 0;
       overflow: hidden;
       width: 100%;
+      div.show-previous-dates {
+        padding: 20px 25px;
+        background: $stripeDark;
+        color: white;
+        width: 100%;
+      }
       div.SingleDate {
+        position: relative;
         overflow: hidden;
         background: $stripeMid;
-        // border-bottom: 4px solid $stripeLight;
-        padding: 50px 25px;
+        &.past {
+          padding: 30px 25px;
+        }
+        &.future {
+          padding: 50px 25px;
+        }
+        &.today {
+          margin: 5px 0;
+          padding: 50px 25px;
+          border-top:5px solid $brightBlue;
+          border-bottom:5px solid $brightBlue;
+        }
         text-align: center;
         width: 100%;
         span {
+          display: block;
           text-align: center !important;
-          color: $brightGreen;
+          &.attending {
+            color: $brightGreen;
+          }
+          &.not-attending {
+            color: $brightRed;
+          }
         }
-        // li {
-        //   text-align: center !important;
-        // }
+        span.max-capicity {
+          position: absolute;
+          background: $brightRed;
+          color: white;
+          text-transform: uppercase;
+          border-radius: 4px;
+          padding: 5px 6px;
+          right: 10px;
+          bottom: 10px;
+        }
       }
     }
   }

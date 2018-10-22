@@ -1,13 +1,23 @@
 import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
-import './Dates.css'
 import {BackNav} from 'components';
 import {push} from 'react-router-redux'
 import SingleDate from './SingleDate'
+import ButtonBase from '@material-ui/core/ButtonBase';
+import './Dates.css'
 
 class Dates extends Component {
+  state = {
+    previousDatesHidden: true
+  }
+
+  handleHideDate = () => {
+    this.setState({previousDatesHidden: !this.state.previousDatesHidden})
+  }
+
   render() {
-    const {locations, dates, selectedLocation, push, user, width} = this.props
+    const {locations, dates, selectedLocation, push, user, width, today} = this.props
+    const {previousDatesHidden} = this.state
     return (
       <div className='Dates'>
         <BackNav
@@ -21,7 +31,17 @@ class Dates extends Component {
         </BackNav>
         <div className='date-scroll'>
           {
+            selectedLocation &&
+            <ButtonBase onClick={this.handleHideDate}>
+              <div className="show-previous-dates">
+                {previousDatesHidden? "Show past dates" : "Hide past dates" }
+              </div>
+            </ButtonBase>
+          }
+          {
             selectedLocation && dates.map(date => {
+
+              if (previousDatesHidden && today > date.id) return null
 
               const locationDate = locations
                 .find(location => location.id === selectedLocation.id).dates
@@ -34,6 +54,7 @@ class Dates extends Component {
                 date={date}
                 locationDate={locationDate}
                 user={user}
+                today={today}
               />
             })
           }
@@ -48,7 +69,8 @@ const mapProps = (state, ownProps) => ({
   locations: state.data.locations,
   dates: state.data.dates,
   selectedLocation: state.data.selectedLocation,
-  width: state.data.width
+  width: state.data.width,
+  today: state.data.today
 })
 
 const mapDispatch = {

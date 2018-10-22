@@ -61,7 +61,7 @@ class Booking extends Component {
   }
 
   render() {
-    const {selectedLocation, selectedDate, attendingOnDate, locations, attendees, width, maxSeats, loadingThesePages} = this.props
+    const {selectedLocation, selectedDate, attendingOnDate, locations, attendees, width, maxSeats, loadingThesePages, today} = this.props
     const {loading} = this.state
 
     return (
@@ -79,6 +79,7 @@ class Booking extends Component {
             <Response
               attendingOnDate={attendingOnDate}
               handleClick={this.handleResponse}
+              future={today <= selectedDate.id}
             />
             <p>
               {attendees.length} seats filled out of {maxSeats}
@@ -108,7 +109,8 @@ const mapProps = state => ({
   attendees: state.data.attendees,
   width: state.data.width,
   maxSeats: state.data.maxSeats,
-  loadingThesePages: state.data.loadingThesePages
+  loadingThesePages: state.data.loadingThesePages,
+  today: state.data.today
 })
 
 const mapDispatch = {
