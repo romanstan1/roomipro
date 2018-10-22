@@ -14,18 +14,18 @@ const Response = ({handleClick, attendingOnDate, future}) => {
         </Fragment>
         :
         <ButtonBase onClick={handleClick} className='will-attend'>
-          I will attend
+          Confirm attendance
         </ButtonBase>
       }
-    </div> )
-  return <div className='Response'>
-    {
-      attendingOnDate?
-      <span className='attending'>You attended!</span> :
-      <span className='attending didnt'>You didnt attend</span>
-    }
-  </div>
+    </div>)
+  return (
+    <div className='Response'>
+      {
+        attendingOnDate?
+        <span className='attending'>You attended!</span> :
+        <span className='attending didnt'>You didnt attend</span>
+      }
+    </div>)
 }
-
 
 export default Response

@@ -113,19 +113,20 @@ export default function databaseReducer(state = initialState, action) {
       }
     }
     case GET_DARKSKY_SUCCESSFUL: {
+      console.log('GET_DARKSKY_SUCCESSFUL', action.type, action.payload );
       return {
-        ...state
-        // dates: state.dates.map(date => {
-        //   const findDate = action.payload.weather.data.find(ele => ele.time + '000' == date.id.toString())
-        //   if(findDate) return {
-        //     ...date,
-        //     locations: [].concat(date.locations || [], {
-        //       id:  action.payload.location,
-        //       weather: findDate
-        //     })
-        //   }
-        //   return date
-        // })
+        ...state,
+        dates: state.dates.map(date => {
+          const findDate = action.payload.weather.data.find(ele => ele.time + '000' == date.id.toString())
+          if(findDate) return {
+            ...date,
+            locations: [].concat(date.locations || [], {
+              id:  action.payload.location,
+              weather: findDate
+            })
+          }
+          return date
+        })
       }
     }
     default:

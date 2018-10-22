@@ -1,5 +1,9 @@
 import React, {Component, Fragment} from 'react'
 import ButtonBase from '@material-ui/core/ButtonBase';
+import {scaleSequential} from 'd3-scale'
+import * as d3 from 'd3-scale-chromatic'
+const convert = scaleSequential(d3.interpolateRdYlBu)
+  .domain([105, 20])
 
 const SingleDate = ({date, pushRoute, selectedLocation, locationDate, user, today}) => {
 
@@ -22,6 +26,8 @@ const SingleDate = ({date, pushRoute, selectedLocation, locationDate, user, toda
       onClick={() => {
         pushRoute('/' + selectedLocation.id + '/' + date.id)
       }}
+
+      style={darksky && {background: convert(darksky.weather.temperatureHigh)}}
       >
         {date.date} <br/>
         {
