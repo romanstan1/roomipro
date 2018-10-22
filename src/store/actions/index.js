@@ -20,6 +20,11 @@ import {
   removeLoadingData
 } from './databaseActions.js'
 
+// Api
+import {
+  getDarkSky
+} from './apiActions.js'
+
 export {
   // Auth
   logOut,
@@ -36,5 +41,7 @@ export {
   switchPage,
   updateWidth,
   focusOnLocation,
-  removeLoadingData
+  removeLoadingData,
+  // Api
+  getDarkSky
 }

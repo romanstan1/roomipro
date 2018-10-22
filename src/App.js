@@ -70,24 +70,13 @@ class App extends Component {
       // switch to 1 if sign in/ login
       nextProps.switchPage(0)
     }
-
     return null
   }
 
   componentDidMount() {
     auth.onAuthStateChanged(user => {
       if(user) {
-        console.log('user::', user.qa)
-
-        // auth.currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
-        //   // Send token to your backend via HTTPS
-        //   // ...
-        //   console.log('token::', idToken)
-        //   console.log('TRUE?::', idToken === user.qa)
-        // }).catch(function(error) {
-        //   // Handle error
-        // });
-
+        // console.log('user::', user.qa)
         firestore.collection('users').doc(user.uid).get().then(userData => {
           const thisUser = userData.data()
           this.props.logInSuccessful({...user, ...thisUser})
@@ -102,34 +91,32 @@ class App extends Component {
     return (
       <Router history={history}>
         <Fragment>
-        <Offline>
-          <div className="offline">
-          It appears that you have a bad internet connection
-          </div>
-        </Offline>
-        {
-          isAuthenticated?
-          <Fragment>
-            <Switch>
-              <Route exact path="/sign-in" render={() => <Redirect to="/" />} />
-              <Route path="/update-location" component={Inputs}/>
-              <Route path="/add-location" component={Inputs}/>
-              <Route path="/delete-location" component={DeleteInput}/>
-              <Route exact path="/" component={Main}/>
-              <Route path="/:location" component={Main}/>
-              <Route path="/:location/:date" component={Main}/>
-              <Redirect to="/"/>
-            </Switch>
-          </Fragment>
-          :
-          <Fragment>
-            <Switch>
-              <Route exact path="/send-email" component={SendEmail}/>
-              <Route exact path="/sign-in" component={SignIn}/>
-              <Redirect to="/sign-in"/>
-            </Switch>
-          </Fragment>
-        }
+          <Offline>
+            <div className="offline"> It appears that you have a bad internet connection</div>
+          </Offline>
+          {
+            isAuthenticated?
+            <Fragment>
+              <Switch>
+                <Route exact path="/sign-in" render={() => <Redirect to="/" />} />
+                <Route path="/update-location" component={Inputs}/>
+                <Route path="/add-location" component={Inputs}/>
+                <Route path="/delete-location" component={DeleteInput}/>
+                <Route exact path="/" component={Main}/>
+                <Route path="/:location" component={Main}/>
+                <Route path="/:location/:date" component={Main}/>
+                <Redirect to="/"/>
+              </Switch>
+            </Fragment>
+            :
+            <Fragment>
+              <Switch>
+                <Route exact path="/send-email" component={SendEmail}/>
+                <Route exact path="/sign-in" component={SignIn}/>
+                <Redirect to="/sign-in"/>
+              </Switch>
+            </Fragment>
+          }
         </Fragment>
       </Router>
     )

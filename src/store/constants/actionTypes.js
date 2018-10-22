@@ -7,7 +7,6 @@ export const ERROR_MESSAGE = 'ERROR_MESSAGE'
 export const CLEAR_MESSAGE = 'CLEAR_MESSAGE'
 
 // Database action types
-
 export const UPDATE_LOCATION_DATA = 'UPDATE_LOCATION_DATA'
 export const SELECT_LOCATION = 'SELECT_LOCATION'
 export const SELECT_DATE = 'SELECT_DATE'
@@ -17,3 +16,7 @@ export const SWITCH_PAGE = 'SWITCH_PAGE'
 export const UPDATE_WIDTH = 'UPDATE_WIDTH'
 export const FOCUS_ON_LOCATION = 'FOCUS_ON_LOCATION'
 export const REMOVE_LOADING_DATA = 'REMOVE_LOADING_DATA'
+
+// Api action types
+export const GET_DARKSKY_SUCCESSFUL = 'GET_DARKSKY_SUCCESSFUL'
+export const GET_DARKSKY_FAILURE = 'GET_DARKSKY_FAILURE'

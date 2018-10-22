@@ -1,19 +1,11 @@
+'use strict';
+
 const functions = require('firebase-functions');
-
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-
-// console.log('Log this');
-//
-
 
 exports.helloWorld = functions.https.onRequest((request, response) => {
   console.log('Log this here');
   response.send("Hello from Firebase!" + process.env.REACT_APP_ROOMIPRO_DARKSKY_APIKEY);
 });
-
-
-'use strict';
 
 const admin = require('firebase-admin');
 admin.initializeApp();
@@ -70,8 +62,8 @@ const validateFirebaseIdToken = async (req, res, next) => {
 app.use(cors);
 app.use(cookieParser);
 app.use(validateFirebaseIdToken);
-app.get('/hello', (req, res) => {
-  res.send(`Hello ${req.user.name}`);
+app.get('/darksky', (req, res) => {
+  res.send(JSON.stringify({user: req.user }));
 });
 
 // This HTTPS endpoint can only be accessed by your Firebase Users.

@@ -13,8 +13,6 @@ const {arrayRemove, arrayUnion} = firebase.firestore.FieldValue
 const settings = {timestampsInSnapshots: true}
 
 firestore.settings(settings)
-firestore.enablePersistence({experimentalTabSynchronization:true}).then(() => {
-       console.log("Woohoo! Multi-Tab Persistence!");
-})
+firestore.enablePersistence({experimentalTabSynchronization:true})
 
 export {auth, persistence, secondaryAuth, firestore, arrayUnion, arrayRemove}
