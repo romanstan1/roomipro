@@ -9,13 +9,16 @@ const Response = ({handleClick, attendingOnDate, future}) => {
         <Fragment>
           <span className='attending'>You are attending!</span>
           <ButtonBase onClick={handleClick} className='will-not-attend'>
-            Cancel attendance
+            Cancel
           </ButtonBase>
         </Fragment>
         :
-        <ButtonBase onClick={handleClick} className='will-attend'>
-          Confirm attendance
-        </ButtonBase>
+        <Fragment>
+          <span className='not-attending'>You are not attending</span>
+          <ButtonBase onClick={handleClick} className='will-attend'>
+            Book
+          </ButtonBase>
+        </Fragment>
       }
     </div>)
   return (

@@ -56,12 +56,11 @@ class App extends Component {
         let attending = false
         let people = []
         let seats = parseInt(selectedLocation.seats)
-        console.log('selectedLocation::', selectedLocation);
+
         if(locationDate && user) {
           attending = !!locationDate.people.find(person => person.id === user.uid)
           people = locationDate.people
           seats = locationDate.seats
-          console.log('seatsseatsseats locationDate', locationDate);
         }
         nextProps.selectDate(date, attending, people, seats)
         nextProps.switchPage(2)

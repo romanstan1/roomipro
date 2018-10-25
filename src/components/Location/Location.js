@@ -8,6 +8,12 @@ import SingleLocation from './SingleLocation'
 import {push} from 'react-router-redux'
 import './Location.css'
 
+
+
+
+
+
+
 class Location extends Component {
 
   render() {
@@ -21,14 +27,20 @@ class Location extends Component {
             user.admin && width > 650 &&
             <Fragment>
               <h3>Admin</h3>
-              <div className='compose-notification'>
-                <ButtonBase>
-                  Compose Notification
-                </ButtonBase>
+
+              <div className='menu-title'>
+                <h2>Notification</h2>
+                <span><PlusCircle/></span>
               </div>
+
+              <div className='menu-title'>
+                <h2>Data</h2>
+                <span><PlusCircle/></span>
+              </div>
+
             </Fragment>
           }
-          <div className="location-title">
+          <div className="menu-title">
             <h2>Locations</h2>
             {
               user.admin && width > 650 &&
@@ -37,7 +49,6 @@ class Location extends Component {
                   pushToLocation={pushToLocation}
                 />
               </span>
-
             }
           </div>
           {

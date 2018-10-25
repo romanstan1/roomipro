@@ -27,9 +27,9 @@ const SingleDate = ({date, pushRoute, selectedLocation, locationDate, user, toda
         pushRoute('/' + selectedLocation.id + '/' + date.id)
       }}
 
-      style={darksky && {background: convert(darksky.weather.temperatureHigh)}}
+      // style={darksky && {background: convert(darksky.weather.temperatureHigh)}}
       >
-        {date.date} <br/>
+        <p className='date'>{date.date}</p>
         {
           future?
             attending?

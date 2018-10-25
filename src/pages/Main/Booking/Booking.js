@@ -81,18 +81,17 @@ class Booking extends Component {
               handleClick={this.handleResponse}
               future={today <= selectedDate.id}
             />
-            <p>
-              {attendees.length} seats filled out of {maxSeats}
-            </p>
-            <h4>Attendees:</h4>
-            <p>
-              {
-                attendees.map((attendee, i) =>
+            <div className="attendees">
+              <h4>Attendees</h4><h4>{attendees.length} / {maxSeats}</h4>
+              <p>
+                {
+                  attendees.map((attendee, i) =>
                   <span key={attendee.id + attendee.name + i}>
                     {attendee.name}
                   </span>)
-              }
-            </p>
+                }
+              </p>
+            </div>
           </Fragment>
         }
       </div>

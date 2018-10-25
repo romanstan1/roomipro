@@ -13,10 +13,10 @@ import {
   GET_DARKSKY_SUCCESSFUL
 } from '../constants/actionTypes'
 
-function createDate(days, weeks) {
+function createDate(days, weeks, dayOfWeek) {
   const id = moment().add(weeks, 'weeks').startOf('isoWeek').add(days - 1, 'days').valueOf()
   const date = moment(id).format('ddd Do MMM YYYY')
-  return { id, date }
+  return { id, date, dayOfWeek }
 }
 
 const dates = (function createFortnight() {
@@ -24,7 +24,8 @@ const dates = (function createFortnight() {
   const limit = i + 14 + 28
   let dates = []
   for(i; i < limit; i++) {
-    if((i%7 !== 6 ) && (i%7 !== 0)) dates.push(createDate(i - 28 , 0))
+    if((i%7 !== 6 ) && (i%7 !== 0)) dates.push(createDate(i - 28 , 0, i%7))
+    // if((i%7 !== 6 ) && (i%7 !== 0)) dates.push(createDate(i - 28 , 0))
   }
   return dates
 })()

@@ -6,6 +6,11 @@ import SingleDate from './SingleDate'
 import ButtonBase from '@material-ui/core/ButtonBase';
 import './Dates.css'
 
+const WeekendText = () =>
+  <div className="weekend-text">
+    It's the weekend!
+  </div>
+
 class Dates extends Component {
   state = {
     previousDatesHidden: true
@@ -32,6 +37,12 @@ class Dates extends Component {
         <div className='date-scroll'>
           {
             selectedLocation &&
+              <div className="header-image">
+              <img src={selectedLocation.url} alt=""/>
+              </div>
+          }
+          {
+            selectedLocation &&
             <ButtonBase onClick={this.handleHideDate}>
               <div className="show-previous-dates">
                 {previousDatesHidden? "Show past dates" : "Hide past dates" }
@@ -40,14 +51,14 @@ class Dates extends Component {
           }
           {
             selectedLocation && dates.map(date => {
-
+              console.log('date', date);
               if (previousDatesHidden && today > date.id) return null
 
               const locationDate = locations
                 .find(location => location.id === selectedLocation.id).dates
                 .find(locationDate => date.id === locationDate.id)
 
-              return <SingleDate
+              const EachDay = <SingleDate
                 pushRoute={push}
                 selectedLocation={selectedLocation}
                 key={date.id}
@@ -56,6 +67,15 @@ class Dates extends Component {
                 user={user}
                 today={today}
               />
+
+              if(date.dayOfWeek === 5) return (
+                <Fragment>
+                  {EachDay}
+                  <WeekendText/>
+                </Fragment>
+              )
+
+              return EachDay
             })
           }
         </div>

@@ -36,10 +36,11 @@ class SingleLocation extends Component {
         className='SingleLocation'
         onMouseEnter={this.mouseOver}
         onMouseLeave={this.mouseOut}
-        style={{backgroundImage: `url(${location.url})`}}
+        // style={{backgroundImage: `url(${location.url})`}}
         >
         <ButtonBase onClick={this.handleClick}>
           <span>
+            <div className='bubble' style={{backgroundImage: `url(${location.url})`}}/>
             <h3>{location.main}</h3>
             <h4>{location.secondary}</h4>
           </span>

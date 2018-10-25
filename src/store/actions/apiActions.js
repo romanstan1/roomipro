@@ -1,3 +1,4 @@
+
 import {
   GET_DARKSKY_SUCCESSFUL,
   GET_DARKSKY_FAILURE
@@ -10,6 +11,7 @@ export const getDarkSky = (token, location) => dispatch => {
     'Authorization': 'Bearer ' + token
   })
   return fetch(`http://localhost:5000/room-ipro/us-central1/app/darksky/${lat}/${lng}`, {
+  // return fetch(`https://us-central1-room-ipro.cloudfunctions.net/app/darksky/${lat}/${lng}`, {
     method: 'GET',
     headers: myHeaders,
   })

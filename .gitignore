@@ -19,7 +19,7 @@ build
 .env.production.local
 *.css
 .css
-/functions/firebase-debug.log
+# /functions/firebase-debug.log
 /functions/node_modules
 
 npm-debug.log*

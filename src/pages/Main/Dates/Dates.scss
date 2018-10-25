@@ -1,55 +1,97 @@
 @import "src/styles/_variables";
 
 div.Dates {
+  background: $darkGrey;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+  // justify-content: flex-start;
+  // align-items: center;
+  position: relative;
   height: 100%;
-  border-right: 2px solid $stripeLight;
+  // border-right: 2px solid $stripeLight;
   h2 {
     font-size: 16px;
   }
   div.date-scroll {
     overflow-y: scroll;
     height: calc(100% - 50px);
-    text-align: center;
-    padding: 0px 0;
+    // text-align: center;
+    // margin-top: 200px;
+    // background: #3c3f51;
+    div.header-image {
+      position: absolute;
+      z-index: 1;
+      width: 100%;
+      height: 90px;
+      left: 0;
+      right: 0;
+      img {
+        width: 100%;
+      }
+    }
+    div.weekend-text {
+      font-size: 70px;
+      // height: 50px;
+      color: $lightGrey;
+      z-index:200;
+      position: relative;
+      background: $darkGrey;
+      padding: 30px 10px;
+    }
     button {
       margin: 1px 0;
       overflow: hidden;
       width: 100%;
       div.show-previous-dates {
-        padding: 20px 25px;
-        background: $stripeDark;
-        color: white;
+        padding: 20px 12px;
+        background: $darkGrey;
+        color: $lightGrey;
         width: 100%;
+        text-align: left;
+        font-size: 16px;
+        &:hover {
+          color:white;
+        }
       }
       div.SingleDate {
         position: relative;
         overflow: hidden;
-        background: $stripeMid;
+        background: $darkGrey;
+        color: $lightGrey;
+        text-align: left;
+        z-index: 2;
+        // border-radius: 7px;
+        // margin: 10px 20px;
+        width: 100%;
+        height: 160px;
+        padding: 10px;
+        &:hover {
+          color: white;
+        }
+        p.date {
+          font-weight: 600;
+          font-size: 28px;
+        }
         &.past {
-          padding: 30px 25px;
+          height: 100px;
+          // padding: 30px 25px;
         }
         &.future {
-          padding: 50px 25px;
+          // padding: 50px 25px;
         }
         &.today {
-          margin: 5px 0;
-          padding: 50px 25px;
-          border-top:5px solid $brightBlue;
-          border-bottom:5px solid $brightBlue;
+          // margin: 5px 0;
+          // padding: 50px 25px;
+          // border-top:5px solid $brightBlue;
+          // border-bottom:5px solid $brightBlue;
         }
-        text-align: center;
-        width: 100%;
         span {
           display: block;
-          text-align: center !important;
+          // text-align: center !important;
           &.attending {
-            color: $brightGreen;
+            color: $green;
           }
           &.not-attending {
-            color: $brightRed;
+            color: $pink;
           }
         }
         span.max-capicity {
@@ -69,6 +111,6 @@ div.Dates {
 
 @media screen and (min-width: 650px) {
   div.Dates {
-    width: 40%;
+    width: 50%;
   }
 }
