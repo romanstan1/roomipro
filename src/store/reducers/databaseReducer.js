@@ -13,6 +13,22 @@ import {
   GET_DARKSKY_SUCCESSFUL
 } from '../constants/actionTypes'
 
+
+// clear-day
+// clear-night
+// rain
+// snow
+// sleet
+// wind
+// fog
+// cloudy
+// partly-cloudy-day
+// partly-cloudy-night
+// hail
+// tornado
+// thunderstorm
+
+
 function createDate(days, weeks, dayOfWeek) {
   const id = moment().add(weeks, 'weeks').startOf('isoWeek').add(days - 1, 'days').valueOf()
   const date = moment(id).format('ddd Do MMM YYYY')

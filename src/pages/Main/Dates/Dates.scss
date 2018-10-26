@@ -3,109 +3,152 @@
 div.Dates {
   background: $darkGrey;
   flex-direction: column;
-  // justify-content: flex-start;
-  // align-items: center;
   position: relative;
   height: 100%;
-  // border-right: 2px solid $stripeLight;
   h2 {
     font-size: 16px;
   }
+  div.header-image {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 330px;
+    left: 0;
+    right: 0;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover !important;
+    background-position: center top !important;
+  }
   div.date-scroll {
+    z-index: 3;
     overflow-y: scroll;
-    height: calc(100% - 50px);
-    // text-align: center;
-    // margin-top: 200px;
-    // background: #3c3f51;
-    div.header-image {
-      position: absolute;
-      z-index: 1;
-      width: 100%;
-      height: 90px;
-      left: 0;
-      right: 0;
-      img {
-        width: 100%;
+    height: calc(100% - 0px);
+    background: $darkGrey;
+    div.transparent-box {
+      height: 330px;
+      background: transparent;
+      z-index: 3;
+      position: relative;
+      background: linear-gradient( to top, $darkestGrey, rgba(255, 0, 0, 0) );
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 0 30px 20px;
+      h2 {
+        color: $lightGrey;
+        font-size: 60px;
+        font-weight: 600;
+      }
+      h3 {
+        color: $lightGrey;
+        font-size: 30px;
+        font-weight: 300;
       }
     }
     div.weekend-text {
       font-size: 70px;
-      // height: 50px;
-      color: $lightGrey;
+      color:$midGrey;
       z-index:200;
       position: relative;
       background: $darkGrey;
+      border-top: 2px solid $darkestGrey;
+      border-bottom: 2px solid $darkestGrey;
       padding: 30px 10px;
     }
-    button {
-      margin: 1px 0;
-      overflow: hidden;
+
+    div.show-previous-dates {
+      padding: 20px 12px;
+      background: $darkGrey;
+      color: $lightGrey;
       width: 100%;
-      div.show-previous-dates {
-        padding: 20px 12px;
-        background: $darkGrey;
-        color: $lightGrey;
-        width: 100%;
-        text-align: left;
-        font-size: 16px;
-        &:hover {
-          color:white;
-        }
-      }
-      div.SingleDate {
-        position: relative;
-        overflow: hidden;
-        background: $darkGrey;
-        color: $lightGrey;
-        text-align: left;
-        z-index: 2;
-        // border-radius: 7px;
-        // margin: 10px 20px;
-        width: 100%;
-        height: 160px;
-        padding: 10px;
-        &:hover {
-          color: white;
-        }
-        p.date {
-          font-weight: 600;
-          font-size: 28px;
-        }
-        &.past {
-          height: 100px;
-          // padding: 30px 25px;
-        }
-        &.future {
-          // padding: 50px 25px;
-        }
-        &.today {
-          // margin: 5px 0;
-          // padding: 50px 25px;
-          // border-top:5px solid $brightBlue;
-          // border-bottom:5px solid $brightBlue;
-        }
-        span {
-          display: block;
-          // text-align: center !important;
-          &.attending {
-            color: $green;
-          }
-          &.not-attending {
-            color: $pink;
-          }
-        }
-        span.max-capicity {
-          position: absolute;
-          background: $brightRed;
-          color: white;
-          text-transform: uppercase;
-          border-radius: 4px;
-          padding: 5px 6px;
-          right: 10px;
-          bottom: 10px;
-        }
+      font-weight: 500;
+      text-align: left;
+      font-size: 16px;
+      border-top: 2px solid $darkestGrey;
+      border-bottom: 2px solid $darkestGrey;
+      z-index: 2;
+      cursor: pointer;
+      position: relative;
+      &:hover {
+        background: $midGrey;
+        color:white;
       }
     }
+
+  }
+}
+
+
+div.SingleDate {
+  position: relative;
+  overflow: hidden;
+  background: $darkGrey;
+  color: $lightGrey;
+  text-align: left;
+  z-index: 2;
+  border-top: 2px solid $darkestGrey;
+  border-bottom: 2px solid $darkestGrey;
+  cursor: pointer;
+  width: 100%;
+  height: 160px;
+  padding: 10px;
+
+  display: grid;
+  grid-template-rows: 1fr 1fr 1px;
+  grid-template-columns: auto 20px 30px 1fr;
+
+
+  &:hover {
+    background: $midGrey;
+    color: white;
+  }
+  p.date {
+    font-weight: 600;
+    font-size: 28px;
+  }
+  svg.tick {
+    padding-top: 2px;
+    grid-column: 3 / 3;
+    width: 30px;
+    fill: $green;
+    align-self: start;
+  }
+  div.progress-bar {
+    grid-column: 1 / 5;
+    grid-row: 3 / 3;
+    background: $midGrey;
+    div {
+      align-self: end;
+      height: 100%;
+      background: $green;
+      &.full {
+        background: $pink;
+      }
+    }
+    span {
+      line-height: 100%;
+      font-size: 0px;
+    }
+  }
+  span.weather-icon {
+    grid-column: 4 / 4;
+    grid-row: 1 / 1;
+    justify-self: end;
+    svg{
+      fill: $lightGrey;
+      width: 35px;
+    }
+  }
+  &.past {
+    height: 100px;
+    font-style: italic;
+    color:$midGrey;
+  }
+  &.future {
+  }
+  &.today {
   }
 }
 

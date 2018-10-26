@@ -25,7 +25,7 @@ class Dates extends Component {
     const {previousDatesHidden} = this.state
     return (
       <div className='Dates'>
-        <BackNav
+        {/* <BackNav
           route='/'
           mobile={width > 650? false : true}
           >
@@ -33,25 +33,31 @@ class Dates extends Component {
             selectedLocation &&
             <Fragment>{selectedLocation.main} - {selectedLocation.secondary}</Fragment>
           }
-        </BackNav>
+        </BackNav> */}
+        {
+          selectedLocation &&
+          <div className="header-image"
+            style={{ background: `url(${selectedLocation.url}) no-repeat`}}>
+            {/* <img src={selectedLocation.url} alt=""/> */}
+          </div>
+        }
         <div className='date-scroll'>
           {
-            selectedLocation &&
-              <div className="header-image">
-              <img src={selectedLocation.url} alt=""/>
-              </div>
+          selectedLocation &&
+          <div className="transparent-box">
+            <h2>{selectedLocation.main}</h2>
+            <h3>{selectedLocation.secondary}</h3>
+          </div>
           }
+
           {
             selectedLocation &&
-            <ButtonBase onClick={this.handleHideDate}>
-              <div className="show-previous-dates">
-                {previousDatesHidden? "Show past dates" : "Hide past dates" }
-              </div>
-            </ButtonBase>
+            <div className="show-previous-dates" onClick={this.handleHideDate}>
+              {previousDatesHidden? "Show past dates" : "Hide past dates" }
+            </div>
           }
           {
             selectedLocation && dates.map(date => {
-              console.log('date', date);
               if (previousDatesHidden && today > date.id) return null
 
               const locationDate = locations
@@ -69,7 +75,7 @@ class Dates extends Component {
               />
 
               if(date.dayOfWeek === 5) return (
-                <Fragment>
+                <Fragment key={date.id}>
                   {EachDay}
                   <WeekendText/>
                 </Fragment>
