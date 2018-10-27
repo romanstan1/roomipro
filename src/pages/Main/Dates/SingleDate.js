@@ -7,23 +7,24 @@ import {
   PartlyCloudyNight,
   Wind,
   Rain,
-  CloudWind
+  CloudWind,
+  Fog,
+  ClearNight,
+  Snow,
+  Hail
 } from './SVGs'
-
-// import {scaleSequential} from 'd3-scale'
-// import * as d3 from 'd3-scale-chromatic'
-// const convert = scaleSequential(d3.interpolateRdYlBu)
-//   .domain([105, 20])
-// style={darksky && {background: convert(darksky.weather.temperatureHigh)}}
-
 
 const WeatherIcon = ({icon}) => {
   switch (icon) {
-    case 'clear-day': case 'clear-night': return <Clear/>
+    case 'clear-day': return <Clear/>
+    case 'clear-night': return <ClearNight/>
     case 'partly-cloudy-day': return <PartlyCloudyDay/>
     case 'partly-cloudy-night': return <PartlyCloudyNight/>
     case 'wind': return <CloudWind/>
     case 'rain': return <Rain/>
+    case 'fog': return <Fog/>
+    case 'snow': return <Snow/>
+    case 'hail': return <Hail/>
     default: return <span/>
   }
 }
