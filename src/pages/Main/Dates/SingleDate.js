@@ -1,12 +1,32 @@
 import React, {Component, Fragment} from 'react'
 import ButtonBase from '@material-ui/core/ButtonBase';
-import {Tick, Clear, PartlyCloudy} from './SVGs'
+import {
+  Tick,
+  Clear,
+  PartlyCloudyDay,
+  PartlyCloudyNight,
+  Wind,
+  Rain,
+  CloudWind
+} from './SVGs'
 
 // import {scaleSequential} from 'd3-scale'
 // import * as d3 from 'd3-scale-chromatic'
 // const convert = scaleSequential(d3.interpolateRdYlBu)
 //   .domain([105, 20])
 // style={darksky && {background: convert(darksky.weather.temperatureHigh)}}
+
+
+const WeatherIcon = ({icon}) => {
+  switch (icon) {
+    case 'clear-day': case 'clear-night': return <Clear/>
+    case 'partly-cloudy-day': return <PartlyCloudyDay/>
+    case 'partly-cloudy-night': return <PartlyCloudyNight/>
+    case 'wind': return <CloudWind/>
+    case 'rain': return <Rain/>
+    default: return <span/>
+  }
+}
 
 const SingleDate = ({date, pushRoute, selectedLocation, locationDate, user, today}) => {
   let attending = false
@@ -39,17 +59,13 @@ const SingleDate = ({date, pushRoute, selectedLocation, locationDate, user, toda
       {
         darksky &&
         <span className='weather-icon'>
-        { (darksky.weather.icon === 'clear-day' || darksky.weather.icon === 'clear-night') && <Clear/> }
-        {
-          (darksky.weather.icon === 'partly-cloudy-day' || darksky.weather.icon === 'partly-cloudy-night')
-          && <PartlyCloudy/>
-        }
+          <WeatherIcon icon={darksky.weather.icon}/>
+          <span>{darksky.weather.icon.replace(/-/g," ")}</span>
+          <span>{Math.round((darksky.weather.temperatureHigh - 32) * (5/9))}°C</span>
         </span>
       }
     </div>
   )
 }
-// {darksky.weather.icon}
-// { maxCapicity && <span className='max-capicity'> Max capicity </span> }
 
 export default SingleDate
