@@ -1,33 +1,5 @@
-import React, {Component, Fragment} from 'react'
-import ButtonBase from '@material-ui/core/ButtonBase';
-import {
-  Tick,
-  Clear,
-  PartlyCloudyDay,
-  PartlyCloudyNight,
-  Wind,
-  Rain,
-  CloudWind,
-  Fog,
-  ClearNight,
-  Snow,
-  Hail
-} from './SVGs'
-
-const WeatherIcon = ({icon}) => {
-  switch (icon) {
-    case 'clear-day': return <Clear/>
-    case 'clear-night': return <ClearNight/>
-    case 'partly-cloudy-day': return <PartlyCloudyDay/>
-    case 'partly-cloudy-night': return <PartlyCloudyNight/>
-    case 'wind': return <CloudWind/>
-    case 'rain': return <Rain/>
-    case 'fog': return <Fog/>
-    case 'snow': return <Snow/>
-    case 'hail': return <Hail/>
-    default: return <span/>
-  }
-}
+import React from 'react'
+import { Tick, WeatherIcon } from './modules'
 
 const SingleDate = ({date, pushRoute, selectedLocation, locationDate, user, today}) => {
   let attending = false
@@ -42,8 +14,7 @@ const SingleDate = ({date, pushRoute, selectedLocation, locationDate, user, toda
     percentage = (locationDate.people.length / parseInt(locationDate.seats)) * 100
     maxCapicity = locationDate.people.length >= parseInt(locationDate.seats)
   }
-  if (date.locations) darksky = date.locations.find( location => selectedLocation.id === location.id)
-
+  if(date.locations) darksky = date.locations.find( location => selectedLocation.id === location.id)
   return (
     <div
       data-value={date.date}
@@ -52,11 +23,9 @@ const SingleDate = ({date, pushRoute, selectedLocation, locationDate, user, toda
       >
       <p className='date'>{date.date.slice(0, -5)}</p>
       { attending && <Tick/> }
-
       <div className="progress-bar">
-        <div className={maxCapicity && 'full'} style={{width: `${percentage}%`}}/>
+        <div className={maxCapicity? 'full' : null} style={{width: `${percentage}%`}}/>
       </div>
-
       {
         darksky &&
         <span className='weather-icon'>

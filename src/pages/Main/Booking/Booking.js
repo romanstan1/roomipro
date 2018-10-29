@@ -29,7 +29,15 @@ class Booking extends Component {
     const locationRef = firestore.collection("locations")
     const bookingUser = { id: user.uid, name: user.firstName + ' ' + user.lastName}
 
+    // console.log('userRefuserRefuserRef', userRef);
+
     placeBooking(selectedLocation.id, selectedDate.id)
+
+    // const userRef = firestore
+    //   .collection("users")
+    //   .doc(user.uid)
+    //   .collection('dates')
+    //   .doc(`${selectedDate.id}`)
 
     const dateRef = locationRef
       .doc(selectedLocation.id)
@@ -58,10 +66,27 @@ class Booking extends Component {
           "seats": selectedLocation.seats
         })
       })
+
+    // userRef
+    //   .get()
+    //   .then(doc => {
+    //     if(doc.exists && !attendingOnDate) userRef.update({
+    //       "id": selectedDate.id,
+    //       "date": selectedDate.date
+    //     })
+    //     else if(doc.exists && attendingOnDate) userRef.update({
+    //       "id": selectedDate.id,
+    //       "date": selectedDate.date
+    //     })
+    //     else userRef.set({
+    //       "id": selectedDate.id,
+    //       "date": selectedDate.date
+    //     })
+    //   })
   }
 
   render() {
-    const {selectedLocation, selectedDate, attendingOnDate, locations, attendees, width, maxSeats, loadingThesePages, today} = this.props
+    const {selectedLocation, selectedDate, attendingOnDate, locations, attendees, width, maxSeats, loadingThesePages, today, pathname} = this.props
     const {loading} = this.state
 
     return (
@@ -80,6 +105,8 @@ class Booking extends Component {
               attendingOnDate={attendingOnDate}
               handleClick={this.handleResponse}
               future={today <= selectedDate.id}
+              loading={loading}
+              pathname={pathname}
             />
             <div className="attendees">
               <h4>Attendees</h4><h4>{attendees.length} / {maxSeats}</h4>
@@ -109,7 +136,8 @@ const mapProps = state => ({
   width: state.data.width,
   maxSeats: state.data.maxSeats,
   loadingThesePages: state.data.loadingThesePages,
-  today: state.data.today
+  today: state.data.today,
+  pathname: state.routing.location.pathname
 })
 
 const mapDispatch = {

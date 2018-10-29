@@ -56,13 +56,11 @@ class Inputs extends Component {
       <div className='Inputs'>
         <Location/>
         <div className='input-section'>
-
           {
             !id?
             <h2>Add a new location with ID: "{newId}"</h2>:
             <h2>Edit "{id}"</h2>
           }
-
           <InputBox
             placeholder='Enter the main location'
             handleInput={this.handleTextInput}
@@ -84,7 +82,6 @@ class Inputs extends Component {
             dataType='url'
             type='text'
           />
-
           <div className='numbers-inline'>
             <InputBox
               name='Max Seats:'
@@ -117,9 +114,6 @@ class Inputs extends Component {
               Update Location
             </ButtonBase>
           }
-
-
-
         </div>
       </div>
     )

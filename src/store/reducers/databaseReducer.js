@@ -13,22 +13,6 @@ import {
   GET_DARKSKY_SUCCESSFUL
 } from '../constants/actionTypes'
 
-
-// clear-day
-// clear-night
-// rain
-// snow
-// sleet
-// wind
-// fog
-// cloudy
-// partly-cloudy-day
-// partly-cloudy-night
-// hail
-// tornado
-// thunderstorm
-
-
 function createDate(days, weeks, dayOfWeek) {
   const id = moment().add(weeks, 'weeks').startOf('isoWeek').add(days - 1, 'days').valueOf()
   const date = moment(id).format('ddd Do MMM YYYY')
@@ -36,12 +20,11 @@ function createDate(days, weeks, dayOfWeek) {
 }
 
 const dates = (function createFortnight() {
-  let i = new Date().getDay()
+  let i = new Date().getDay() + 7
   const limit = i + 14 + 28
   let dates = []
   for(i; i < limit; i++) {
     if((i%7 !== 6 ) && (i%7 !== 0)) dates.push(createDate(i - 28 , 0, i%7))
-    // if((i%7 !== 6 ) && (i%7 !== 0)) dates.push(createDate(i - 28 , 0))
   }
   return dates
 })()
@@ -130,7 +113,7 @@ export default function databaseReducer(state = initialState, action) {
       }
     }
     case GET_DARKSKY_SUCCESSFUL: {
-      console.log('GET_DARKSKY_SUCCESSFUL', action.type, action.payload );
+      // console.log('GET_DARKSKY_SUCCESSFUL', action.type, action.payload );
       return {
         ...state,
         dates: state.dates.map(date => {

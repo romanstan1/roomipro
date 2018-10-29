@@ -27,7 +27,7 @@ class Main extends Component {
         querySnapshot.forEach(doc => {
           const locationData = doc.data()
           data = { ...data, [doc.id]: {...locationData, id: doc.id}}
-          getDarkSky(user.qa, locationData)          
+          getDarkSky(user.qa, locationData)
           firestore.collection("locations")
             .doc(doc.id)
             .collection("dates")
@@ -40,25 +40,7 @@ class Main extends Component {
               addDateToLocation(doc.id, dates)
             })
         })
-
         updateLocationData(data)
-
-        // Object.values(data).forEach(location => {
-        //   // fetch(`https://api.darksky.net/forecast/${process.env.REACT_APP_ROOMIPRO_DARKSKY}/${location.lat},${location.lng}`)
-        //   fetch(`api.openweathermap.org/data/2.5/forecast?lat=${location.lat}&lon=${location.lng}`)
-        //     .then(res => {
-        //       console.log('res', res)
-        //       res.json()
-        //     })
-        //     .then(result => {
-        //       console.log('result')
-        //       console.log('result:: ', JSON.stringify(result));
-        //     })
-        //     .catch(error => {
-        //       console.log('error!: ',error)
-        //     })
-        // })
-
       })
   }
 

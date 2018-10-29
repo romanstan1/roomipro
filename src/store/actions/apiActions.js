@@ -20,7 +20,6 @@ export const getDarkSky = (token, location) => dispatch => {
     else throw new Error('Something went wrong on api server!')
   })
   .then(data => {
-    console.log('Darksky data:', location.id, data);
     return dispatch({
       type: GET_DARKSKY_SUCCESSFUL,
       payload: {location: location.id, weather: data}

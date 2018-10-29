@@ -43,7 +43,7 @@ div.Response {
       color: $brightRed;
     }
   }
-  button {
+  div.book-cancel {
     padding: 30px 0px;
     cursor: pointer;
     font-size: 58px;
@@ -53,18 +53,6 @@ div.Response {
     color: $lightGrey;
     &:hover {
       color: white !important;
-    }
-    &.will-not-attend {
-      // color: $brightRed;
-      // background: $stripeMid;
-      // color: $lightGrey;
-      // background: $stripeMid;
-    }
-    &.will-attend {
-      // margin: 30px 0 32px 0;
-      // background: $brightGreen;
-      // margin: 30px 0 32px 0;
-      // color: $green;
     }
   }
 }
