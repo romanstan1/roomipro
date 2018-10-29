@@ -2,7 +2,10 @@ import React, {Component, Fragment} from 'react'
 
 export default class AnimatedWord extends Component {
 
-  state = {displayedText: null}
+  state = {
+    displayedText: null,
+    previousText: null
+  }
 
   // componentDidMount() {
   //   console.log('didmount !!!!!!!!!!!!!!!!!!!!');
@@ -13,24 +16,34 @@ export default class AnimatedWord extends Component {
     const {loading, pathChange, text} = nextProps
     if(loading) {
       console.log('on loading begins here...... ', nextProps);
+      // return null
       return {
-        displayedText: text
+        displayedText: text,
+        previousText: text
       }
-      
+
     } else if (pathChange) {
-      // console.log('path change here...... ', nextProps);
+      // console.log('path change here...... ', nextProps); // pass through text
       return {
-        displayedText: text
+        displayedText: text,
+        previousText: text
       }
     } else if (!prevState.displayedText) {
       // console.log('mounted here...... ');
       return {
-        displayedText: text
+        displayedText: text,
+        previousText: text
       }
     } else if (!loading) {
       // not path change, and loading false, therefore loading end. TWICE
-      console.log('loading ends here..... ', nextProps);
+      console.log('loading ends here..... ', nextProps, prevState);
+      return {
+        displayedText: text,
+        previousText: text
+      }
+      if(text !== prevState.previousText) return null
       return null
+
     }
   }
 
