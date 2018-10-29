@@ -13,27 +13,45 @@ const WeekendText = () =>
 
 class Dates extends Component {
   state = {
-    previousDatesHidden: true
+    previousDatesHidden: true,
+    displayNavBar: false
   }
-
   handleHideDate = () => {
-    this.setState({previousDatesHidden: !this.state.previousDatesHidden})
+    this.setState((prevState) => ({...prevState, previousDatesHidden: !prevState.previousDatesHidden}))
   }
-
+  componentDidMount() {
+    this.refs.dates.addEventListener('scroll', this.handleScroll);
+  }
+  componentWillUnmount() {
+    this.refs.dates.removeEventListener('scroll', this.handleScroll);
+  }
+  handleScroll = e => {
+    if(e.target.scrollTop > 220 && !this.state.displayNavBar) {
+      this.setState(prevState => ({
+        ...prevState, displayNavBar: true
+      }))
+    } else if(e.target.scrollTop < 220 && this.state.displayNavBar ) {
+      this.setState(prevState => ({
+        ...prevState, displayNavBar: false
+      }))
+    }
+  }
   render() {
     const {locations, dates, selectedLocation, push, user, width, today} = this.props
-    const {previousDatesHidden} = this.state
+    const {previousDatesHidden, displayNavBar} = this.state
     return (
       <div className='Dates'>
-        {/* <BackNav
+        <BackNav
           route='/'
           mobile={width > 650? false : true}
+          date={true}
+          displayNavBar={displayNavBar}
           >
           {
             selectedLocation &&
             <Fragment>{selectedLocation.main} - {selectedLocation.secondary}</Fragment>
           }
-        </BackNav> */}
+        </BackNav>
         {
           selectedLocation &&
           <div className="header-image"
@@ -41,7 +59,7 @@ class Dates extends Component {
             {/* <img src={selectedLocation.url} alt=""/> */}
           </div>
         }
-        <div className='date-scroll'>
+        <div className='date-scroll' ref="dates">
           {
           selectedLocation &&
           <div className="transparent-box">
