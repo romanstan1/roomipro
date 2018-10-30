@@ -1,7 +1,7 @@
 import React from 'react'
 import { Tick, WeatherIcon } from './modules'
 
-const SingleDate = ({date, pushRoute, selectedLocation, locationDate, user, today}) => {
+const SingleDate = ({date, pushRoute, selectedLocation, locationDate, user, today, selectedDate}) => {
   let attending = false
   let percentage = 0
   let maxCapicity = false
@@ -15,10 +15,12 @@ const SingleDate = ({date, pushRoute, selectedLocation, locationDate, user, toda
     maxCapicity = locationDate.people.length >= parseInt(locationDate.seats)
   }
   if(date.locations) darksky = date.locations.find( location => selectedLocation.id === location.id)
+  // const className = "SingleDate " + (today === date.id ? "today " : future? : "future " : "past ") + (selectedDate.id === date.id ? 'active': '' )
+  // console.log('date', date, selectedDate);
   return (
     <div
       data-value={date.date}
-      className={today === date.id? "SingleDate today" : future? "SingleDate future": "SingleDate past"}
+      className={"SingleDate " + (today === date.id ? "today " : '') + (future? "future " : "past ") + ((selectedDate && selectedDate.id === date.id) ? 'active': '' )}
       onClick={() => { pushRoute('/' + selectedLocation.id + '/' + date.id) }}
       >
       <p className='date'>{date.date.slice(0, -5)}</p>

@@ -41,8 +41,9 @@ export default class Response extends Component{
   }
 
   render() {
-    const {attendingOnDate, future, loading} = this.props
+    const {attendingOnDate, future, loading, fullyBooked} = this.props
     // console.log('pathname:: ', this.props.pathname);
+    console.log('fullyBooked', fullyBooked);
     if(future) return (
       <div className='Response'>
         {
@@ -51,13 +52,20 @@ export default class Response extends Component{
           :
           <span className='not-attending'>You are not attending</span>
         }
-        <div onClick={this.handleClick} className='book-cancel'>
-          <AnimatedWord
-            text={attendingOnDate? 'Cancel' : 'Book'}
-            loading={loading}
-            pathChange={this.state.pathChange}
-          />
-        </div>
+        {
+          fullyBooked && <span className='fully-booked'>This room is fully booked</span>
+        }
+
+        {
+          (fullyBooked && !attendingOnDate)? null:
+          <div onClick={this.handleClick} className='book-cancel'>
+              <AnimatedWord
+                text={attendingOnDate? 'Cancel' : 'Book'}
+                loading={loading}
+                pathChange={this.state.pathChange}
+              />
+          </div>
+        }
 
       </div>)
     return (

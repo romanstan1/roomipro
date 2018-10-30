@@ -55,6 +55,13 @@ div.Response {
       color: white !important;
     }
   }
+  span.fully-booked {
+    font-size: 28px;
+    font-weight: 600;
+    color: $pink;
+    display: block;
+    padding: 10px 0 0 0;
+  }
 }
 
 div.attendees {

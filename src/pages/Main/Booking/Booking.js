@@ -102,6 +102,7 @@ class Booking extends Component {
           selectedDate &&
           <Fragment>
             <Response
+              fullyBooked={attendees.length >= maxSeats}
               attendingOnDate={attendingOnDate}
               handleClick={this.handleResponse}
               future={today <= selectedDate.id}

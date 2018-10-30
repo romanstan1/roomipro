@@ -98,10 +98,25 @@ div.SingleDate {
   display: grid;
   grid-template-rows: 1fr 5fr 1fr 1px;
   grid-template-columns: auto 20px 30px 1fr;
-
+  &.active {
+    background: $midGrey;
+    color: $blue !important;
+    div.progress-bar {
+      background: $darkGrey !important;
+    }
+    &.past {
+      color: $darkGrey ;
+    }
+  }
   &:hover {
     background: $midGrey;
     color: white;
+    div.progress-bar {
+      background: $darkGrey !important;
+    }
+    &.past {
+      color: $darkGrey;
+    }
   }
   p.date {
     font-weight: 600;
@@ -158,6 +173,7 @@ div.SingleDate {
     height: 100px;
     font-style: italic;
     color:$midGrey;
+
   }
   &.future {
   }

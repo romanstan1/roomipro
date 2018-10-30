@@ -8,16 +8,10 @@ import SingleLocation from './SingleLocation'
 import {push} from 'react-router-redux'
 import './Location.css'
 
-
-
-
-
-
-
 class Location extends Component {
 
   render() {
-    const {locations, push, user, width} = this.props
+    const {locations, push, user, width, selectedLocation} = this.props
     const pushToLocation = this.props.push
     return (
       <Fragment>

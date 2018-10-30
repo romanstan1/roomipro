@@ -37,7 +37,7 @@ class Dates extends Component {
     }
   }
   render() {
-    const {locations, dates, selectedLocation, push, user, width, today} = this.props
+    const {locations, dates, selectedLocation, push, user, width, today, selectedDate} = this.props
     const {previousDatesHidden, displayNavBar} = this.state
     return (
       <div className='Dates'>
@@ -56,7 +56,6 @@ class Dates extends Component {
           selectedLocation &&
           <div className="header-image"
             style={{ background: `url(${selectedLocation.url}) no-repeat`}}>
-            {/* <img src={selectedLocation.url} alt=""/> */}
           </div>
         }
         <div className='date-scroll' ref="dates">
@@ -90,6 +89,7 @@ class Dates extends Component {
                 locationDate={locationDate}
                 user={user}
                 today={today}
+                selectedDate={selectedDate}
               />
 
               if(date.dayOfWeek === 5) return (
@@ -109,6 +109,7 @@ class Dates extends Component {
 }
 
 const mapProps = (state, ownProps) => ({
+  selectedDate: state.data.selectedDate,
   user: state.auth.user,
   locations: state.data.locations,
   dates: state.data.dates,

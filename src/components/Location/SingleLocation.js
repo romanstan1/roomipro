@@ -30,21 +30,21 @@ class SingleLocation extends Component {
     this.props.push('/delete-location/'+location.id)
   }
   render() {
-    const {location, user, width} = this.props
+    const {location, user, width, selectedLocation} = this.props
     return (
       <div
-        className='SingleLocation'
+        className={'SingleLocation ' + (selectedLocation && (selectedLocation.id === location.id)? 'active' : '')}
         onMouseEnter={this.mouseOver}
         onMouseLeave={this.mouseOut}
         // style={{backgroundImage: `url(${location.url})`}}
         >
-        <ButtonBase onClick={this.handleClick}>
+        <div className='button' onClick={this.handleClick}>
           <span>
             <div className='bubble' style={{backgroundImage: `url(${location.url})`}}/>
             <h3>{location.main}</h3>
             <h4>{location.secondary}</h4>
           </span>
-        </ButtonBase>
+        </div>
         {
           user.admin && this.state.hover && width > 650 &&
           <Fragment>
@@ -63,7 +63,8 @@ class SingleLocation extends Component {
 
 const mapProps = state => ({
   user: state.auth.user,
-  width: state.data.width
+  width: state.data.width,
+  selectedLocation: state.data.selectedLocation
 })
 
 const mapDispatch = {

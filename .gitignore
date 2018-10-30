@@ -7,8 +7,8 @@
 /coverage
 
 # production
-# /build
-# build
+/build
+build
 .firebase
 
 # misc
