@@ -6,16 +6,10 @@ export default class AnimatedWord extends Component {
     displayedText: null,
     previousText: null
   }
-
-  // componentDidMount() {
-  //   console.log('didmount !!!!!!!!!!!!!!!!!!!!');
-  //   this.setState({displayedText: })
-  // }
-
   static getDerivedStateFromProps(nextProps, prevState) {
     const {loading, pathChange, text} = nextProps
     if(loading) {
-      console.log('on loading begins here...... ', nextProps);
+      // console.log('on loading begins here...... ', nextProps);
       // return null
       return {
         displayedText: text,
@@ -36,14 +30,13 @@ export default class AnimatedWord extends Component {
       }
     } else if (!loading) {
       // not path change, and loading false, therefore loading end. TWICE
-      console.log('loading ends here..... ', nextProps, prevState);
+      // console.log('loading ends here..... ', nextProps, prevState);
       return {
         displayedText: text,
         previousText: text
       }
       if(text !== prevState.previousText) return null
       return null
-
     }
   }
 
@@ -62,9 +55,10 @@ export default class AnimatedWord extends Component {
     // console.log(' ');
 
     return (
-      <span>
-        {this.state.displayedText}
-      </span>
+      <Fragment>
+        <span>{this.state.displayedText}</span>
+        <span className={"circle" + (loading? ' loading' : '')}/>
+      </Fragment>
     )
   }
 }

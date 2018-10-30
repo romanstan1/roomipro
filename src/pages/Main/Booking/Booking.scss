@@ -21,6 +21,7 @@ div.Booking {
 }
 
 div.Response {
+  padding-top: 40px;
   margin: 50px 10px 20px 10px;
   // text-align: center;
   span.attending {
@@ -62,6 +63,34 @@ div.Response {
     display: block;
     padding: 10px 0 0 0;
   }
+
+  div.guests {
+    margin-bottom: 20px;
+    // margin-left: 2px;
+    h4 {
+      display: inline-block;
+      font-size: 16px;
+      font-weight: 600;
+      color: $stripeDark;
+      margin-right: 20px;
+      text-transform: uppercase;
+    }
+    span {
+      display: inline-block;
+      margin-right: 40px;
+      font-size: 32px;
+      font-weight: 500;
+      color: $lightGrey;
+      cursor: pointer;
+      &:hover {
+        color: white;
+      }
+      &.disable {
+        color: $midGrey !important;
+        cursor: not-allowed;
+      }
+    }
+  }
 }
 
 div.attendees {
@@ -87,27 +116,43 @@ div.attendees {
   }
 }
 
-div.animated-gradient {
-  background: repeating-linear-gradient(to right, $brightGreen 0%, blue 50%, $brightGreen 100%);
-  width: 100%;
-  background-size: 200% auto;
-  height: 10px;
-  background-position: 0 100%;
-  animation: gradient 2s infinite;
-  animation-fill-mode: forwards;
-  animation-timing-function: linear;
-  opacity: 0;
-  transition: 0.1s ease;
+
+span.circle{
+  display: inline-block;
+  width:10px;
+  height:10px;
+  margin-left: 9px;
+  // background:#fff;
+  background: $lightGrey;
+  // border-radius:100%;
+  position:relative;
+  // transform: scale3d(1, 1, 1);
   &.loading {
-    opacity: 1;
+    animation:pulse 2s linear infinite;
+  }
+  @keyframes pulse{
+    0%{
+      // transform: scale3d(1, 1, 1);
+      // opacity: 1;
+      // background:#fff;
+      transform: rotate(0deg);
+      // background:$blue;
+    }
+    50%{
+      // transform: scale3d(2.3, 2.3, 2.3);
+      // opacity: 0.4;
+      // background:$brightBlue;
+      transform: rotate(360deg);
+    }
+    100%{
+      // transform: scale3d(1, 1, 1);
+      // opacity: 1;
+      // background:#fff;
+      transform: rotate(0deg);
+      // background:$blue;
+    }
   }
 }
-
-@keyframes gradient {
-  0%   { background-position: 0 0; }
-  100% { background-position: -200% 0; }
-}
-
 
 @media screen and (min-width: 650px) {
   div.Booking {

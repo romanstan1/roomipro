@@ -36,10 +36,12 @@ export const initialState = {
   focusedLocation: null,
   selectedDate: null,
   attendingOnDate: false,
+  guestsAttendingOnDate: false,
   attendees: [],
   maxSeats: 0,
   page: 0,
   loadingThesePages: [],
+  totalAttendees: 0,
   today: moment().startOf('day').valueOf(),
   width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
 }
@@ -67,11 +69,22 @@ export default function databaseReducer(state = initialState, action) {
       }
     }
     case SELECT_DATE: {
+      const attendees = action.payload.people
+        .map(person => ({...person, guests:0}))
+        .reduce((acc, val, i, array) => {
+          const theOne = acc.find(person => person.id === val.id)
+          if (!theOne) acc.push({...val})
+          else theOne.guests ++
+          return acc
+        },[])
+      const user = attendees.find(attendee => attendee.id === action.payload.user.uid)
       return {
         ...state,
         selectedDate: action.payload.date,
         attendingOnDate: action.payload.attending,
-        attendees: action.payload.people,
+        guestsAttendingOnDate: user? user.guests : 0,
+        attendees: attendees,
+        totalAttendees: action.payload.people.length,
         maxSeats: action.payload.seats
       }
     }

@@ -23,7 +23,7 @@ class Booking extends Component {
     return {loading: false}
   }
 
-  handleResponse = () => {
+  handleResponse = (guest, addGuestBoolean) => () => {
 
     const {locations, selectedDate, selectedLocation, user, attendingOnDate, placeBooking} = this.props
     const locationRef = firestore.collection("locations")
@@ -47,19 +47,36 @@ class Booking extends Component {
     dateRef
       .get()
       .then(doc => {
-        if(doc.exists && !attendingOnDate) dateRef.update({
+        if(guest && addGuestBoolean) dateRef.update({
+          "id": selectedDate.id,
+          "date": selectedDate.date,
+          "people": arrayUnion({...bookingUser, guest: Math.floor(Date.now() / 1000) }),
+          "seats": selectedLocation.seats
+        })
+        else if(guest && !addGuestBoolean) {
+          const guest = doc.data().people.find(person => ((bookingUser.id === person.id) && person.guest))
+          dateRef.update({
+            "id": selectedDate.id,
+            "date": selectedDate.date,
+            "people": arrayRemove(guest),
+            "seats": selectedLocation.seats
+          })
+        } else if(doc.exists && !attendingOnDate)
+        dateRef.update({
           "id": selectedDate.id,
           "date": selectedDate.date,
           "people": arrayUnion(bookingUser),
           "seats": selectedLocation.seats
         })
-        else if(doc.exists && attendingOnDate) dateRef.update({
-          "id": selectedDate.id,
-          "date": selectedDate.date,
-          "people": arrayRemove(bookingUser),
-          "seats": selectedLocation.seats
-        })
-        else dateRef.set({
+        else if(doc.exists && attendingOnDate){
+          const people = doc.data().people.filter(person => bookingUser.id !== person.id)
+          dateRef.update({
+            "id": selectedDate.id,
+            "date": selectedDate.date,
+            "people": people,
+            "seats": selectedLocation.seats
+          })
+        } else dateRef.set({
           "id": selectedDate.id,
           "date": selectedDate.date,
           "people": [bookingUser],
@@ -85,10 +102,16 @@ class Booking extends Component {
     //   })
   }
 
-  render() {
-    const {selectedLocation, selectedDate, attendingOnDate, locations, attendees, width, maxSeats, loadingThesePages, today, pathname} = this.props
-    const {loading} = this.state
+  handleAddGuest = () => {
 
+  }
+  handleRemoveGuest = () => {
+
+  }
+
+  render() {
+    const {selectedLocation, selectedDate, attendingOnDate, locations, attendees, width, maxSeats, loadingThesePages, today, pathname, user, guestsAttendingOnDate, totalAttendees} = this.props
+    const {loading} = this.state
     return (
       <div className='Booking'>
         <BackNav
@@ -97,26 +120,27 @@ class Booking extends Component {
           >
           { selectedDate && <Fragment>{selectedDate.date}</Fragment> }
         </BackNav>
-        <div className={loading? "animated-gradient loading" : "animated-gradient"}/>
         {
           selectedDate &&
           <Fragment>
             <Response
-              fullyBooked={attendees.length >= maxSeats}
+              fullyBooked={totalAttendees >= maxSeats}
               attendingOnDate={attendingOnDate}
-              handleClick={this.handleResponse}
+              handleResponse={this.handleResponse}
               future={today <= selectedDate.id}
               loading={loading}
               pathname={pathname}
+              guestsAttendingOnDate={guestsAttendingOnDate}
             />
             <div className="attendees">
-              <h4>Attendees</h4><h4>{attendees.length} / {maxSeats}</h4>
+              <h4>Attendees</h4><h4>{totalAttendees} / {maxSeats}</h4>
               <p>
                 {
                   attendees.map((attendee, i) =>
-                  <span key={attendee.id + attendee.name + i}>
-                    {attendee.name}
-                  </span>)
+                    <span key={attendee.id + attendee.name + i}>
+                      {attendee.name} {attendee.guests > 0 && ' + ' + attendee.guests}
+                    </span>
+                  )
                 }
               </p>
             </div>
@@ -138,7 +162,9 @@ const mapProps = state => ({
   maxSeats: state.data.maxSeats,
   loadingThesePages: state.data.loadingThesePages,
   today: state.data.today,
-  pathname: state.routing.location.pathname
+  pathname: state.routing.location.pathname,
+  guestsAttendingOnDate: state.data.guestsAttendingOnDate,
+  totalAttendees: state.data.totalAttendees
 })
 
 const mapDispatch = {

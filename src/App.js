@@ -62,7 +62,7 @@ class App extends Component {
           people = locationDate.people
           seats = locationDate.seats
         }
-        nextProps.selectDate(date, attending, people, seats)
+        nextProps.selectDate(date, attending, people, seats, user)
         nextProps.switchPage(2)
       }
     }
