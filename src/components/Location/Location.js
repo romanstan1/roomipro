@@ -24,12 +24,22 @@ class Location extends Component {
 
               <div className='menu-title'>
                 <h2>Notification</h2>
-                <span><PlusCircle/></span>
+                <span>
+                  <PlusCircle
+                    pushToLocation={pushToLocation}
+                    route='/send-notification'
+                  />
+                  </span>
               </div>
 
               <div className='menu-title'>
                 <h2>Data</h2>
-                <span><PlusCircle/></span>
+                <span>
+                  <PlusCircle
+                    pushToLocation={pushToLocation}
+                    route='/download-data'
+                  />
+                  </span>
               </div>
 
             </Fragment>
@@ -41,6 +51,7 @@ class Location extends Component {
               <span>
                 <PlusCircle
                   pushToLocation={pushToLocation}
+                  route='/add-location'
                 />
               </span>
             }

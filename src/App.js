@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import {Route, Router, Redirect, Switch} from 'react-router-dom'
 import {connect} from 'react-redux'
 import createBrowserHistory from 'history/createBrowserHistory'
-import { Main, SignIn, SendEmail, Inputs, DeleteInput } from 'pages'
+import { Main, SignIn, SendEmail, Inputs, DeleteInput, SendNotification, DownloadData} from 'pages'
 import {auth, persistence, firestore} from 'firebaseInit'
 import {logInSuccessful} from 'store/actions'
 import PropTypes from 'prop-types'
@@ -102,6 +102,8 @@ class App extends Component {
                 <Route path="/update-location" component={Inputs}/>
                 <Route path="/add-location" component={Inputs}/>
                 <Route path="/delete-location" component={DeleteInput}/>
+                <Route path="/send-notification" component={SendNotification}/>
+                <Route path="/download-data" component={DownloadData}/>
                 <Route exact path="/" component={Main}/>
                 <Route path="/:location" component={Main}/>
                 <Route path="/:location/:date" component={Main}/>
