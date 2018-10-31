@@ -5,26 +5,48 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import {firestore} from 'firebaseInit'
 import InputBox from './InputBox'
 import './Inputs.css'
+import {auth} from 'firebaseInit'
+
+const postNotification = (title, body, link) => {
+  auth.currentUser.getIdToken(true).then(idToken => {
+    const url = 'https://us-central1-room-ipro.cloudfunctions.net/app/postNotification'
+    fetch(url,
+      {
+        method: "POST",
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': 'Bearer ' + idToken
+        },
+        body:"title=" + title + "&body=" + body + "&link=" + link + "&icon=https://unipro-innovation-platform.firebaseapp.com/assets/unipro-favicon-small.png"
+      })
+      .then(res => res.json())
+      .then(res => { console.log('res notification::: ',res) })
+      .catch(error => console.log("Error with posting notification : ",error))
+  }).catch((error) => console.log('error getting Firebase id token: ',error ))
+}
+
 
 class SendNotification extends Component {
   state = {
-    id:'',
-    safetyInput:''
+    title: '',
+    body: '',
+    link: ''
   }
 
   handleTextInput = e => {
     this.setState({[e.target.dataset.type]: e.target.value})
   }
 
-  deleteLocation = () => {
-    // firestore
-    //   .collection("locations")
-    //   .doc(this.state.id)
-    //   .delete()
+  sendNotification = () => {
+    const {title, body, link} = this.state
+    postNotification(title, body, link)
   }
 
+  handleTextInput = e => this.setState({[e.target.dataset.type]: e.target.value})
+
   render() {
-    const {id, safetyInput} = this.state
+    const {title, body, link} = this.state
     return (
       <div className='Inputs'>
         <Location/>
@@ -32,16 +54,30 @@ class SendNotification extends Component {
           <h2>Send Notification</h2>
           <br/>
           <InputBox
-            placeholder='Enter the ID for location before you can delete it'
+            placeholder='Enter title of notification'
             handleInput={this.handleTextInput}
-            value={safetyInput}
-            dataType='safetyInput'
+            value={title}
+            dataType='title'
+            type='text'
+          />
+          <InputBox
+            placeholder='Enter body of notification'
+            handleInput={this.handleTextInput}
+            value={body}
+            dataType='body'
+            type='text'
+          />
+          <InputBox
+            placeholder='Enter URL link'
+            handleInput={this.handleTextInput}
+            value={link}
+            dataType='link'
             type='text'
           />
           <ButtonBase
-            className={safetyInput === id? 'CTAbutton' : 'CTAbutton disable'}
-            onClick={safetyInput === id? this.deleteLocation : null}>
-            Delete Location
+            className='CTAbutton'
+            onClick={this.sendNotification}>
+            Send Notification
           </ButtonBase>
         </div>
       </div>

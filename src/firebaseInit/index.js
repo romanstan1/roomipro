@@ -1,6 +1,7 @@
 import config from './firebase-config.js'
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import 'firebase/messaging'
 import 'firebase/firestore'
 
 firebase.initializeApp(config);
@@ -15,4 +16,11 @@ const settings = {timestampsInSnapshots: true}
 firestore.settings(settings)
 firestore.enablePersistence({experimentalTabSynchronization:true})
 
-export {auth, persistence, secondaryAuth, firestore, arrayUnion, arrayRemove}
+
+try {
+  var messaging = firebase.messaging();
+} catch (e) {
+  console.log('Unable to Instantiate Firebase Messaing', e);
+}
+
+export {auth, persistence, secondaryAuth, firestore, arrayUnion, arrayRemove, messaging}

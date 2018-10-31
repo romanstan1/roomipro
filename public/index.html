@@ -2,8 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="theme-color" content="#000000">
-    <link rel="icon" href="%PUBLIC_URL%/assets/unipro-favicon-small.png" />
+    <meta charset="utf-8">
+    <meta name="theme-color" content="#080a3c">
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    <link rel="icon" href="%PUBLIC_URL%/fav128.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -16,15 +18,15 @@
     </noscript>
     <div id="root"></div>
     <script>
-    // if ('serviceWorker' in navigator) {
-    //   window.addEventListener('load', function() {
-    //     navigator.serviceWorker.register('/sw.js').then(function(registration) {
-    //       console.log('ServiceWorker registration successful with scope: ', registration.scope);
-    //     }, function(err) {
-    //       console.log('ServiceWorker registration failed: ', err);
-    //     });
-    //   });
-    // }
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js').then(function(registration) {
+          console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }, function(err) {
+          console.log('ServiceWorker registration failed: ', err);
+        });
+      });
+    }
     </script>
   </body>
 </html>

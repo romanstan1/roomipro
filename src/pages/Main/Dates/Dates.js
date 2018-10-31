@@ -46,6 +46,7 @@ class Dates extends Component {
           mobile={width > 650? false : true}
           date={true}
           displayNavBar={displayNavBar}
+          backgroundImage={selectedLocation}
           >
           {
             selectedLocation &&

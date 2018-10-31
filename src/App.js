@@ -3,12 +3,12 @@ import {Route, Router, Redirect, Switch} from 'react-router-dom'
 import {connect} from 'react-redux'
 import createBrowserHistory from 'history/createBrowserHistory'
 import { Main, SignIn, SendEmail, Inputs, DeleteInput, SendNotification, DownloadData} from 'pages'
-import {auth, persistence, firestore} from 'firebaseInit'
+import {auth, persistence, firestore, messaging} from 'firebaseInit'
 import {logInSuccessful} from 'store/actions'
 import PropTypes from 'prop-types'
-import 'styles/global.css'
 import {selectLocation, selectDate, switchPage, focusOnLocation} from 'store/actions'
 import { Offline } from "react-detect-offline";
+import 'styles/global.css'
 
 export const history = createBrowserHistory()
 
@@ -83,6 +83,30 @@ class App extends Component {
         })
       }
     })
+
+    if(!!messaging) {
+      messaging.requestPermission()
+      .then(() => messaging.getToken())
+      .then(token => {
+        console.log('token:: ', token);
+        let url = 'https://us-central1-room-ipro.cloudfunctions.net/app/registerDevice'
+    
+        fetch(url,
+          {
+            method: "POST",
+            mode: 'cors',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body:"token=" + token + "&topic=roomipro1" // the topic name
+          })
+          .then(res => res.json())
+          .then(resp => console.log("Successfully registered for notifications", resp))
+          .catch(error => console.log("Error with notification registration", error))
+      })
+      .catch(error => console.log("Error with messaging request persmission", error))
+    }
+
   }
 
   render() {

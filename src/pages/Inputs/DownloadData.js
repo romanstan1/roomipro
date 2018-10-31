@@ -8,40 +8,30 @@ import './Inputs.css'
 
 class DownloadData extends Component {
   state = {
-    id:'',
-    safetyInput:''
   }
 
   handleTextInput = e => {
     this.setState({[e.target.dataset.type]: e.target.value})
   }
 
-  deleteLocation = () => {
-    // firestore
-    //   .collection("locations")
-    //   .doc(this.state.id)
-    //   .delete()
-  }
-
   render() {
-    const {id, safetyInput} = this.state
     return (
       <div className='Inputs'>
         <Location/>
         <div className='input-section'>
           <h2>Download Data</h2>
           <br/>
-          <InputBox
+          {/* <InputBox
             placeholder='Enter the ID for location before you can delete it'
             handleInput={this.handleTextInput}
             value={safetyInput}
             dataType='safetyInput'
             type='text'
-          />
+          /> */}
           <ButtonBase
-            className={safetyInput === id? 'CTAbutton' : 'CTAbutton disable'}
-            onClick={safetyInput === id? this.deleteLocation : null}>
-            Delete Location
+            className='CTAbutton'
+            >
+            Download Data
           </ButtonBase>
         </div>
       </div>

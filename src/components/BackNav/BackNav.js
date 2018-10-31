@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react'
 import {Link} from 'react-router-dom'
 import './BackNav.css'
 
-const BackNav = ({route, children, mobile, displayNavBar, date}) =>
+const BackNav = ({route, children, mobile, displayNavBar, date, backgroundImage}) =>
 <Fragment>
   <div
     className={
@@ -10,6 +10,7 @@ const BackNav = ({route, children, mobile, displayNavBar, date}) =>
       date? 'BackNav date' :
       'BackNav'
     }
+    style={backgroundImage && {backgroundImage: backgroundImage.url}}
     >
       <span className={mobile? 'mobile': null}>{children}</span>
     </div>

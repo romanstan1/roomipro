@@ -10,8 +10,14 @@ export const getDarkSky = (token, location) => dispatch => {
     'Content-Type': 'application/json',
     'Authorization': 'Bearer ' + token
   })
-  return fetch(`http://localhost:5000/room-ipro/us-central1/app/darksky/${lat}/${lng}`, {
-  // return fetch(`https://us-central1-room-ipro.cloudfunctions.net/app/darksky/${lat}/${lng}`, {
+  let url
+  if(process.env.NODE_ENV === 'development') {
+    url = `http://localhost:5000/room-ipro/us-central1/app/darksky/${lat}/${lng}`
+  } else {
+    url = `https://us-central1-room-ipro.cloudfunctions.net/app/darksky/${lat}/${lng}`
+  }
+
+  return fetch(url, {
     method: 'GET',
     headers: myHeaders,
   })
