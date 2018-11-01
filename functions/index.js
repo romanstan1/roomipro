@@ -16,9 +16,9 @@ app.post('/registerDevice', notifications.registerDevice);
 
 app.use(authenticateUser.validateFirebaseIdToken);
 
+const key = process.env.REACT_APP_ROOMIPRO_DARKSKY_APIKEY
+// const key = functions.config().darksky.key
 app.get('/darksky/:lat/:lng', (request, response) => {
-  const key = process.env.REACT_APP_ROOMIPRO_DARKSKY_APIKEY
-  // const key = functions.config().darksky.key
 
   const {lat, lng} = request.params
   fetch(`https://api.darksky.net/forecast/${key}/${lat},${lng}`)

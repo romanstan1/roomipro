@@ -18,7 +18,7 @@ const postNotification = (title, body, link) => {
           'Content-Type': 'application/x-www-form-urlencoded',
           'Authorization': 'Bearer ' + idToken
         },
-        body:"title=" + title + "&body=" + body + "&link=" + link + "&icon=https://unipro-innovation-platform.firebaseapp.com/assets/unipro-favicon-small.png"
+        body:"title=" + title + "&body=" + body + "&link=" + link + "&icon=https://room-ipro.firebaseapp.com/fav128.png"
       })
       .then(res => res.json())
       .then(res => { console.log('res notification::: ',res) })

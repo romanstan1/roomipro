@@ -84,13 +84,27 @@ class App extends Component {
       }
     })
 
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').then(registration => {
+          console.log('ServiceWorker registration successful with scope');
+        }, err => {
+          console.log('ServiceWorker registration failed');
+        }).catch(err => {
+          console.log(err)
+        })
+      })
+    } else {
+      console.log('service worker is not supported');
+    }
+
     if(!!messaging) {
       messaging.requestPermission()
       .then(() => messaging.getToken())
       .then(token => {
         console.log('token:: ', token);
         let url = 'https://us-central1-room-ipro.cloudfunctions.net/app/registerDevice'
-    
+
         fetch(url,
           {
             method: "POST",
