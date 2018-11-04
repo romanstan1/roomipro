@@ -18,6 +18,11 @@ div.Booking {
       display: block;
     }
   }
+  &::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+    display:none;
+  }
 }
 
 div.Response {

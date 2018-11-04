@@ -10,7 +10,8 @@ import {
   UPDATE_WIDTH,
   FOCUS_ON_LOCATION,
   REMOVE_LOADING_DATA,
-  GET_DARKSKY_SUCCESSFUL
+  GET_DARKSKY_SUCCESSFUL,
+  GET_DARKSKY_FAILURE
 } from '../constants/actionTypes'
 
 function createDate(days, weeks, dayOfWeek) {
@@ -125,20 +126,24 @@ export default function databaseReducer(state = initialState, action) {
         width:action.payload
       }
     }
-    case GET_DARKSKY_SUCCESSFUL: {
-      // console.log('GET_DARKSKY_SUCCESSFUL', action.type, action.payload );
+    case GET_DARKSKY_SUCCESSFUL: case GET_DARKSKY_FAILURE: {
+      const defaultWeatherIcon = {
+        icon: "default-weather",
+        temperatureHigh: 100.0,
+        time: 1001
+      }
       return {
         ...state,
         dates: state.dates.map(date => {
-          const findDate = action.payload.weather.data.find(ele => ele.time + '000' == date.id.toString())
-          if(findDate) return {
+          let findDate
+          if(Array.isArray(action.payload.weather)) findDate = action.payload.weather.find(ele => ele.time + '000' == date.id.toString())
+          return {
             ...date,
             locations: [].concat(date.locations || [], {
               id:  action.payload.location,
-              weather: findDate
+              weather: findDate? findDate : defaultWeatherIcon
             })
           }
-          return date
         })
       }
     }

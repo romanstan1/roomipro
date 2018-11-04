@@ -17,6 +17,8 @@ export const getDarkSky = (token, location) => dispatch => {
     url = `https://us-central1-room-ipro.cloudfunctions.net/app/darksky/${lat}/${lng}`
   }
 
+  url = `https://us-central1-room-ipro.cloudfunctions.net/app/darksky/${lat}/${lng}`
+
   return fetch(url, {
     method: 'GET',
     headers: myHeaders,
@@ -25,14 +27,29 @@ export const getDarkSky = (token, location) => dispatch => {
     if (res.status === 200) return res.json()
     else throw new Error('Something went wrong on api server!')
   })
-  .then(data => {
+  .then(res => {
+    if(res.errno) {
+      throw new Error('Something went wrong on api server!')
+      return;
+    }
+    const data = res.data.map(day => {
+      return {
+        time: day.time,
+        icon: day.icon,
+        temperatureHigh: day.temperatureHigh
+      }
+    })
+
+    console.log('data', data);
+    console.log('json data: ', JSON.stringify(data));
+
     return dispatch({
       type: GET_DARKSKY_SUCCESSFUL,
       payload: {location: location.id, weather: data}
     })
   })
   .catch(error => {
-    console.error('GET_DARKSKY_FAILURE', error);
+    console.error('GET_DARKSKY_FAILURE here:: ', error);
     return dispatch({
       type: GET_DARKSKY_FAILURE,
       payload: {location: location.id, weather: error}

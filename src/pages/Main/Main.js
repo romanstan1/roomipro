@@ -52,9 +52,9 @@ class Main extends Component {
   componentWillUnmount() {
     this.unsubscribe()
   }
-
   render() {
     const {width} = this.props
+
     if(width > 650) return (
       <div className='Main'>
         <Location/>

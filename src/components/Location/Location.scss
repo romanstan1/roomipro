@@ -11,6 +11,11 @@ div.Location {
   display: inline-block;
   overflow-y: scroll;
   min-width: 320px;
+  &::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+    display:none;
+  }
   div.menu-title {
     margin: 5px 20px 5px 20px;
     display: flex;

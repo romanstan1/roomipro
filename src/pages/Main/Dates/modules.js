@@ -10,7 +10,8 @@ import {
   Fog,
   ClearNight,
   Snow,
-  Hail
+  Hail,
+  Cloudy
 } from './WeatherIcons'
 
 export const Tick = () =>
@@ -30,11 +31,12 @@ export const WeatherIcon = ({icon}) => {
     case 'clear-night': return <ClearNight/>
     case 'partly-cloudy-day': return <PartlyCloudyDay/>
     case 'partly-cloudy-night': return <PartlyCloudyNight/>
+    case 'cloudy': return <Cloudy/>
     case 'wind': return <CloudWind/>
     case 'rain': return <Rain/>
     case 'fog': return <Fog/>
     case 'snow': return <Snow/>
     case 'hail': return <Hail/>
-    default: return <span/>
+    default: return <PartlyCloudyDay/>
   }
 }

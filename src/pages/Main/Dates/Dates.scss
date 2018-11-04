@@ -26,6 +26,11 @@ div.Dates {
     overflow-y: scroll;
     height: calc(100% - 0px);
     background: $darkGrey;
+    &::-webkit-scrollbar {
+      width: 0px;
+      background: transparent; /* make scrollbar transparent */
+      display:none;
+    }
     div.transparent-box {
       height: 330px;
       background: transparent;

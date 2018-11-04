@@ -17,7 +17,6 @@ class App extends Component {
   static propTypes = {
     isAuthenticated: PropTypes.bool.isRequired
   }
-
   state = {}
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -84,6 +83,7 @@ class App extends Component {
       }
     })
 
+
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('sw.js').then(registration => {
@@ -102,7 +102,7 @@ class App extends Component {
       messaging.requestPermission()
       .then(() => messaging.getToken())
       .then(token => {
-        console.log('token:: ', token);
+        // console.log('token:: ', token);
         let url = 'https://us-central1-room-ipro.cloudfunctions.net/app/registerDevice'
 
         fetch(url,
@@ -115,7 +115,7 @@ class App extends Component {
             body:"token=" + token + "&topic=roomipro1" // the topic name
           })
           .then(res => res.json())
-          .then(resp => console.log("Successfully registered for notifications", resp))
+          .then(resp => {})
           .catch(error => console.log("Error with notification registration", error))
       })
       .catch(error => console.log("Error with messaging request persmission", error))

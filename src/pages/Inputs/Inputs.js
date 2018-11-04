@@ -61,6 +61,7 @@ class Inputs extends Component {
             <h2>Add a new location with ID: "{newId}"</h2>:
             <h2>Edit "{id}"</h2>
           }
+
           <InputBox
             placeholder='Enter the main location'
             handleInput={this.handleTextInput}

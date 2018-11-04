@@ -7,8 +7,7 @@ import InputBox from './InputBox'
 import './Inputs.css'
 
 class DownloadData extends Component {
-  state = {
-  }
+  state = {}
 
   handleTextInput = e => {
     this.setState({[e.target.dataset.type]: e.target.value})
