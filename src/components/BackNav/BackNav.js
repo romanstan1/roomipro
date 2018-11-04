@@ -12,10 +12,14 @@ const BackNav = ({route, children, mobile, displayNavBar, date, backgroundImage}
       }
       // style={backgroundImage? { background: `url(${backgroundImage.url}) no-repeat`} : null}
       >
+      {
+        backgroundImage?
         <div
-          className='img'
-          style={backgroundImage? { background: `url(${backgroundImage.url}) no-repeat`} : null}
+        className='img'
+        style={{ background: `url(${backgroundImage.url}) no-repeat`}}
         />
+        : null
+      }
         <span className={'text ' + (mobile? 'mobile': '')}>{children}</span>
       </div>
       {

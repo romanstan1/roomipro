@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import createBrowserHistory from 'history/createBrowserHistory'
 import { Main, SignIn, SendEmail, Inputs, DeleteInput, SendNotification, DownloadData} from 'pages'
 import {auth, persistence, firestore, messaging} from 'firebaseInit'
-import {logInSuccessful} from 'store/actions'
+import {logInSuccessful, notLoggedIn} from 'store/actions'
 import PropTypes from 'prop-types'
 import {selectLocation, selectDate, switchPage, focusOnLocation} from 'store/actions'
 import { Offline } from "react-detect-offline";
@@ -80,6 +80,8 @@ class App extends Component {
           const thisUser = userData.data()
           this.props.logInSuccessful({...user, ...thisUser})
         })
+      } else {
+          this.props.notLoggedIn()
       }
     })
 
@@ -124,7 +126,7 @@ class App extends Component {
   }
 
   render() {
-    const {isAuthenticated} = this.props
+    const {isAuthenticated, logInPending} = this.props
     const {page} = this.state
     return (
       <Router history={history}>
@@ -133,7 +135,11 @@ class App extends Component {
             <div className="offline"> No internet detected. Roomipro will automatically try to connect when it detects an internet connection. </div>
           </Offline>
           {
-            isAuthenticated?
+            logInPending &&
+            <div className='loading-screen'> Fetching profile... </div>
+          }
+          {
+            isAuthenticated && !logInPending?
             <Fragment>
               <Switch>
                 <Route exact path="/sign-in" render={() => <Redirect to="/" />} />
@@ -169,7 +175,8 @@ const mapProps = state => ({
   locations: state.data.locations,
   dates: state.data.dates,
   selectedLocation: state.data.selectedLocation,
-  user: state.auth.user
+  user: state.auth.user,
+  logInPending: state.auth.logInPending
 })
 
 const mapDispatch = {
@@ -177,7 +184,8 @@ const mapDispatch = {
   selectLocation,
   selectDate,
   switchPage,
-  focusOnLocation
+  focusOnLocation,
+  notLoggedIn,
 }
 
 export default connect(mapProps, mapDispatch)(App)

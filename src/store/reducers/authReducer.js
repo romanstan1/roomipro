@@ -3,7 +3,8 @@ import {
   LOG_IN_SUCCESSFUL,
   EMAIL_SUCCESS,
   ERROR_MESSAGE,
-  CLEAR_MESSAGE
+  CLEAR_MESSAGE,
+  NOT_LOGGED_IN
 } from '../constants/actionTypes'
 
 export const initialState = {
@@ -11,6 +12,7 @@ export const initialState = {
   user: null,
   // user: {email: 'roman@stankiewicz.com', admin: true},
   // isAuthenticated: true,
+  logInPending: true,
   userMessage: null,
   error: false,
   emailSuccess: false
@@ -23,14 +25,22 @@ export default function authReducer(state = initialState, action) {
         ...state,
         isAuthenticated: true,
         user: action.payload,
-        error: false
+        error: false,
+        logInPending: false
       }
     }
     case LOG_OUT: {
       return {
         ...state,
         isAuthenticated: false,
-        user: null
+        user: null,
+        logInPending: false
+      }
+    }
+    case NOT_LOGGED_IN: {
+      return {
+        ...state,
+        logInPending: false
       }
     }
     case EMAIL_SUCCESS: {

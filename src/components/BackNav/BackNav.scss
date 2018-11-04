@@ -37,14 +37,14 @@ div.BackNav {
   &.display-nav-bar {
     opacity: 1;
     z-index: 500;
-    // transform: translateY(0px);
-  }
-  span.mobile {
-    text-indent: 50px;
-      z-index: 500;
   }
   span.text {
+    text-indent: 20px;
     z-index: 100;
+  }
+  span.mobile {
+    z-index: 500;
+    text-indent: 50px;
   }
 }
 div.arrow {

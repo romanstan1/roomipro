@@ -4,7 +4,8 @@ import {
   logInSuccessful,
   emailSuccess,
   errorMessage,
-  clearMessage
+  clearMessage,
+  notLoggedIn
 } from './authActions.js'
 
 // Database
@@ -32,6 +33,7 @@ export {
   emailSuccess,
   errorMessage,
   clearMessage,
+  notLoggedIn,
   // Database
   updateLocationData,
   selectLocation,

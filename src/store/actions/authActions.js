@@ -3,7 +3,8 @@ import {
   LOG_IN_SUCCESSFUL,
   EMAIL_SUCCESS,
   ERROR_MESSAGE,
-  CLEAR_MESSAGE
+  CLEAR_MESSAGE,
+  NOT_LOGGED_IN
 } from '../constants/actionTypes'
 
 export const logOut = () => dispatch =>
@@ -13,6 +14,11 @@ export const logInSuccessful = user => dispatch =>
   dispatch({
     type: LOG_IN_SUCCESSFUL,
     payload: user
+  })
+
+export const notLoggedIn = () => dispatch =>
+  dispatch({
+    type: NOT_LOGGED_IN
   })
 
 export const emailSuccess = email => dispatch => {
