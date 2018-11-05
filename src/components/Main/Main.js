@@ -53,7 +53,7 @@ class Main extends Component {
   render() {
     const {width} = this.props
 
-    if(width > 650) return (
+    if(width > 720) return (
       <div className='Main'>
         <Location/>
         <Dates/>

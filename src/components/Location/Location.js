@@ -18,7 +18,7 @@ class Location extends Component {
         <div className='Location'>
           <Nav/>
           {
-            user.admin && width > 650 &&
+            user.admin && width > 720 &&
             <Fragment>
               <h3>Admin</h3>
 
@@ -47,7 +47,7 @@ class Location extends Component {
           <div className="menu-title">
             <h2>Locations</h2>
             {
-              user.admin && width > 650 &&
+              user.admin && width > 720 &&
               <span>
                 <PlusCircle
                   pushToLocation={pushToLocation}

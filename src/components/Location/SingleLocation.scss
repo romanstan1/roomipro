@@ -11,7 +11,7 @@ div.SingleLocation {
   &.active {
     div.button {
       background: $darkGrey;
-      color: $blue !important;
+      color: white !important;
     }
   }
   div.button {
@@ -37,7 +37,6 @@ div.SingleLocation {
     height: 105px;
     &:hover {
       background: $darkGrey;
-      color: white;
     }
     >span {
       padding-left: 100px;

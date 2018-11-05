@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react'
 import {Link} from 'react-router-dom'
 import './BackNav.css'
 
-const BackNav = ({route, children, mobile, displayNavBar, date, backgroundImage}) => {
+const BackNav = ({route, children, mobile, displayNavBar, date, backgroundColor}) => {
   return <Fragment>
     <div
       className={
@@ -13,10 +13,10 @@ const BackNav = ({route, children, mobile, displayNavBar, date, backgroundImage}
       // style={backgroundImage? { background: `url(${backgroundImage.url}) no-repeat`} : null}
       >
       {
-        backgroundImage?
+        backgroundColor?
         <div
-        className='img'
-        style={{ background: `url(${backgroundImage.url}) no-repeat`}}
+          className='block-color'
+          style={{ background: backgroundColor}}
         />
         : null
       }

@@ -16,7 +16,7 @@ import {
 
 function createDate(days, weeks, dayOfWeek) {
   const id = moment().add(weeks, 'weeks').startOf('isoWeek').add(days - 1, 'days').valueOf()
-  const date = moment(id).format('ddd Do MMM YYYY')
+  const date = moment(id).format('dddd D MMMM YYYY')
   return { id, date, dayOfWeek }
 }
 

@@ -15,17 +15,17 @@ div.BackNav {
   z-index: 500;
   font-weight: 600;
   // text-indent: 5px;
-  border-bottom: 4px solid $darkestGrey;
+  // border-bottom: 4px solid $darkestGrey;
   transition: 0.2s ease;
   transform: scale(1);
   overflow: hidden;
   opacity: 1;
-  div.img {
+  div.block-color {
     height: 100%;
     width: 100%;
     position: absolute;
-    -webkit-filter: blur(2px); /* Safari 6.0 - 9.0 */
-    filter: blur(3px);
+    // -webkit-filter: blur(2px); /* Safari 6.0 - 9.0 */
+    // filter: blur(3px);
   }
   &.date {
     opacity: 0;
@@ -41,6 +41,8 @@ div.BackNav {
   span.text {
     text-indent: 20px;
     z-index: 100;
+    // color: $darkGrey;
+    // mix-blend-mode:color-burn;
   }
   span.mobile {
     z-index: 500;
@@ -52,7 +54,7 @@ div.arrow {
   left: 10px;
   top: 0px;
   width: 50px;
-  height: 56px;
+  height: 60px;
   z-index: 600;
   display: inline-block;
   &.date a{
@@ -64,7 +66,7 @@ div.arrow {
     padding: 5px;
     font-size: 0px;
     width: 50px;
-    height: 56px;
+    height: 60px;
     display: flex;
     justify-content: center;
     align-items: center;

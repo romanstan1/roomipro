@@ -29,8 +29,6 @@ class Booking extends Component {
     const locationRef = firestore.collection("locations")
     const bookingUser = { id: user.uid, name: user.firstName + ' ' + user.lastName}
 
-    // console.log('userRefuserRefuserRef', userRef);
-
     placeBooking(selectedLocation.id, selectedDate.id)
 
     // const userRef = firestore

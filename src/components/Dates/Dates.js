@@ -5,6 +5,7 @@ import {push} from 'react-router-redux'
 import SingleDate from './SingleDate'
 import ButtonBase from '@material-ui/core/ButtonBase';
 import './Dates.css'
+import { ColorExtractor } from 'react-color-extractor'
 
 const WeekendText = () =>
   <div className="weekend-text">
@@ -14,7 +15,8 @@ const WeekendText = () =>
 class Dates extends Component {
   state = {
     previousDatesHidden: true,
-    displayNavBar: false
+    displayNavBar: false,
+    color: null
   }
   handleHideDate = () => {
     this.setState((prevState) => ({...prevState, previousDatesHidden: !prevState.previousDatesHidden}))
@@ -24,6 +26,9 @@ class Dates extends Component {
   }
   componentWillUnmount() {
     this.refs.dates.removeEventListener('scroll', this.handleScroll);
+  }
+  setColour = (color) => {
+    this.setState({color: color[0]})
   }
   handleScroll = e => {
     if(e.target.scrollTop > 220 && !this.state.displayNavBar) {
@@ -43,10 +48,10 @@ class Dates extends Component {
       <div className='Dates'>
         <BackNav
           route='/'
-          mobile={width > 650? false : true}
+          mobile={width > 720? false : true}
           date={true}
           displayNavBar={displayNavBar}
-          backgroundImage={selectedLocation}
+          backgroundColor={this.state.color}
           >
           {
             selectedLocation &&
@@ -55,10 +60,18 @@ class Dates extends Component {
         </BackNav>
         {
           selectedLocation &&
-          <div className="header-image"
-            style={{ background: `url(${selectedLocation.url}) no-repeat`}}>
-          </div>
+          <Fragment>
+            <div
+              className="header-image"
+              style={{ background: `url(${selectedLocation.url}) no-repeat`}}
+            />
+            <ColorExtractor
+              src={selectedLocation.url}
+              getColors={this.setColour}
+            />
+          </Fragment>
         }
+
         <div className='date-scroll' ref="dates">
           {
           selectedLocation &&
@@ -83,14 +96,9 @@ class Dates extends Component {
                 .find(locationDate => date.id === locationDate.id)
 
               const EachDay = <SingleDate
-                pushRoute={push}
-                selectedLocation={selectedLocation}
                 key={date.id}
                 date={date}
                 locationDate={locationDate}
-                user={user}
-                today={today}
-                selectedDate={selectedDate}
               />
 
               if(date.dayOfWeek === 5) return (

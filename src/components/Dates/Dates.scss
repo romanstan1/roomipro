@@ -20,6 +20,9 @@ div.Dates {
     -o-background-size: cover;
     background-size: cover !important;
     background-position: center top !important;
+    img {
+
+    }
   }
   div.date-scroll {
     z-index: 3;
@@ -85,108 +88,7 @@ div.Dates {
   }
 }
 
-
-div.SingleDate {
-  position: relative;
-  overflow: hidden;
-  background: $darkGrey;
-  color: $lightGrey;
-  text-align: left;
-  z-index: 2;
-  border-top: 2px solid $darkestGrey;
-  border-bottom: 2px solid $darkestGrey;
-  cursor: pointer;
-  width: 100%;
-  height: 160px;
-  padding: 10px;
-
-  display: grid;
-  grid-template-rows: 1fr 5fr 1fr 1px;
-  grid-template-columns: auto 20px 30px 1fr;
-  &.active {
-    background: $midGrey;
-    color: $blue !important;
-    div.progress-bar {
-      background: $darkGrey !important;
-    }
-    &.past {
-      color: $darkGrey ;
-    }
-  }
-  &:hover {
-    background: $midGrey;
-    color: white;
-    div.progress-bar {
-      background: $darkGrey !important;
-    }
-    &.past {
-      color: $darkGrey;
-    }
-  }
-  p.date {
-    font-weight: 600;
-    font-size: 28px;
-  }
-  svg.tick {
-    padding-top: 2px;
-    grid-column: 3 / 3;
-    width: 30px;
-    fill: $green;
-    align-self: start;
-  }
-  div.progress-bar {
-    grid-column: 1 / 5;
-    grid-row: 4 / 4;
-    background: $midGrey;
-    div {
-      align-self: end;
-      height: 100%;
-      background: $green;
-      &.full {
-        background: $pink;
-      }
-    }
-    span {
-      line-height: 100%;
-      font-size: 0px;
-    }
-  }
-  span.weather-icon {
-    grid-column: 4 / 4;
-    grid-row: 1 / 3;
-    justify-self: end;
-    text-align: right;
-    display: inline-grid;
-    // align-self: end;
-    svg{
-      justify-self: end;
-      text-align: right;
-      display: block;
-      fill: $lightGrey;
-      width: 35px;
-    }
-    span {
-      align-self:start;
-      text-align: right;
-      display: block;
-      font-size: 10px;
-      padding-right: 4px;
-      font-weight: 300;
-    }
-  }
-  &.past {
-    height: 100px;
-    font-style: italic;
-    color:$midGrey;
-
-  }
-  &.future {
-  }
-  &.today {
-  }
-}
-
-@media screen and (min-width: 650px) {
+@media screen and (min-width: 720px) {
   div.Dates {
     width: 50%;
   }

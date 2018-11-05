@@ -134,7 +134,11 @@ class App extends Component {
           </Offline>
           {
             logInPending &&
-            <div className='loading-screen'> Fetching profile... </div>
+            <div className='loading-screen'>
+              <div className='animation'>
+                <div className="inside"/>
+              </div>
+            </div>
           }
           {
             isAuthenticated && !logInPending?

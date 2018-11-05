@@ -1,0 +1,106 @@
+@import "src/styles/_variables";
+
+div.SingleDate {
+  position: relative;
+  overflow: hidden;
+  background: $darkGrey;
+  color: $lightGrey;
+  text-align: left;
+  z-index: 2;
+  border-top: 2px solid $darkestGrey;
+  border-bottom: 2px solid $darkestGrey;
+  cursor: pointer;
+  width: 100%;
+  height: 160px;
+  padding: 12px 15px;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-columns: auto 20px 30px 30px;
+  &.active {
+    background: $midGrey;
+    color: white !important;
+    div.progress-bar {
+      background: $darkGrey !important;
+    }
+    &.past {
+      color: $darkGrey ;
+    }
+  }
+  &:hover {
+    background: $midGrey;
+    // color: white;
+    div.progress-bar {
+      background: $darkGrey !important;
+    }
+    &.past {
+      color: $darkGrey;
+    }
+  }
+  p.date {
+    font-weight: 600;
+    font-size: 28px;
+  }
+  svg.tick {
+    // padding-right: 2px;
+    transform: translateX(-20px);
+    grid-row: 2 / 4;
+    grid-column: 2 / 4;
+    width: 100%;
+    fill: $green;
+    align-self: start;
+    height: 100%;
+  }
+  div.progress-bar {
+    grid-column: 4 / 4;
+    grid-row: 2 / 4;
+    background: $midGrey;
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-end;
+    div {
+
+      width: 100%;
+      background: $green;
+      &.full {
+        background: $pink;
+      }
+    }
+    span {
+      line-height: 100%;
+      font-size: 0px;
+    }
+  }
+  span.weather-icon {
+    grid-column: 1 / 1;
+    grid-row: 3 / 5;
+    justify-self:start;
+    text-align: left;
+    display: inline-grid;
+    // align-self: end;
+    svg{
+      justify-self: end;
+      text-align: right;
+      display: block;
+      fill: $lightGrey;
+      width: 35px;
+    }
+    span {
+      align-self:start;
+      text-align: right;
+      display: block;
+      font-size: 10px;
+      padding-right: 4px;
+      font-weight: 300;
+    }
+  }
+  &.past {
+    height: 100px;
+    font-style: italic;
+    color:$midGrey;
+
+  }
+  &.future {
+  }
+  &.today {
+  }
+}
