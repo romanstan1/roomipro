@@ -104,9 +104,7 @@ class App extends Component {
       messaging.requestPermission()
       .then(() => messaging.getToken())
       .then(token => {
-        // console.log('token:: ', token);
         let url = 'https://us-central1-room-ipro.cloudfunctions.net/app/registerDevice'
-
         fetch(url,
           {
             method: "POST",

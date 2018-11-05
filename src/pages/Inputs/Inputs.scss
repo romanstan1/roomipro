@@ -96,4 +96,21 @@ div.Inputs {
       cursor:not-allowed;
     }
   }
+
+  div.rdrDefinedRangesWrapper {display: none}
+
+  div.download-data {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    a {
+      border-radius: 3px;
+      background: $stripeMid;
+      padding: 10px 20px;
+      transform: 0.9s ease;
+      &:hover {
+        background: $stripeMidBlue;
+      }
+    }
+  }
 }
