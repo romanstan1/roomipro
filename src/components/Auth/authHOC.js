@@ -3,7 +3,7 @@ import {Logo} from 'components'
 import {Title, Message} from './AuthModules'
 import { emailSuccess, errorMessage } from 'store/actions'
 import {Link} from 'react-router-dom'
-import {auth, persistence, secondaryAuth, firestore} from 'firebaseInit'
+import {auth, persistence, secondaryAuth, firestore} from 'firebase/initialize'
 import {connect} from 'react-redux'
 import {compose} from "redux";
 import PropTypes from 'prop-types'

@@ -1,5 +1,5 @@
 @import "src/styles/_variables";
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,300i,400,500,700,900');
 
 
 div.Inputs {
@@ -32,14 +32,14 @@ div.Inputs {
           font-size: 14px;
           padding: 5px 10px;
           height: 42px;
-          font-family: 'Open Sans', sans-serif;
+          font-family: 'Roboto', sans-serif;
           color: $navyBlue;
           transition: 0.5s ease;
           &:focus {
             border: 1px solid $brightBlueHover;
           }
           &::placeholder{
-            font-family: 'Open Sans', sans-serif;
+            font-family: 'Roboto', sans-serif;
             color: $stripeMidBlue;
             opacity: 1;
             font-weight: 600;

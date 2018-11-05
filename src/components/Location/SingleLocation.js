@@ -3,18 +3,19 @@ import {connect} from 'react-redux'
 import {push} from 'react-router-redux'
 import ButtonBase from '@material-ui/core/ButtonBase';
 import {addDateToLocation} from 'store/actions'
-import {firestore} from 'firebaseInit'
+import {firestore} from 'firebase/initialize'
 import {EditIcon, DeleteIcon} from './Icons'
+import './SingleLocation.css'
 
 class SingleLocation extends Component {
 
   state = {
     hover: false
   }
-  mouseOver = () => {
+  mouseEnter = () => {
     this.setState({hover: true})
   }
-  mouseOut = () => {
+  mouseLeave = () => {
     this.setState({hover: false})
   }
   handleClick = () => {
@@ -34,9 +35,8 @@ class SingleLocation extends Component {
     return (
       <div
         className={'SingleLocation ' + (selectedLocation && (selectedLocation.id === location.id)? 'active' : '')}
-        onMouseEnter={this.mouseOver}
-        onMouseLeave={this.mouseOut}
-        // style={{backgroundImage: `url(${location.url})`}}
+        onMouseEnter={this.mouseEnter}
+        onMouseLeave={this.mouseLeave}
         >
         <div className='button' onClick={this.handleClick}>
           <span>

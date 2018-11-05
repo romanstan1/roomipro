@@ -1,4 +1,4 @@
-import config from './firebase-config.js'
+import config from './config.js'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/messaging'

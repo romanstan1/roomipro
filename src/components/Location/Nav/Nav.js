@@ -2,10 +2,11 @@ import React, {Component, Fragment} from 'react'
 import {Logo} from 'components'
 import {logOut} from 'store/actions'
 import {connect} from 'react-redux'
-import {auth} from 'firebaseInit'
+import {auth} from 'firebase/initialize'
 import SettingsModal from './SettingsModal'
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types'
+import './Nav.css'
 
 class Nav extends Component {
 

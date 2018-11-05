@@ -2,10 +2,10 @@ import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import {Location} from 'components'
 import ButtonBase from '@material-ui/core/ButtonBase';
-import {firestore} from 'firebaseInit'
+import {firestore} from 'firebase/initialize'
 import InputBox from './InputBox'
 import './Inputs.css'
-import {auth} from 'firebaseInit'
+import {auth} from 'firebase/initialize'
 
 const postNotification = (title, body, link) => {
   auth.currentUser.getIdToken(true).then(idToken => {

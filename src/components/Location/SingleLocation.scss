@@ -1,0 +1,99 @@
+@import "src/styles/_variables";
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,300i,400,500,700,700i,900');
+
+div.SingleLocation {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: calc(100% - 0px);
+  overflow: hidden;
+  cursor: pointer;
+  &.active {
+    div.button {
+      background: $darkGrey;
+      color: $blue !important;
+    }
+  }
+  div.button {
+    &:after {
+      content: "";
+      // background: $midGrey;
+      opacity: 0.2;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      mix-blend-mode: screen;
+    }
+    color: $lightGrey;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    font-family: 'Roboto', sans-serif;
+    align-items:flex-start;
+    justify-content: center;
+    padding: 20px;
+    height: 105px;
+    &:hover {
+      background: $darkGrey;
+      color: white;
+    }
+    >span {
+      padding-left: 100px;
+      h3 {
+        // align-self:flex-end;
+        // text-transform: uppercase;
+        font-weight: 600 !important;
+        font-size: 18px;
+        // text-align: center;
+        text-align: left;
+        padding: 0 0px 0px 0;
+        z-index: 100;
+        display: block;
+      }
+      h4 {
+        font-weight: 300 !important;
+        font-size: 16px;
+        text-align: left;
+        z-index: 100;
+        display: block;
+        // font-style: italic;
+      }
+    }
+  }
+  div.bubble {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    left: 50px;
+    top: 50%;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+  div.edit, div.delete {
+    position: absolute;
+    right: 12px;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0px;
+    svg {
+      width: 20px !important;
+      height: 20px !important;
+      fill: white;
+    }
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  div.edit {
+    bottom: 5px;
+  }
+  div.delete {
+    top: 13px;
+  }
+}

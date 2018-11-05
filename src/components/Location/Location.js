@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react'
 import Nav from './Nav/Nav.js'
 import {connect} from 'react-redux'
 import ButtonBase from '@material-ui/core/ButtonBase';
-import {firestore} from 'firebaseInit'
+import {firestore} from 'firebase/initialize'
 import {EditIcon, PlusCircle} from './Icons'
 import SingleLocation from './SingleLocation'
 import {push} from 'react-router-redux'

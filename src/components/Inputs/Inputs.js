@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {push} from 'react-router-redux'
 import {Location} from 'components'
 import ButtonBase from '@material-ui/core/ButtonBase';
-import {firestore} from 'firebaseInit'
+import {firestore} from 'firebase/initialize'
 import InputBox from './InputBox'
 import './Inputs.css'
 

@@ -5,7 +5,7 @@ import {BackNav} from 'components';
 import Response from './Response';
 import {placeBooking} from 'store/actions'
 import ButtonBase from '@material-ui/core/ButtonBase';
-import {firestore, arrayUnion, arrayRemove} from 'firebaseInit'
+import {firestore, arrayUnion, arrayRemove} from 'firebase/initialize'
 
 class Booking extends Component {
 
