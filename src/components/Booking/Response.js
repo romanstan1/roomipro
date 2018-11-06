@@ -1,8 +1,11 @@
 import React, {Component, Fragment} from 'react'
 import ButtonBase from '@material-ui/core/ButtonBase';
 import AnimatedWord from './AnimatedWord'
+import {connect} from 'react-redux'
+import {placeBooking} from 'store/actions'
+import {handleBooking} from 'firebase/modules'
 
-export default class Response extends Component{
+class Response extends Component{
   state = {
     pathChange: false
   }
@@ -13,8 +16,26 @@ export default class Response extends Component{
       this.setState({pathChange: false})
     }
   }
+
+  handleResponse = (guest, addGuestBoolean) => () => {
+    handleBooking(guest, addGuestBoolean, this.props)
+  }
+
   render() {
-    const {attendingOnDate, future, loading, fullyBooked, handleResponse, guestsAttendingOnDate} = this.props
+    const {
+      handleResponse,
+      attendingOnDate,
+      loading,
+      guestsAttendingOnDate,
+      totalAttendees,
+      maxSeats,
+      today,
+      selectedDate
+    } = this.props
+
+    const fullyBooked = totalAttendees >= maxSeats
+    const future = today <= selectedDate.id
+
     if(future) return (
       <div className='Response'>
         {
@@ -27,7 +48,7 @@ export default class Response extends Component{
         }
         {
           (fullyBooked && !attendingOnDate)? null:
-          <div onClick={handleResponse(false, false)} className='book-cancel'>
+          <div onClick={this.handleResponse(false, false)} className='book-cancel'>
             <AnimatedWord
               text={attendingOnDate? 'Cancel' : 'Book'}
               loading={loading}
@@ -41,11 +62,11 @@ export default class Response extends Component{
             <h4>Guests</h4>
             <span
               className={fullyBooked?'disable' : ''}
-              onClick={handleResponse(true, true)}> +1
+              onClick={this.handleResponse(true, true)}> +1
             </span>
             <span
               className={guestsAttendingOnDate>0?'':'disable'}
-              onClick={handleResponse(true, false)}> -1
+              onClick={this.handleResponse(true, false)}> -1
             </span>
           </div>
         }
@@ -63,3 +84,22 @@ export default class Response extends Component{
     )
   }
 }
+
+const mapProps = state => ({
+  selectedDate: state.data.selectedDate,
+  attendingOnDate: state.data.attendingOnDate,
+  selectedLocation: state.data.selectedLocation,
+  user: state.auth.user,
+  attendees: state.data.attendees,
+  maxSeats: state.data.maxSeats,
+  today: state.data.today,
+  pathname: state.routing.location.pathname,
+  guestsAttendingOnDate: state.data.guestsAttendingOnDate,
+  totalAttendees: state.data.totalAttendees
+})
+
+const mapDispatch = {
+  placeBooking
+}
+
+export default connect(mapProps, mapDispatch)(Response)

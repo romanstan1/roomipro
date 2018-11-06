@@ -26,7 +26,6 @@ div.BackNav {
     position: absolute;
     opacity: 1;
     div{
-      // background-blend-mode:color-dodge;
       mix-blend-mode:hard-light;
       font-size: 0;
       height: 100%;
@@ -37,7 +36,6 @@ div.BackNav {
       opacity: 0.6;
       background: white;
     }
-    // filter: blur(3px);
   }
   &.date {
     opacity: 0;
