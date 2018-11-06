@@ -20,7 +20,7 @@ div.SingleDate {
     background: $midGrey;
     color: white !important;
     div.progress-bar {
-      background: $darkGrey !important;
+      // background: $darkGrey !important;
     }
     &.past {
       color: $darkGrey ;
@@ -30,7 +30,7 @@ div.SingleDate {
     background: $midGrey;
     // color: white;
     div.progress-bar {
-      background: $darkGrey !important;
+      // background: $darkGrey !important;
     }
     &.past {
       color: $darkGrey;
@@ -42,23 +42,27 @@ div.SingleDate {
   }
   svg.tick {
     // padding-right: 2px;
-    transform: translateX(-20px);
+    // transform: translate(-80px, 5px) scale(0.8);
+    transform: translate(0px, 5px) scale(0.8);
+    grid-column: 3 / 5;
     grid-row: 2 / 4;
-    grid-column: 2 / 4;
     width: 100%;
     fill: $green;
     align-self: start;
     height: 100%;
+    z-index: 1000;
   }
   div.progress-bar {
-    grid-column: 4 / 4;
+    grid-column: 3 / 5;
     grid-row: 2 / 4;
-    background: $midGrey;
+    background: inherit;
     display: flex;
     flex-direction: column;
     justify-content:flex-end;
+    text {
+      display: none;
+    }
     div {
-
       width: 100%;
       background: $green;
       &.full {
@@ -76,6 +80,7 @@ div.SingleDate {
     justify-self:start;
     text-align: left;
     display: inline-grid;
+
     // align-self: end;
     svg{
       justify-self: end;
@@ -97,6 +102,9 @@ div.SingleDate {
     height: 100px;
     font-style: italic;
     color:$midGrey;
+    span.weather-icon {
+      display: none;
+    }
 
   }
   &.future {

@@ -4,6 +4,8 @@ import {connect} from 'react-redux'
 import {BackNav} from 'components';
 import {push} from 'react-router-redux'
 import './SingleDate.css'
+import CircularProgressbar from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 class SingleDate extends Component {
   render() {
@@ -22,6 +24,7 @@ class SingleDate extends Component {
     }
     if(date.locations) darksky = date.locations.find( location => selectedLocation.id === location.id)
     // <span>{darksky.weather.icon.replace(/-/g," ")}</span>
+    // <div className={maxCapicity? 'full' : null} style={{height: `${percentage}%`}}/>
 
     return (
       <div
@@ -32,7 +35,21 @@ class SingleDate extends Component {
       <p className='date'>{date.date.slice(0, -5)}</p>
       { attending && <Tick/> }
       <div className="progress-bar">
-      <div className={maxCapicity? 'full' : null} style={{height: `${percentage}%`}}/>
+        <CircularProgressbar
+          percentage={percentage}
+          text={`${percentage}%`}
+          initialAnimation={true}
+          styles={{
+            root: {},
+            path: {
+              stroke: percentage === 100? '#f33974' : '#5ece9e',
+              strokeLinecap: 'butt',
+              strokeWidth: 8,
+              transition: 'stroke-dashoffset 0.5s ease 0s'
+            }
+
+          }}
+        />
       </div>
       {
         darksky &&

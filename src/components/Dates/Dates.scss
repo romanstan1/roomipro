@@ -56,14 +56,17 @@ div.Dates {
       }
     }
     div.weekend-text {
-      font-size: 70px;
+      font-size: 90px;
       color:$midGrey;
       z-index:200;
       position: relative;
+      overflow: hidden;
+      line-height: 90%;
+      font-weight: 500;
       background: $darkGrey;
       border-top: 2px solid $darkestGrey;
       border-bottom: 2px solid $darkestGrey;
-      padding: 30px 10px;
+      padding: 30px 30px;
     }
 
     div.show-previous-dates {

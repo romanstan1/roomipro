@@ -24,7 +24,19 @@ div.BackNav {
     height: 100%;
     width: 100%;
     position: absolute;
-    // -webkit-filter: blur(2px); /* Safari 6.0 - 9.0 */
+    // opacity: 0.8;
+    div{
+      // background-blend-mode:color-dodge;
+      mix-blend-mode:screen;
+      font-size: 0;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top:0;
+      opacity: 0;
+      background: green;
+    }
     // filter: blur(3px);
   }
   &.date {

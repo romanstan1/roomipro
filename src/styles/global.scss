@@ -99,7 +99,6 @@ div.offline {
 }
 
 div.loading-screen {
-  font-size: 20px !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -110,6 +109,7 @@ div.loading-screen {
     position:relative;
     margin:0 auto;
     overflow:hidden;
+    display: inline-block;
     -webkit-animation:spin 2s linear infinite;
     -moz-animation:spin 2s linear infinite;
     -o-animation:spin 2s linear infinite;

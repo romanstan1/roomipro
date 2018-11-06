@@ -114,7 +114,7 @@ class Booking extends Component {
       <div className='Booking'>
         <BackNav
           route={selectedLocation? '/'+ selectedLocation.id : ''}
-          mobile={width > 650? false : true}
+          mobile={width > 720? false : true}
           >
           { selectedDate && <Fragment>{selectedDate.date}</Fragment> }
         </BackNav>

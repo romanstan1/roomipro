@@ -7,9 +7,16 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import './Dates.css'
 import { ColorExtractor } from 'react-color-extractor'
 
-const WeekendText = () =>
+const weekendArray = [
+  "It's the weekend!",
+  "Time for a drink",
+  "WEEEEK EEEND",
+  "The relentless cycle of the working week, followed by the weekend, is turning.",
+  "The term 'weekend' is a concept from the gregorian calendar."
+]
+const WeekendText = ({id}) =>
   <div className="weekend-text">
-    It's the weekend!
+    {weekendArray[parseInt(id)%4]}
   </div>
 
 class Dates extends Component {
@@ -104,7 +111,7 @@ class Dates extends Component {
               if(date.dayOfWeek === 5) return (
                 <Fragment key={date.id}>
                   {EachDay}
-                  <WeekendText/>
+                  <WeekendText id={date.id}/>
                 </Fragment>
               )
 

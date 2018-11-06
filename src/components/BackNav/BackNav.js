@@ -17,7 +17,9 @@ const BackNav = ({route, children, mobile, displayNavBar, date, backgroundColor}
         <div
           className='block-color'
           style={{ background: backgroundColor}}
-        />
+        >
+          <div/>
+        </div>
         : null
       }
         <span className={'text ' + (mobile? 'mobile': '')}>{children}</span>
