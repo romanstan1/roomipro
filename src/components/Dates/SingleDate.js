@@ -23,9 +23,6 @@ class SingleDate extends Component {
       maxCapicity = locationDate.people.length >= parseInt(locationDate.seats)
     }
     if(date.locations) darksky = date.locations.find( location => selectedLocation.id === location.id)
-    // <span>{darksky.weather.icon.replace(/-/g," ")}</span>
-    // <div className={maxCapicity? 'full' : null} style={{height: `${percentage}%`}}/>
-
     return (
       <div
         data-value={date.date}

@@ -10,14 +10,17 @@ import { ColorExtractor } from 'react-color-extractor'
 const weekendArray = [
   "It's the weekend!",
   "Time for a drink",
-  "WEEEEK EEEND",
-  "The relentless cycle of the working week, followed by the weekend, is turning.",
-  "The term 'weekend' is a concept from the gregorian calendar."
+  "WEEK END",
+  "Time for a drink again!"
 ]
-const WeekendText = ({id}) =>
-  <div className="weekend-text">
-    {weekendArray[parseInt(id)%4]}
+const WeekendText = ({id}) => {
+  let val = parseInt(id.toString().slice(4, 6))
+  if(val%3 !== 0) val = val%3
+  else val = val%4
+  return <div className="weekend-text">
+  {weekendArray[val]}
   </div>
+}
 
 class Dates extends Component {
   state = {

@@ -3,7 +3,9 @@ import {Route, Router, Redirect, Switch} from 'react-router-dom'
 import {connect} from 'react-redux'
 import createBrowserHistory from 'history/createBrowserHistory'
 import { Main, SignIn, SendEmail, Inputs, DeleteInput, SendNotification, DownloadData} from 'components'
-import {auth, persistence, firestore, messaging} from 'firebase/initialize'
+import {onAuthStateChanged} from 'firebase/modules'
+import {registerDeviceForNotifications} from 'modules/apis'
+import registerServiceWorker from 'modules/registerServiceWorker'
 import {logInSuccessful, notLoggedIn} from 'store/actions'
 import PropTypes from 'prop-types'
 import {selectLocation, selectDate, switchPage, focusOnLocation} from 'store/actions'
@@ -74,53 +76,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    auth.onAuthStateChanged(user => {
-      if(user) {
-        firestore.collection('users').doc(user.uid).get().then(userData => {
-          const thisUser = userData.data()
-          this.props.logInSuccessful({...user, ...thisUser})
-        })
-      } else {
-          this.props.notLoggedIn()
-      }
-    })
-
-
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js').then(registration => {
-          console.log('ServiceWorker registration successful with scope');
-        }, err => {
-          console.log('ServiceWorker registration failed');
-        }).catch(err => {
-          console.log(err)
-        })
-      })
-    } else {
-      console.log('service worker is not supported');
-    }
-
-    if(!!messaging) {
-      messaging.requestPermission()
-      .then(() => messaging.getToken())
-      .then(token => {
-        let url = 'https://us-central1-room-ipro.cloudfunctions.net/app/registerDevice'
-        fetch(url,
-          {
-            method: "POST",
-            mode: 'cors',
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body:"token=" + token + "&topic=roomipro1" // the topic name
-          })
-          .then(res => res.json())
-          .then(resp => {})
-          .catch(error => console.log("Error with notification registration", error))
-      })
-      .catch(error => console.log("Error with messaging request persmission", error))
-    }
-
+    onAuthStateChanged(this.props.logInSuccessful, this.props.notLoggedIn)
+    registerServiceWorker()
+    registerDeviceForNotifications()
   }
 
   render() {
