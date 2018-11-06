@@ -24,18 +24,18 @@ div.BackNav {
     height: 100%;
     width: 100%;
     position: absolute;
-    // opacity: 0.8;
+    opacity: 1;
     div{
       // background-blend-mode:color-dodge;
-      mix-blend-mode:screen;
+      mix-blend-mode:hard-light;
       font-size: 0;
       height: 100%;
       width: 100%;
       position: absolute;
       left: 0;
       top:0;
-      opacity: 0;
-      background: green;
+      opacity: 0.6;
+      background: white;
     }
     // filter: blur(3px);
   }
