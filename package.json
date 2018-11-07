@@ -15,7 +15,6 @@
     "react-color-extractor": "^1.1.2",
     "react-csv": "^1.0.18",
     "react-csv-downloader": "^0.2.0",
-    "react-date-range": "^1.0.0-beta",
     "react-dates": "^18.2.0",
     "react-detect-offline": "^2.1.2",
     "react-dom": "^16.5.2",

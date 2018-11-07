@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react'
 import {Location, Booking, Dates} from 'components'
-import {firestore} from 'firebase/initialize'
+import {subscribeToLocation} from 'firebase/modules'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {updateLocationData, updateWidth, addDateToLocation, removeLoadingData, getDarkSky} from 'store/actions'
@@ -15,31 +15,8 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    const {minDate, maxDate, addDateToLocation, updateLocationData, removeLoadingData, user, getDarkSky} = this.props
-
     window.addEventListener('resize', this.resize)
-    this.unsubscribe = firestore.collection("locations")
-      .onSnapshot(querySnapshot => {
-
-        let data = {}
-        querySnapshot.forEach(doc => {
-          const locationData = doc.data()
-          data = { ...data, [doc.id]: {...locationData, id: doc.id}}
-          getDarkSky(user.qa, locationData)
-          firestore.collection("locations")
-            .doc(doc.id)
-            .collection("dates")
-            .where("id", ">=", minDate)
-            .where("id", "<=", maxDate)
-            .onSnapshot(querySnapshot => {
-              let dates = []
-              querySnapshot.forEach(docQuery => dates.push(docQuery.data()))
-              removeLoadingData(doc.id)
-              addDateToLocation(doc.id, dates)
-            })
-        })
-        updateLocationData(data)
-      })
+    this.unsubscribe = subscribeToLocation(this.props)
   }
 
   resize = (e) => {

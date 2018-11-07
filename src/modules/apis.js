@@ -22,3 +22,30 @@ export function registerDeviceForNotifications() {
     .catch(error => console.log("Error with messaging request persmission", error))
   }
 }
+
+
+export function darkSkyApiCall(url, headers) {
+  return fetch(url, {
+    method: 'GET',
+    headers,
+  })
+  .then(res => {
+    if (res.status === 200) return res.json()
+    else throw new Error('Something went wrong on api server!')
+  })
+  .then(res => {
+    if(res.errno) {
+      throw new Error('Something went wrong on api server!')
+      return;
+    }
+    const data = res.data.map(day => {
+      return {
+        time: day.time,
+        icon: day.icon,
+        temperatureHigh: day.temperatureHigh
+      }
+    })
+    return data
+    console.log('darksky data: ', data);
+  })
+}

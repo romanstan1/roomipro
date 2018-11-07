@@ -20,7 +20,9 @@ div.SingleDate {
     background: $midGrey;
     color: white !important;
     div.progress-bar {
-      // background: $darkGrey !important;
+      path.CircularProgressbar-trail {
+        stroke: $darkGrey;
+      }
     }
     &.past {
       color: $darkGrey ;
@@ -31,6 +33,9 @@ div.SingleDate {
     // color: white;
     div.progress-bar {
       // background: $darkGrey !important;
+      path.CircularProgressbar-trail {
+        stroke: $darkGrey;
+      }
     }
     &.past {
       color: $darkGrey;
@@ -61,6 +66,9 @@ div.SingleDate {
     justify-content:flex-end;
     text {
       display: none;
+    }
+    path.CircularProgressbar-trail {
+      stroke: $midGrey;
     }
     div {
       width: 100%;

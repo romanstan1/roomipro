@@ -1,5 +1,4 @@
 // Auth action types
-
 export const LOG_OUT = 'LOG_OUT'
 export const NOT_LOGGED_IN = 'NOT_LOGGED_IN'
 export const LOG_IN_SUCCESSFUL = 'LOG_IN_SUCCESSFUL'

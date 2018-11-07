@@ -62,11 +62,11 @@ class Response extends Component{
             <h4>Guests</h4>
             <span
               className={fullyBooked?'disable' : ''}
-              onClick={this.handleResponse(true, true)}> +1
+              onClick={fullyBooked? null : this.handleResponse(true, true)}> +1
             </span>
             <span
               className={guestsAttendingOnDate>0?'':'disable'}
-              onClick={this.handleResponse(true, false)}> -1
+              onClick={guestsAttendingOnDate>0? this.handleResponse(true, false) : null}> -1
             </span>
           </div>
         }

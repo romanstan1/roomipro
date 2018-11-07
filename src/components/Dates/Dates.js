@@ -17,11 +17,10 @@ const WeekendText = ({id}) => {
   let val = parseInt(id.toString().slice(4, 6))
   if(val%3 !== 0) val = val%3
   else val = val%4
-  return <div className="weekend-text">
-  {weekendArray[val]}
-  </div>
+  return (<div className="weekend-text">
+    {weekendArray[val]}
+  </div>)
 }
-
 class Dates extends Component {
   state = {
     previousDatesHidden: true,

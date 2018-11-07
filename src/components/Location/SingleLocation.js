@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import {push} from 'react-router-redux'
 import ButtonBase from '@material-ui/core/ButtonBase';
 import {addDateToLocation} from 'store/actions'
-import {firestore} from 'firebase/initialize'
 import {EditIcon, DeleteIcon} from './Icons'
 import './SingleLocation.css'
 

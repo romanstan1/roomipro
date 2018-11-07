@@ -90,3 +90,28 @@ export const handleBooking = (guest, addGuestBoolean, props) => {
   //   })
 
 }
+
+
+export const subscribeToLocation = ({minDate, maxDate, addDateToLocation, updateLocationData, removeLoadingData, user, getDarkSky}) => {
+  return firestore.collection("locations")
+  .onSnapshot(querySnapshot => {
+    let data = {}
+    querySnapshot.forEach(doc => {
+      const locationData = doc.data()
+      data = { ...data, [doc.id]: {...locationData, id: doc.id}}
+      getDarkSky(user.qa, locationData)
+      firestore.collection("locations")
+      .doc(doc.id)
+      .collection("dates")
+      .where("id", ">=", minDate)
+      .where("id", "<=", maxDate)
+      .onSnapshot(querySnapshot => {
+        let dates = []
+        querySnapshot.forEach(docQuery => dates.push(docQuery.data()))
+        removeLoadingData(doc.id)
+        addDateToLocation(doc.id, dates)
+      })
+    })
+    updateLocationData(data)
+  })
+}
