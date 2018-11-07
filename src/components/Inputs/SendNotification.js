@@ -2,30 +2,9 @@ import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import {Location} from 'components'
 import ButtonBase from '@material-ui/core/ButtonBase';
-import {firestore} from 'firebase/initialize'
 import InputBox from './InputBox'
+import {postNotification} from 'firebase/modules'
 import './Inputs.css'
-import {auth} from 'firebase/initialize'
-
-const postNotification = (title, body, link) => {
-  auth.currentUser.getIdToken(true).then(idToken => {
-    const url = 'https://us-central1-room-ipro.cloudfunctions.net/app/postNotification'
-    fetch(url,
-      {
-        method: "POST",
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': 'Bearer ' + idToken
-        },
-        body:"title=" + title + "&body=" + body + "&link=" + link + "&icon=https://room-ipro.firebaseapp.com/fav128.png"
-      })
-      .then(res => res.json())
-      .then(res => { console.log('res notification::: ',res) })
-      .catch(error => console.log("Error with posting notification : ",error))
-  }).catch((error) => console.log('error getting Firebase id token: ',error ))
-}
-
 
 class SendNotification extends Component {
   state = {
@@ -39,8 +18,8 @@ class SendNotification extends Component {
   }
 
   sendNotification = () => {
-    const {title, body, link} = this.state
-    postNotification(title, body, link)
+    // const {title, body, link} = this.state
+    postNotification(this.state)
   }
 
   handleTextInput = e => this.setState({[e.target.dataset.type]: e.target.value})

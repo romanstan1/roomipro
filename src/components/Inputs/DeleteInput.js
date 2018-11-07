@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {Location} from 'components'
 import ButtonBase from '@material-ui/core/ButtonBase';
 import {firestore} from 'firebase/initialize'
+import {deleteLocation} from 'firebase/modules'
 import InputBox from './InputBox'
 import './Inputs.css'
 
@@ -23,14 +24,6 @@ class DeleteInput extends Component {
   handleTextInput = e => {
     this.setState({[e.target.dataset.type]: e.target.value})
   }
-
-  deleteLocation = () => {
-    firestore
-      .collection("locations")
-      .doc(this.state.id)
-      .delete()
-  }
-
   render() {
     const {focusedLocation} = this.props
     const {id, safetyInput} = this.state
@@ -49,7 +42,7 @@ class DeleteInput extends Component {
           />
           <ButtonBase
             className={safetyInput === id? 'CTAbutton' : 'CTAbutton disable'}
-            onClick={safetyInput === id? this.deleteLocation : null}>
+            onClick={safetyInput === id? deleteLocation(this.state) : null}>
             Delete Location
           </ButtonBase>
         </div>

@@ -1,4 +1,5 @@
 import {auth, persistence, firestore, messaging, arrayUnion, arrayRemove} from './initialize'
+import {postNotificationApi} from 'modules/apis'
 
 export const onAuthStateChanged = (logInSuccessful, notLoggedIn) => {
   auth.onAuthStateChanged(user => {
@@ -114,4 +115,18 @@ export const subscribeToLocation = ({minDate, maxDate, addDateToLocation, update
     })
     updateLocationData(data)
   })
+}
+
+export const deleteLocation = (state) => () => {
+  firestore
+    .collection("locations")
+    .doc(state.id)
+    .delete()
+}
+
+export const postNotification = (state) => {
+  auth.currentUser.getIdToken(true).then(idToken => {
+    const url = 'https://us-central1-room-ipro.cloudfunctions.net/app/postNotification'
+    postNotificationApi(url, idToken, state)
+  }).catch((error) => console.log('error getting Firebase id token: ',error ))
 }
