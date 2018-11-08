@@ -143,7 +143,27 @@ div.loading-screen {
     }
   }
 }
+#simple-menu {
+  >div:last-of-type{
+    outline: none;
+    ul {
+      padding: 0;
+      display: block !important;
+      span {
+        display: block !important;
+        li {
+          display: block !important;
+          height: auto !important;
+          div {
+            display: block !important;
+            font-size: 13px;
 
+          }
+        }
+      }
+    }
+  }
+}
 span.thin {
   font-weight: 300;
 }

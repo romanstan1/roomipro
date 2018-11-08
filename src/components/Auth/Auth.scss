@@ -3,10 +3,11 @@
 div.Auth {
   height: 100%;
   position: relative;
+  background: $darkGrey;
   div.titles {
     position: relative;
     margin: 0px auto;
-    padding: 35px 0 20px 0;
+    padding: 35px 0 0px 0;
     width: 70%;
     min-width: 300px;
     max-width: 700px;
@@ -16,6 +17,7 @@ div.Auth {
       font-weight: 400;
       padding-top: 70px;
       letter-spacing: 0.9px;
+      color: white;
       // margin: 15px 0;
     }
     h2 {
@@ -23,12 +25,11 @@ div.Auth {
       line-height: 150%;
       font-size: 24px;
       font-weight: 300;
-      color: $stripeDark;
+      color: $headerColor;
     }
   }
   div.Message {
     display: block;
-    // background: ghostwhite;
     position: relative;
     margin: 40px auto 0px auto;
     height: 20px;
@@ -36,16 +37,10 @@ div.Auth {
     justify-content: center;
     align-items:flex-end;
     p {
-      // animation-duration: 2.4s;
-      // animation-name: createBox;
-      // white-space: nowrap;
-      // overflow: hidden;
       width: 90%;
-      // max-width: 0px;
-      // height: 35px;
       text-align: center;
       line-height: 28px;
-      color: $brightGreen;
+      color: $green;
       font-weight: 300;
       font-size: 16px;
       padding: 10px 0;
@@ -53,7 +48,7 @@ div.Auth {
         font-weight: 700;
       }
       &.error {
-        color: $brightRed;
+        color: $pink;
       }
     }
   }
@@ -63,18 +58,16 @@ div.Auth {
     margin: 0px auto;
     max-width: 600px;
     width: 70%;
-    // -webkit-box-shadow: 0px 4px 40px -4pxrgba(0,0,0,0.20);
-    // -moz-box-shadow: 0px 4px 40px -4px rgba(0,0,0,0.20);
-    // box-shadow: 0px 4px 40px -4px rgba(0,0,0,0.20);
     border-radius: 5px;
     text-align: center;
     input {
       transition: 0.2s ease;
       margin: 4px 0;
-      border-radius: 5px;
+      border-radius: 3px;
       border: 2px solid $stripeLight;
       line-height: 44px;
       width: 70%;
+      min-width: 320px;
       outline:none;
       font-size: 16px;
       text-indent: 15px;
@@ -83,20 +76,22 @@ div.Auth {
         background: white;
       }
       &::placeholder {
-        color: $stripeDark;
+        color: $lightGrey;
       }
     }
 
     div.CTAButton {
-      margin: 28px 0 35px 0;
-      background: $brightBlue;
+      margin: 25px 0 25px 0;
+      background: $green;
+      opacity: 0.9;
       color: white;
       display: inline-block;
-      padding: 12px 0;
-      width: 280px;
+      padding: 16px 0;
+      width: 70%;
+      min-width: 320px;
       font-size: 14px;
       cursor: pointer;
-      border-radius: 5px;
+      border-radius: 3px;
       text-transform: uppercase;
       font-weight: 600;
       font-size: 600;
@@ -113,16 +108,8 @@ div.Auth {
       -ms-user-select: none; /* Internet Explorer/Edge */
       user-select: none;
        -webkit-tap-highlight-color: transparent;
-      &.pressDown {
-        transform: translate3d(0, 0%, 0) !important;
-        background: $brightBlueHover;
-        -webkit-box-shadow: 0px 10px 20px -4px rgba(0,0,0,0.30);
-        -moz-box-shadow:    0px 10px 20px -4px rgba(0,0,0,0.30);
-        box-shadow:         0px 10px 20px -4px rgba(0,0,0,0.30);
-      }
       &:hover {
-        transform: translate3d(0, -5%, 0);
-        background: $brightBlueHover;
+        opacity: 1;
       }
     }
     div.CardFooter {
@@ -131,11 +118,11 @@ div.Auth {
       line-height: 50px;
       font-size: 14px;
       a {
-        color: $stripeDark;
+        color: $headerColor;
         transition: 0.1s ease;
         &:hover {
           text-decoration: underline;
-          color: $navyBlue;
+          color: white;
         }
       }
     }
