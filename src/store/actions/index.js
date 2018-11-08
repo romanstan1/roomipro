@@ -18,7 +18,7 @@ import {
   switchPage,
   updateWidth,
   focusOnLocation,
-  removeLoadingData
+  removeLoadingData,
 } from './databaseActions.js'
 
 // Api

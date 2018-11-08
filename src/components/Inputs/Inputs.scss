@@ -100,7 +100,7 @@ div.Inputs {
   span.label {
     font-size: 13px;
     display: block;
-    padding: 20px 0 5px 12px;
+    padding: 50px 0 10px 12px;
   }
   div.dropdown{
     width: 286px;
@@ -114,17 +114,20 @@ div.Inputs {
   }
   div.download-data-button {
     position: relative;
-    margin-top: 40px;
-    padding-left: 10px;
-    &.disabled a{
+    margin-top: 75px;
+    margin-left: 10px;
+    width: 286px;
+    &.disabled div{
       cursor: not-allowed;
       color: $lightGrey;
       background: ghostwhite !important;
     }
-    a {
+    div {
+      text-align: center;
+      cursor: pointer;
       border: 1px solid $lightGrey;
       background: $stripeMid;
-      padding: 12px 25px;
+      padding: 12px 30px;
       transform: 0.9s ease;
       &:hover {
         background: $stripeMidBlue;

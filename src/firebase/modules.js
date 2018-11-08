@@ -72,26 +72,37 @@ export const handleBooking = (guest, addGuestBoolean, props) => {
         "seats": selectedLocation.seats
       })
     })
-
-  // userRef
-  //   .get()
-  //   .then(doc => {
-  //     if(doc.exists && !attendingOnDate) userRef.update({
-  //       "id": selectedDate.id,
-  //       "date": selectedDate.date
-  //     })
-  //     else if(doc.exists && attendingOnDate) userRef.update({
-  //       "id": selectedDate.id,
-  //       "date": selectedDate.date
-  //     })
-  //     else userRef.set({
-  //       "id": selectedDate.id,
-  //       "date": selectedDate.date
-  //     })
-  //   })
-
 }
 
+export const downloadLocationData = (startDate, endDate) => {
+
+  const ref =  firestore.collection("locations")
+
+  function getLocation(location) {
+    return ref
+    .doc(location.id)
+    .collection("dates")
+    .where("id", ">=", startDate.valueOf())
+    .where("id", "<=", endDate.valueOf())
+    .get()
+    .then(querySnapshot => {
+      let dates = []
+      querySnapshot.forEach(doc => dates.push(doc.data()))
+      return {...location, dates}
+    })
+  }
+
+  return ref.get()
+    .then(querySnapshot => {
+      let locations = []
+      querySnapshot.forEach(doc => locations.push(doc.data()))
+      return locations
+    })
+    .then(async(locations) => {
+      const data = await Promise.all(locations.map(location => getLocation(location)))
+      return data
+    })
+}
 
 export const subscribeToLocation = ({minDate, maxDate, addDateToLocation, updateLocationData, removeLoadingData, user, getDarkSky}) => {
   return firestore.collection("locations")

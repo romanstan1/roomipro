@@ -18,7 +18,6 @@ class SendNotification extends Component {
   }
 
   sendNotification = () => {
-    // const {title, body, link} = this.state
     postNotification(this.state)
   }
 
