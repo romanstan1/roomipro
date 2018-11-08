@@ -28,7 +28,7 @@ div.Dates {
     z-index: 3;
     overflow-y: scroll;
     height: calc(100% - 0px);
-    background: $darkGrey;
+    background: $darkestGrey;
     &::-webkit-scrollbar {
       width: 0px;
       background: transparent; /* make scrollbar transparent */
@@ -63,7 +63,7 @@ div.Dates {
       overflow: hidden;
       line-height: 90%;
       font-weight: 500;
-      background: $darkGrey;
+      background: $darkestGrey;
       border-top: 2px solid $darkestGrey;
       border-bottom: 2px solid $darkestGrey;
       padding: 30px 30px;

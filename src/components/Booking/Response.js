@@ -48,7 +48,9 @@ class Response extends Component{
         }
         {
           (fullyBooked && !attendingOnDate)? null:
-          <div onClick={this.handleResponse(false, false)} className='book-cancel'>
+          <div
+            onClick={this.handleResponse(false, false)}
+            className={'book-cancel' + (attendingOnDate? ' cancel' : '')}>
             <AnimatedWord
               text={attendingOnDate? 'Cancel' : 'Book'}
               loading={loading}

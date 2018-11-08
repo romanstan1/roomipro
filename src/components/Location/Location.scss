@@ -23,12 +23,10 @@ div.Location {
     justify-content:space-between;
     align-items: center;
     h2 {
-      // text-align: right;
-      font-size: 13px;
-      font-weight: 700;
       text-transform: uppercase;
-      color: $stripeDark;
-      // letter-spacing: 1.2px;
+      font-size: 13px;
+      font-weight: 300;
+      color: $headerColor;
       display: inline-block;
       height: 24px;
       line-height: 24px;
@@ -39,9 +37,11 @@ div.Location {
       fill:$navyBlue;
       height: 18px;
       width: 18px;
+      height: 40px;
+      fill: $headerColor;
       cursor: pointer;
       &:hover {
-        fill:$stripeDark;
+        fill:white;
       }
     }
   }
@@ -55,12 +55,12 @@ div.Location {
     right: 74px;
     font-style: italic;
   }
-  div.menu-title {
-    height: 40px;
-    svg {
-      fill: $stripeLight;
-    }
-  }
+  // div.menu-title {
+  //   height: 40px;
+  //   svg {
+  //     fill: $stripeLight;
+  //   }
+  // }
 }
 
 @media screen and (max-width: 950px) {

@@ -31,7 +31,11 @@ class Booking extends Component {
           route={selectedLocation? '/'+ selectedLocation.id : ''}
           mobile={width > 720? false : true}
           >
-          { selectedDate && <Fragment>{selectedDate.date}</Fragment> }
+          {
+            selectedDate &&
+            <Fragment>{selectedDate.day} {selectedDate.dateValue}
+            <span className='thin'> {selectedDate.month}</span></Fragment> 
+          }
         </BackNav>
         {
           selectedDate &&

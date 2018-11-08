@@ -46,7 +46,7 @@ class SendNotification extends Component {
             type='text'
           />
           <InputBox
-            placeholder='Enter URL link'
+            placeholder='Enter URL link, this must include https://'
             handleInput={this.handleTextInput}
             value={link}
             dataType='link'

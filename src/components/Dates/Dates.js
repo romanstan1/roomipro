@@ -64,7 +64,7 @@ class Dates extends Component {
           >
           {
             selectedLocation &&
-            <Fragment>{selectedLocation.main} - {selectedLocation.secondary}</Fragment>
+            <Fragment>{selectedLocation.main} <span className='thin'>{selectedLocation.secondary}</span></Fragment>
           }
         </BackNav>
         {
@@ -96,6 +96,7 @@ class Dates extends Component {
               {previousDatesHidden? "Show past dates" : "Hide past dates" }
             </div>
           }
+      
           {
             selectedLocation && dates.map(date => {
               if (previousDatesHidden && today > date.id) return null

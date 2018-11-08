@@ -35,6 +35,6 @@ export const WeatherIcon = ({icon}) => {
     case 'fog': return <Fog/>
     case 'snow': return <Snow/>
     case 'hail': return <Hail/>
-    default: return <PartlyCloudyDay/>
+    default: return null
   }
 }

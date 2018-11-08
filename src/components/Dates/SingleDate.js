@@ -24,12 +24,13 @@ class SingleDate extends Component {
     }
     if(date.locations) darksky = date.locations.find( location => selectedLocation.id === location.id)
     return (
+      <div className='scroll-section'>
       <div
         data-value={date.date}
         className={"SingleDate " + (today === date.id ? "today " : '') + (future? "future " : "past ") + ((selectedDate && selectedDate.id === date.id) ? 'active': '' )}
         onClick={() => { this.props.push('/' + selectedLocation.id + '/' + date.id) }}
       >
-      <p className='date'>{date.date.slice(0, -5)}</p>
+      <p className='date'>{date.day} {date.dateValue}<span className="thin month"> {date.month}</span></p>
       { attending && <Tick/> }
       <div className="progress-bar">
         <CircularProgressbar
@@ -39,7 +40,7 @@ class SingleDate extends Component {
           styles={{
             root: {},
             path: {
-              stroke: percentage === 100? '#f33974' : '#5ece9e',
+              stroke: percentage === 100? '#f33974' : '#41cc8f',
               strokeLinecap: 'butt',
               strokeWidth: 8,
               transition: 'stroke-dashoffset 0.5s ease 0s'
@@ -52,10 +53,14 @@ class SingleDate extends Component {
         darksky &&
         <span className='weather-icon'>
         <WeatherIcon icon={darksky.weather.icon}/>
-        <span>{Math.round((darksky.weather.temperatureHigh - 32) * (5/9))}°C</span>
+        {
+          darksky.weather.temperatureHigh &&
+          <span>{Math.round((darksky.weather.temperatureHigh - 32) * (5/9))}°C</span>
+        }
         </span>
       }
       </div>
+    </div>
     )
   }
 }

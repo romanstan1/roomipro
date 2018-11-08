@@ -88,7 +88,7 @@ class App extends Component {
       <Router history={history}>
         <Fragment>
           <Offline>
-            <div className="offline"> No internet detected. Roomipro will automatically try to connect when it detects an internet connection. </div>
+            <div className="offline"> No internet connection available </div>
           </Offline>
           {
             logInPending &&

@@ -7,10 +7,12 @@ div.SingleLocation {
   position: relative;
   width: calc(100% - 0px);
   overflow: hidden;
+  border-radius: 15px;
+  margin: 4px 0;
   cursor: pointer;
   &.active {
     div.button {
-      background: $darkGrey;
+      background: $midGrey;
       color: white !important;
     }
   }
@@ -36,28 +38,24 @@ div.SingleLocation {
     padding: 20px;
     height: 105px;
     &:hover {
-      background: $darkGrey;
+      background: $midGrey;
     }
-    >span {
+    > span {
       padding-left: 100px;
       h3 {
-        // align-self:flex-end;
-        // text-transform: uppercase;
         font-weight: 600 !important;
-        font-size: 18px;
-        // text-align: center;
+        font-size: 17px;
         text-align: left;
-        padding: 0 0px 0px 0;
+        padding: 0 0px 3px 0;
         z-index: 100;
         display: block;
       }
       h4 {
         font-weight: 300 !important;
-        font-size: 16px;
+        font-size: 13px;
         text-align: left;
         z-index: 100;
         display: block;
-        // font-style: italic;
       }
     }
   }

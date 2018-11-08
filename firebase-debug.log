@@ -1,0 +1,32 @@
+[debug] [2018-11-08T16:49:36.563Z] ----------------------------------------------------------------------
+[debug] [2018-11-08T16:49:36.565Z] Command:       /Users/romanstankiewicz/.nvm/versions/node/v10.12.0/bin/node /Users/romanstankiewicz/.nvm/versions/node/v10.12.0/bin/firebase serve --only functions
+[debug] [2018-11-08T16:49:36.565Z] CLI Version:   5.1.1
+[debug] [2018-11-08T16:49:36.565Z] Platform:      darwin
+[debug] [2018-11-08T16:49:36.565Z] Node Version:  v10.12.0
+[debug] [2018-11-08T16:49:36.570Z] Time:          Thu Nov 08 2018 16:49:36 GMT+0000 (Greenwich Mean Time)
+[debug] [2018-11-08T16:49:36.570Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-11-08T16:49:36.582Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-11-08T16:49:36.582Z] > authorizing via signed-in user
+[debug] [2018-11-08T16:49:36.582Z] [iam] checking project room-ipro for permissions ["firebase.projects.get"]
+[debug] [2018-11-08T16:49:36.584Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-11-08T16:49:36.584Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2018-11-08T16:49:36.724Z] <<< HTTP RESPONSE 200
+[debug] [2018-11-08T16:49:36.739Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/room-ipro:testIamPermissions  
+
+[debug] [2018-11-08T16:49:37.432Z] <<< HTTP RESPONSE 200
+[debug] [2018-11-08T16:49:37.434Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/room-ipro  
+ 
+[debug] [2018-11-08T16:49:38.125Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/romanstankiewicz/development/roomipro'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2018-11-08T16:49:39.122Z] Fetching environment
+[debug] [2018-11-08T16:49:39.125Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/855552313275:getServerAppConfig  
+ 
+[debug] [2018-11-08T16:49:39.299Z] <<< HTTP RESPONSE 200
+[debug] [2018-11-08T16:49:39.300Z] Starting @google-cloud/functions-emulator
+[debug] [2018-11-08T16:49:40.871Z] Parsing function triggers
+[info] ✔  functions: app: http://localhost:5000/room-ipro/us-central1/app

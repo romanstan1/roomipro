@@ -17,7 +17,16 @@ import {
 function createDate(days, weeks, dayOfWeek) {
   const id = moment().add(weeks, 'weeks').startOf('isoWeek').add(days - 1, 'days').valueOf()
   const date = moment(id).format('dddd D MMMM YYYY')
-  return { id, date, dayOfWeek }
+  const dateArray = date.split(' ')
+
+  return {
+    id,
+    date,
+    dayOfWeek,
+    day: dateArray[0],
+    dateValue: dateArray[1],
+    month: dateArray[2]
+  }
 }
 
 const dates = (function createFortnight() {
@@ -126,7 +135,7 @@ export default function databaseReducer(state = initialState, action) {
         width:action.payload
       }
     }
-    case GET_DARKSKY_SUCCESSFUL: case GET_DARKSKY_FAILURE: {
+    case GET_DARKSKY_SUCCESSFUL: {
       const defaultWeatherIcon = {
         icon: "default-weather",
         temperatureHigh: 100.0,
@@ -141,7 +150,7 @@ export default function databaseReducer(state = initialState, action) {
             ...date,
             locations: [].concat(date.locations || [], {
               id:  action.payload.location,
-              weather: findDate? findDate : defaultWeatherIcon
+              weather: findDate? findDate : ''
             })
           }
         })

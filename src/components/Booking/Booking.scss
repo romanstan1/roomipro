@@ -30,39 +30,49 @@ div.Response {
   margin: 50px 10px 20px 10px;
   // text-align: center;
   span.attending {
-    font-size: 28px;
+    font-size: 22px;
     font-weight: 600;
     color: $green;
     // padding: 20px 60px;
     display: block;
     &.didnt {
-      color: $brightRed;
+      color: $pink;
     }
   }
   span.not-attending {
-    font-size: 28px;
+    font-size: 22px;
     font-weight: 600;
     color: $pink;
     // padding: 20px 60px;
     display: block;
     &.didnt {
-      color: $brightRed;
+      color: $pink;
     }
   }
   div.book-cancel {
+    background: $darkGrey;
+
+
     padding: 30px 0px;
+    margin: 80px 0px 50px 0;
+    border-radius: 15px;
     cursor: pointer;
     font-size: 58px;
     font-weight: 500;
     font-family: 'Roboto', sans-serif;
-    text-align: left;
+    text-align: center;
+    // text-indent: 30px;
     color: $lightGrey;
     &:hover {
+      background: $midGrey;
       color: white !important;
+    }
+    &.cancel {
+      background: $darkestGrey !important;
     }
   }
   span.fully-booked {
-    font-size: 28px;
+    font-size: 22px;
     font-weight: 600;
     color: $pink;
     display: block;
@@ -74,9 +84,9 @@ div.Response {
     // margin-left: 2px;
     h4 {
       display: inline-block;
-      font-size: 16px;
-      font-weight: 600;
-      color: $stripeDark;
+      font-size: 13px;
+      font-weight: 300;
+      color: $headerColor;
       margin-right: 20px;
       text-transform: uppercase;
     }
@@ -99,14 +109,15 @@ div.Response {
 }
 
 div.attendees {
-  padding-left: 10px;
+  padding: 5px 10px;
   h4 {
     text-transform: uppercase;
-    color: $stripeDark;
+    color: $headerColor;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 300;
     display: inline-block;
     padding-right: 20px;
+    text-indent: 1px;
   }
   p {
     padding: 8px 0;
@@ -115,8 +126,11 @@ div.attendees {
     text-transform: capitalize;
     color: $lightGrey;
     span {
-
-      padding: 4px 0;
+      border-top: 3px $lightGrey solid;
+      padding: 6px 0;
+      &:last-of-type {
+        border-bottom: 3px $lightGrey solid;
+      }
     }
   }
 }

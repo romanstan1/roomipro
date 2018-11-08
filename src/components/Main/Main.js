@@ -5,7 +5,6 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {updateLocationData, updateWidth, addDateToLocation, removeLoadingData, getDarkSky} from 'store/actions'
 import SwipeableViews from 'react-swipeable-views';
-import { Resize, ResizeHorizon } from "react-resize-layout";
 import './Main.css'
 
 class Main extends Component {
