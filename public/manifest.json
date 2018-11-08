@@ -10,7 +10,7 @@
   ],
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#cecaca",
+  "theme_color": "#2d2f3a",
   "background_color": "#cecaca",
   "description": "",
   "gcm_sender_id": "103953800507"
