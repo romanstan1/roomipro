@@ -23,7 +23,7 @@ div.Auth {
     h2 {
       margin: 24px 0 0px 0;
       line-height: 150%;
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 300;
       color: $headerColor;
     }
@@ -31,7 +31,7 @@ div.Auth {
   div.Message {
     display: block;
     position: relative;
-    margin: 40px auto 0px auto;
+    margin: 30px auto 0px auto;
     height: 20px;
     display: flex;
     justify-content: center;
@@ -67,7 +67,6 @@ div.Auth {
       border: 2px solid $stripeLight;
       line-height: 44px;
       width: 70%;
-      min-width: 320px;
       outline:none;
       font-size: 16px;
       text-indent: 15px;
@@ -81,14 +80,13 @@ div.Auth {
     }
 
     div.CTAButton {
-      margin: 25px 0 25px 0;
+      margin: 25px 0 10px 0;
       background: $green;
       opacity: 0.9;
       color: white;
       display: inline-block;
       padding: 16px 0;
       width: 70%;
-      min-width: 320px;
       font-size: 14px;
       cursor: pointer;
       border-radius: 3px;
@@ -137,6 +135,39 @@ div.Auth {
         }
       }
     }
+  }
+}
+
+@media screen and (max-width: 720px) {
+  div.Auth {
+    div.titles {
+      width: 88%;
+      h1{
+        font-size: 32px;
+        font-weight: 400;
+        padding-top: 70px;
+        letter-spacing: 0.9px;
+        color: white;
+      }
+      h2 {
+        margin: 24px 0 0px 0;
+        font-size: 18px !important;
+      }
+    }
+    div.card {
+      width: 80%;
+      input {
+        width: 80%;
+        min-width: 280px;
+      }
+    }
+    div.CTAButton {
+      width: 80% !important;
+      min-width: 280px;
+    }
+  }
+  div.Message {
+    padding-top: 20px !important;
   }
 }
 

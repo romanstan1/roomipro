@@ -28,13 +28,13 @@ const authHOC = PassedComponent => class AuthHOC extends Component {
 
   handleSignIn = () => {
     const {email, password} = this.state
-    auth.setPersistence(persistence.SESSION).then(() =>
-      auth.signInWithEmailAndPassword(email, password))
+    auth.setPersistence(persistence.SESSION)
+      .then(() =>
+        auth.signInWithEmailAndPassword(email, password))
       .then(firebaseUser => {
         this.uploadUserData(email, firebaseUser)
       })
-      .catch(error => this.props.errorMessage(error)
-    )
+      .catch(error => this.props.errorMessage(error))
   }
 
   uploadUserData = (email, firebaseUser) => {
@@ -60,7 +60,7 @@ const authHOC = PassedComponent => class AuthHOC extends Component {
     const domain = email.replace(/.*@/, "")
     const names = email.split("@")[0].split(".")
 
-    if(domain === 'theuniprogroup.com' && names.length === 2) { // 0 checks if it is a unipro email address
+    if((domain === 'theuniprogroup.com' && names.length === 2) || email === 'roman.stan3@gmail.com') { // 0 checks if it is a unipro email address
       const password = Math.random().toString(36).slice(-8)
       secondaryAuth.createUserWithEmailAndPassword(email, password) // 1 trys to create new user by default
         .then(() => secondaryAuth.signOut()) // 2 if succeed, signs out

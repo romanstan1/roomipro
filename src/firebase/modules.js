@@ -4,9 +4,15 @@ import {postNotificationApi} from 'modules/apis'
 export const onAuthStateChanged = (logInSuccessful, notLoggedIn) => {
   auth.onAuthStateChanged(user => {
     if(user) {
-      firestore.collection('users').doc(user.uid).get().then(userData => {
+      firestore.collection('users').doc(user.uid).onSnapshot(userData => {
         const thisUser = userData.data()
-        logInSuccessful({...user, ...thisUser})
+        console.log("user: ", user, thisUser)
+        logInSuccessful({
+          ...thisUser,
+          email: user.email,
+          refreshToken: user.refreshToken,
+          uid: user.uid
+        })
       })
     } else {
       notLoggedIn()
@@ -21,12 +27,6 @@ export const handleBooking = (guest, addGuestBoolean, props) => {
   const bookingUser = { id: user.uid, name: user.firstName + ' ' + user.lastName}
 
   placeBooking(selectedLocation.id, selectedDate.id)
-
-  // const userRef = firestore
-  //   .collection("users")
-  //   .doc(user.uid)
-  //   .collection('dates')
-  //   .doc(`${selectedDate.id}`)
 
   const dateRef = locationRef
     .doc(selectedLocation.id)

@@ -10,8 +10,6 @@ import {
 export const initialState = {
   isAuthenticated: false,
   user: null,
-  // user: {email: 'roman@stankiewicz.com', admin: true},
-  // isAuthenticated: true,
   logInPending: true,
   userMessage: null,
   error: false,

@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 export const Title = () =>
 <div className='titles'>
   <h1>Lorem, ipsum veritatis</h1>
-  <h2>Magnam deleniti, eum qui excepturi dantium ipsum dolor sit amet. Consectetur adipisicing elit error minus.</h2>
+  <h2>Magnam deleniti, eum qui excepturi dantium ipsum dolor sit amet. Consectetur adipisicing elit error.</h2>
 </div>
 
 export const EmailInput = ({handleChange, email}) =>
@@ -25,8 +25,6 @@ export const PasswordInput = ({handleChange, password}) =>
     placeholder='password'
     autoComplete='password'
   />
-  // {/* <form action=""> */}
-// </form>
 
 export class CTAButton extends Component {
   state = {
