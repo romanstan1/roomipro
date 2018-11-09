@@ -6,12 +6,10 @@ div.Booking {
   overflow: hidden;
   flex-direction: column;
   justify-content: flex-start;
-  // align-items: center;
   width: 100%;
   height: 100%;
   background: $darkestGrey;
   position: relative;
-  // border-right: 2px solid $stripeLight;
   p {
     margin: 10px 0;
     span {
@@ -27,82 +25,113 @@ div.Booking {
 
 div.Response {
   padding-top: 40px;
-  margin: 50px 10px 20px 10px;
-  // text-align: center;
+  margin: 40px 0px 0px 0px;
+  &.past {
+    margin: 60px 0px 30px 0px;
+  }
   span.attending {
+    padding-left: 10px;
     font-size: 22px;
     font-weight: 600;
     color: $green;
-    // padding: 20px 60px;
+    height: 25px;
+    line-height: 25px;
     display: block;
     &.didnt {
       color: $pink;
     }
+  }
+  span.fully-booked {
+    padding-left: 10px;
+    font-size: 22px;
+    font-weight: 600;
+    color: $pink;
+    display: block;
+    margin: 10px 0 0 0;
+    height: 25px;
+    line-height: 25px;
   }
   span.not-attending {
     font-size: 22px;
     font-weight: 600;
     color: $pink;
-    // padding: 20px 60px;
+    height: 25px;
+    line-height: 25px;
     display: block;
     &.didnt {
       color: $pink;
+      height: 25px;
+      line-height: 25px;
     }
   }
   div.book-cancel {
     background: $darkGrey;
-
-
     padding: 30px 0px;
-    margin: 80px 0px 50px 0;
+    margin: 50px 0px 40px 0;
     border-radius: 15px;
     cursor: pointer;
     font-size: 58px;
     font-weight: 500;
     font-family: 'Roboto', sans-serif;
     text-align: center;
-    // text-indent: 30px;
     color: $lightGrey;
-    &:hover {
-      background: $midGrey;
-      color: white !important;
+    &.allowed {
+      &:hover {
+        background: $midGrey;
+        color: white !important;
+      }
     }
     &.cancel {
       background: $darkestGrey !important;
     }
-  }
-  span.fully-booked {
-    font-size: 22px;
-    font-weight: 600;
-    color: $pink;
-    display: block;
-    padding: 10px 0 0 0;
+    &.disabled {
+      color: $midGrey !important;
+      cursor: not-allowed;
+      span.circle {
+        background: $midGrey !important;
+      }
+    }
   }
 
   div.guests {
-    margin-bottom: 20px;
-    // margin-left: 2px;
-    h4 {
-      display: inline-block;
-      font-size: 13px;
-      font-weight: 300;
-      color: $headerColor;
-      margin-right: 20px;
-      text-transform: uppercase;
-    }
-    span {
-      display: inline-block;
-      margin-right: 40px;
-      font-size: 32px;
-      font-weight: 500;
-      color: $lightGrey;
-      cursor: pointer;
-      &:hover {
-        color: white;
+    margin: 0px 10px 20px 10px;
+    height: 88px;
+    div.guest-heading {
+      h4 {
+        display: inline-block;
+        font-size: 13px;
+        font-weight: 300;
+        color: $headerColor;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+        span {
+          padding-left: 17px;
+        }
       }
-      &.disable {
-        color: $midGrey !important;
-        cursor: not-allowed;
+    }
+    div.guest-buttons {
+      display: flex;
+      margin-top: 10px;
+      flex-direction: row;
+      justify-content: space-between;
+      span {
+        display: inline-block;
+        font-size: 32px;
+        font-weight: 500;
+        color: $lightGrey;
+        background: $darkGrey;
+        border-radius: 15px;
+        padding: 10px;
+        width: 48%;
+        text-align: center;
+        cursor: pointer;
+        &:hover {
+          color: white;
+        }
+        &.disable {
+          color: $midGrey !important;
+          cursor: not-allowed;
+        }
       }
     }
   }

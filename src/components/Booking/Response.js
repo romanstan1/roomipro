@@ -38,45 +38,42 @@ class Response extends Component{
 
     if(future) return (
       <div className='Response'>
-        {
-          attendingOnDate?
-          <span className='attending'>You are attending!</span>:
-          <span className='not-attending'>You are not attending</span>
-        }
-        {
-          fullyBooked && <span className='fully-booked'>This room is fully booked</span>
-        }
-        {
-          (fullyBooked && !attendingOnDate)? null:
-          <div
-            onClick={this.handleResponse(false, false)}
-            className={'book-cancel' + (attendingOnDate? ' cancel' : '')}>
-            <AnimatedWord
-              text={attendingOnDate? 'Cancel' : 'Book'}
-              loading={loading}
-              pathChange={this.state.pathChange}
-            />
-          </div>
-        }
-        {
-          attendingOnDate &&
-          <div className='guests'>
-            <h4>Guests</h4>
-            <span
-              className={fullyBooked?'disable' : ''}
-              onClick={fullyBooked? null : this.handleResponse(true, true)}> +1
-            </span>
-            <span
-              className={guestsAttendingOnDate>0?'':'disable'}
-              onClick={guestsAttendingOnDate>0? this.handleResponse(true, false) : null}> -1
-            </span>
-          </div>
-        }
+        <span className='attending'>{attendingOnDate && "You are attending"}</span>
+        <span className='fully-booked'>{fullyBooked && "This room is fully booked"}</span>
+        <div
+          onClick={fullyBooked && !attendingOnDate? null: this.handleResponse(false, false)}
+          className={'book-cancel' + (attendingOnDate? ' cancel' : '') + (fullyBooked && !attendingOnDate? ' disabled' : ' allowed')}>
+          <AnimatedWord
+            text={attendingOnDate? 'Cancel' : 'Book'}
+            loading={loading}
+            pathChange={this.state.pathChange}
+          />
+        </div>
+        <div className='guests'>
+          {
+            attendingOnDate &&
+            <Fragment>
+              <div className='guest-heading'>
+                <h4>Guests<span>{!!guestsAttendingOnDate && guestsAttendingOnDate}</span></h4>
+              </div>
+              <div className="guest-buttons">
+                <span
+                  className={(fullyBooked?'disable' : '')}
+                  onClick={fullyBooked? null : this.handleResponse(true, true)}> +1
+                </span>
+                <span
+                  className={(guestsAttendingOnDate>0?'':'disable')}
+                  onClick={guestsAttendingOnDate>0? this.handleResponse(true, false) : null}> -1
+                </span>
+              </div>
+            </Fragment>
+          }
+        </div>
 
       </div>
     )
     return (
-      <div className='Response'>
+      <div className='Response past'>
         {
           attendingOnDate?
           <span className='attending'>You attended!</span> :

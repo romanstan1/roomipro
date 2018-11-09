@@ -2,7 +2,7 @@
 div.scroll-section {
   position: relative;
   overflow: hidden;
-  z-index: 2;
+  z-index: 8;
   background: $darkestGrey;
 }
 div.SingleDate {
@@ -11,7 +11,7 @@ div.SingleDate {
   background: $darkGrey;
   color: $lightGrey;
   text-align: left;
-  z-index: 2;
+  z-index: 8;
   border-top: 3px solid $darkestGrey;
   border-bottom: 3px solid $darkestGrey;
   cursor: pointer;

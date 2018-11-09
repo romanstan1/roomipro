@@ -17,6 +17,7 @@ div.BackNav {
   transition: 0.2s ease;
   overflow: hidden;
   opacity: 1;
+  z-index: 10;
   div.block-color {
     height: 100%;
     width: 100%;
@@ -40,7 +41,6 @@ div.BackNav {
     text-indent: 20px;
     color: $darkestGrey;
     background: $headerColor;
-    // transform: translateY(-60px);
   }
   &.display-nav-bar {
     opacity: 1;
@@ -49,8 +49,6 @@ div.BackNav {
   span.text {
     text-indent: 20px;
     z-index: 100;
-    // color: $darkGrey;
-    // mix-blend-mode:color-burn;
   }
   span.mobile {
     z-index: 500;

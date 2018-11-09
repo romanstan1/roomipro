@@ -53,6 +53,7 @@ class Dates extends Component {
   render() {
     const {locations, dates, selectedLocation, push, user, width, today, selectedDate} = this.props
     const {previousDatesHidden, displayNavBar} = this.state
+    console.log("displayNavBar: ", displayNavBar)
     return (
       <div className='Dates'>
         <BackNav
@@ -96,7 +97,7 @@ class Dates extends Component {
               {previousDatesHidden? "Show past dates" : "Hide past dates" }
             </div>
           }
-      
+
           {
             selectedLocation && dates.map(date => {
               if (previousDatesHidden && today > date.id) return null
