@@ -45,7 +45,6 @@ export function darkSkyApiCall(url, headers) {
       }
     })
     return data
-    console.log('darksky data: ', data);
   })
 }
 

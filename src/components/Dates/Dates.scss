@@ -68,6 +68,13 @@ div.Dates {
       border-top: 2px solid $darkestGrey;
       border-bottom: 2px solid $darkestGrey;
       padding: 30px 30px;
+      &.end {
+        color: $headerColor;
+        font-size: 17px;
+        font-weight: 300;
+        padding-bottom: 40px;
+        text-align: center;
+      }
     }
 
     div.show-previous-dates {

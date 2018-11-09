@@ -5,6 +5,18 @@ import {connect} from 'react-redux'
 import {placeBooking} from 'store/actions'
 import {handleBooking} from 'firebase/modules'
 
+const confirmationText = [
+  "Awesome! See you there.",
+  "Great, that's booked.",
+  "Done! See you then.",
+  "We'll save you a spot!"
+]
+const roomFullText = [
+  "We're sorry, it's fully booked.",
+  "All full up! Sorry.",
+  "Looks a bit busy!"
+]
+
 class Response extends Component{
   state = {
     pathChange: false
@@ -36,10 +48,23 @@ class Response extends Component{
     const fullyBooked = totalAttendees >= maxSeats
     const future = today <= selectedDate.id
 
+    const copyVal = parseInt(selectedDate.id.toString().charAt(7)) * 0.5
+    const confirmVal = copyVal%4
+    const fullVal = (copyVal + 1)%3
+
+    console.log("copyVal: ", copyVal)
+    console.log("confirmVal: ", confirmVal)
+    console.log("fullVal: ", fullVal)
+    console.log(" ")
+    console.log(" ")
     if(future) return (
       <div className='Response'>
-        <span className='attending'>{attendingOnDate && "You are attending"}</span>
-        <span className='fully-booked'>{fullyBooked && "This room is fully booked"}</span>
+        <span className='attending'>
+          {attendingOnDate && confirmationText[confirmVal]}
+        </span>
+        <span className='fully-booked'>
+          {fullyBooked && !attendingOnDate && roomFullText[fullVal]}
+        </span>
         <div
           onClick={fullyBooked && !attendingOnDate? null: this.handleResponse(false, false)}
           className={'book-cancel' + (attendingOnDate? ' cancel' : '') + (fullyBooked && !attendingOnDate? ' disabled' : ' allowed')}>

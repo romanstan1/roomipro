@@ -32,11 +32,11 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "61d7ac17244cf00c2a24837012f9c7cb"
+    "revision": "a768e31e518861dafe9fd29f86436cb6"
   },
   {
-    "url": "static/css/main.6f7405e9.css",
-    "revision": "6ceffad932fbdef3bb72dc7f33fd7c4d"
+    "url": "static/css/main.64ea6b96.css",
+    "revision": "d4fbc5b3eff7f562390f78e56d394719"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();

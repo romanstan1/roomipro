@@ -6,7 +6,6 @@ export const onAuthStateChanged = (logInSuccessful, notLoggedIn) => {
     if(user) {
       firestore.collection('users').doc(user.uid).onSnapshot(userData => {
         const thisUser = userData.data()
-        console.log("user: ", user, thisUser)
         logInSuccessful({
           ...thisUser,
           email: user.email,

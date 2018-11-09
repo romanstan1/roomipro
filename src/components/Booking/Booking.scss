@@ -4,6 +4,7 @@
 div.Booking {
   display: inline-flex;
   overflow: hidden;
+  overflow-y: scroll;
   flex-direction: column;
   justify-content: flex-start;
   width: 100%;

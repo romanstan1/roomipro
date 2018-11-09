@@ -23,7 +23,6 @@ export const getDarkSky = (token, location) => dispatch => {
     payload: {location: location.id, weather: data}
   }))
   .catch(error => {
-    console.error('GET_DARKSKY_FAILURE here:: ', error);
     return dispatch({
       type: GET_DARKSKY_FAILURE,
       payload: {location: location.id, weather: error}

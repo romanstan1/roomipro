@@ -8,10 +8,12 @@ import './Dates.css'
 import { ColorExtractor } from 'react-color-extractor'
 
 const weekendArray = [
-  "It's the weekend!",
-  "Time for a drink",
-  "WEEK END",
-  "Time for a drink again!"
+  "See you next week!",
+  "Have a good one!",
+  "Until next week...",
+  "Onwards and upwards!",
+  "Get some rest.",
+  "Time for a drink"
 ]
 const WeekendText = ({id}) => {
   let val = parseInt(id.toString().slice(4, 6))
@@ -53,7 +55,6 @@ class Dates extends Component {
   render() {
     const {locations, dates, selectedLocation, push, user, width, today, selectedDate} = this.props
     const {previousDatesHidden, displayNavBar} = this.state
-    console.log("displayNavBar: ", displayNavBar)
     return (
       <div className='Dates'>
         <BackNav
@@ -122,6 +123,13 @@ class Dates extends Component {
               return EachDay
             })
           }
+          {
+            selectedLocation &&
+            <div className="weekend-text end">
+              That's all for now
+            </div>
+          }
+
         </div>
       </div>
     )

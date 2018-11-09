@@ -27,7 +27,11 @@ class SingleDate extends Component {
       <div className='scroll-section'>
       <div
         data-value={date.date}
-        className={"SingleDate " + (today === date.id ? "today " : '') + (future? "future " : "past ") + ((selectedDate && selectedDate.id === date.id) ? 'active': '' )}
+        className={
+          "SingleDate " + (today === date.id ? "today " : '')
+          + (future? "future " : "past ") + ((selectedDate && selectedDate.id === date.id) ? 'active': '' )
+          + (attending? ' attending': '')
+        }
         onClick={() => { this.props.push('/' + selectedLocation.id + '/' + date.id) }}
       >
       <p className='date'>{date.day} {date.dateValue}<span className="thin month"> {date.month}</span></p>
@@ -45,7 +49,6 @@ class SingleDate extends Component {
               strokeWidth: 8,
               transition: 'stroke-dashoffset 0.5s ease 0s'
             }
-
           }}
         />
       </div>
