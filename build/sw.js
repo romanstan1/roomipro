@@ -13,6 +13,9 @@
 
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
+workbox.skipWaiting();
+workbox.clientsClaim();
+
 /**
  * The workboxSW.precacheAndRoute() method efficiently caches and responds to
  * requests for URLs in the manifest.
@@ -20,24 +23,16 @@ importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox
  */
 self.__precacheManifest = [
   {
-    "url": "asset-manifest.json",
-    "revision": "90b6a91d504009a28dff4d9017803577"
+    "url": "fav128.png",
+    "revision": "9f75efab90a92f0bbab60d1edde2d83f"
   },
   {
-    "url": "favicon.ico",
-    "revision": "c92b85a5b907c70211f4ec25e29a8c4a"
-  },
-  {
-    "url": "firebase-messaging-sw.js",
-    "revision": "91d35e432c5c7e698dab5f9a3099ac6e"
+    "url": "fav512.png",
+    "revision": "a38d266e076c58f622b111f911bc1071"
   },
   {
     "url": "index.html",
-    "revision": "b1f042cf22fc45f80115211a1d8c7c3a"
-  },
-  {
-    "url": "manifest.json",
-    "revision": "09d111909137806489b0ea563e948e6b"
+    "revision": "95a12aa5b345956e253be6cab02f5647"
   },
   {
     "url": "static/css/main.c7ffe111.css",
@@ -46,3 +41,5 @@ self.__precacheManifest = [
 ].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
+
+workbox.routing.registerRoute("/.jpg$/", workbox.strategies.cacheFirst({ "cacheName":"my-image-cache", plugins: [new workbox.expiration.Plugin({"maxEntries":10,"maxAgeSeconds":2592000,"purgeOnQuotaError":false})] }), 'GET');

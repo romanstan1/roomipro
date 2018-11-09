@@ -12,7 +12,7 @@ import moment from 'moment'
 class DownloadData extends Component {
   state = {
     maxDate: moment().startOf('day'),
-    minDate: moment('Mon Oct 05 2018 15:34:41 GMT+0000 (Greenwich Mean Time)'),
+    minDate: moment('Mon Nov 05 2018 15:34:41 GMT+0000 (Greenwich Mean Time)'),
     startDate: null,
     endDate: null
   }

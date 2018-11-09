@@ -4,13 +4,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
 
 html, body {
   height: 100%;
-  // overflow: hidden;
   font-family: 'Roboto', sans-serif;
   color: $navyBlue;
   font-size: 15px;
