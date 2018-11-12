@@ -52,11 +52,6 @@ class Response extends Component{
     const confirmVal = copyVal%4
     const fullVal = (copyVal + 1)%3
 
-    console.log("copyVal: ", copyVal)
-    console.log("confirmVal: ", confirmVal)
-    console.log("fullVal: ", fullVal)
-    console.log(" ")
-    console.log(" ")
     if(future) return (
       <div className='Response'>
         <span className='attending'>
