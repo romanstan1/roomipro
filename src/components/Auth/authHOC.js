@@ -86,7 +86,7 @@ const authHOC = PassedComponent => class AuthHOC extends Component {
           else this.props.errorMessage(error) // 5 if fails for another reason, therefore sends error message
         })
     } else {
-      this.props.errorMessage({message: "This is not a valid Unipro email address"})
+      this.props.errorMessage({code: 'auth/invalid-email'})
     }
   }
 

@@ -28,11 +28,23 @@ export const emailSuccess = email => dispatch => {
   })
 }
 
+
+
 export const errorMessage = error => dispatch => {
-  console.log("error here!: ", error)
+  function changeErrorCopy(err) {
+    switch (err.code) {
+      case 'auth/invalid-email': case 'auth/user-not-found': return {
+        message: "Email Error. That doesn't look right. Make sure you use your Unipro email address."
+      }
+      case 'auth/wrong-password': return {
+        message: "Incorrect Password. Sorry, that password doesn't look right. Forgot your password? You can reset it below."
+      }
+    default: return err
+    }
+  }
   return dispatch({
     type: ERROR_MESSAGE,
-    payload: error
+    payload: changeErrorCopy(error)
   })
 }
 

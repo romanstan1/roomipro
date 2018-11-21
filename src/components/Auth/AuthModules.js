@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 
 export const Title = () =>
 <div className='titles'>
-  <h1>Let's Work Together</h1>
+  <h1>Let's work together</h1>
 </div>
 
 export const EmailInput = ({handleChange, email}) =>
