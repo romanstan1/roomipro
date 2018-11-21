@@ -29,6 +29,7 @@ export const emailSuccess = email => dispatch => {
 }
 
 export const errorMessage = error => dispatch => {
+  console.log("error here!: ", error)
   return dispatch({
     type: ERROR_MESSAGE,
     payload: error

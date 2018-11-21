@@ -35,12 +35,17 @@ div.Auth {
   }
   div.Message {
     display: block;
-    position: absolute;
     top: 50%;
     transform: translate(0, -50%);
     left: 350px;
     width: 320px;
-    padding: 10px;
+    // padding: 10px;
+    position: relative;
+
+    &.error {
+      position: absolute;
+    }
+
     p {
       // width: 100%;
       border-radius: 10px;
@@ -50,8 +55,9 @@ div.Auth {
       color: white;
       font-weight: 300;
       font-size: 15px;
-      padding: 5px 10px;
+      padding: 0px 10px;
       opacity: 0.92;
+      margin-top: 20px;
       span {
         font-weight: 700;
       }
@@ -132,13 +138,13 @@ div.Auth {
       }
     }
     div.OutlookLink {
-      margin: 45px 0;
+      margin-bottom: 25px;
       a {
+        font-size: 14px;
         color: $brightBlue;
         transition: 0.1s ease;
         &:hover {
           text-decoration: underline;
-          color: $brightBlueHover;
         }
       }
     }
@@ -166,70 +172,26 @@ div.backgroundImage {
 
 @media screen and (max-width: 720px) {
   div.Auth {
-    // div.titles {
-    //   // width: 88%;
-    //   h1{
-    //     font-size: 32px;
-    //     font-weight: 400;
-    //     padding-top: 70px;
-    //     letter-spacing: 0.9px;
-    //     color: white;
-    //   }
-    //   h2 {
-    //     margin: 24px 0 0px 0;
-    //     font-size: 18px !important;
-    //   }
-    // }
     width: calc(100% - 100px);
     margin: 50vh 50px;
     min-width:auto;
-
   }
   div.Message {
     top: 20% !important;
     transform: translate(-50%, -50%) !important;
     left: 50% !important;
     width: calc(70%) !important;
-    padding: 10px;
+    // padding: 10px;
     z-index: 100;
-    // p {
-    //   // width: 100%;
-    //   border-radius: 10px;
-    //   text-align: center;
-    //   line-height: 28px;
-    //   background: $green;
-    //   color: white;
-    //   font-weight: 300;
-    //   font-size: 15px;
-    //   padding: 5px 10px;
-    //   opacity: 0.92;
-    //   span {
-    //     font-weight: 700;
-    //   }
-    //   &.error {
-    //     background: $pink;
-    //   }
-    // }
+    p {
+      line-height: 35px !important;
+    }
   }
 }
 
 
 @media screen and (max-width: 480px) {
   div.Auth {
-    // div.titles {
-    //   // width: 88%;
-    //   h1{
-    //     font-size: 32px;
-    //     font-weight: 400;
-    //     padding-top: 70px;
-    //     letter-spacing: 0.9px;
-    //     color: white;
-    //   }
-    //   h2 {
-    //     margin: 24px 0 0px 0;
-    //     font-size: 18px !important;
-    //   }
-    // }
     width: calc(100%);
     margin: 0vh 0px;
     min-width:auto;
@@ -237,19 +199,12 @@ div.backgroundImage {
     height: 100% !important;
     padding-top: 5vh;
     border-radius: 0px;
-    div.card {
-      // width: 100%;
-      // input {
-      //   width: 92%;
-      //   min-width: 280px;
-      // }
-    }
-    div.CTAButton {
-      // width: 92% !important;
-      // min-width: 280px;
-    }
   }
   div.Message {
     width: 90% !important;
+    top: 5px !important;
+    &.error {
+      top: 20% !important;
+    }
   }
 }

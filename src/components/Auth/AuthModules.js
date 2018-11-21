@@ -65,9 +65,9 @@ export const OutlookLink = ({link, children}) =>
   </div>
 
 export const Message = ({children, error}) =>
-<div className="Message">
+<div className={error? 'Message error':'Message'}>
   {
-     children &&
+    children &&
     <p className={error? 'error':''} dangerouslySetInnerHTML={{ __html: children }}/>
   }
 </div>
