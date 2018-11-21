@@ -101,7 +101,11 @@ div.loading-screen {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 10;
+  background: $darkGrey;
+  // display: none;
   div.animation{
+    z-index: 10;
     width:150px;
     height:150px;
     border-radius:50%;
@@ -136,7 +140,7 @@ div.loading-screen {
         position:absolute;
         margin-top:-40%;
         margin-left:10%;
-        background:white;
+        background:$darkGrey;
         border-radius:50%;
       }
     }

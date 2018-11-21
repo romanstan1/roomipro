@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import {Logo} from 'components'
 import {Title, Message} from './AuthModules'
 import { emailSuccess, errorMessage } from 'store/actions'
@@ -8,6 +8,22 @@ import {connect} from 'react-redux'
 import {compose} from "redux";
 import PropTypes from 'prop-types'
 import './Auth.css'
+
+import {backOne, backTwo, backThree, backFour} from './backgroundImages'
+
+const randomNum = Math.floor(Math.random() * 4) + 1
+const randomImage = randomImageGenerator(randomNum)
+
+
+function randomImageGenerator(num) {
+  switch (num) {
+    case 1: return backOne;
+    case 2: return backTwo;
+    case 3: return backThree;
+    case 4: return backFour;
+    default: return backFour
+  }
+}
 
 const authHOC = PassedComponent => class AuthHOC extends Component {
 
@@ -82,21 +98,28 @@ const authHOC = PassedComponent => class AuthHOC extends Component {
     const {email, password} = this.state
     const {error, emailWasASuccess, userMessage} = this.props
     return (
-      <div className='Auth'>
-        <Logo/>
-        <Title/>
-        <Message error={error}>{userMessage}</Message>
-        <div className="card">
-          <PassedComponent
-            email={email}
-            password={password}
-            handleChange={this.handleChange}
-            handleSignIn={this.handleSignIn}
-            handleSendEmail={this.handleSendEmail}
-            emailSuccess={emailWasASuccess}
-          />
+      <Fragment>
+        <div
+          className="backgroundImage"
+          style={{ backgroundImage: `url(${randomImage})`}}
+        >
         </div>
-      </div>
+        <div className='Auth'>
+          <Logo/>
+          <Title/>
+          <Message error={error}>{userMessage}</Message>
+          <div className="card">
+            <PassedComponent
+              email={email}
+              password={password}
+              handleChange={this.handleChange}
+              handleSignIn={this.handleSignIn}
+              handleSendEmail={this.handleSendEmail}
+              emailSuccess={emailWasASuccess}
+            />
+          </div>
+        </div>
+      </Fragment>
     )
   }
 }

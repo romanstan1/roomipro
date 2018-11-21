@@ -84,6 +84,7 @@ class App extends Component {
   render() {
     const {isAuthenticated, logInPending} = this.props
     const {page} = this.state
+    const something = true
     return (
       <Router history={history}>
         <Fragment>
@@ -91,15 +92,14 @@ class App extends Component {
             <div className="offline"> No internet connection available </div>
           </Offline>
           {
-            logInPending &&
+            logInPending?
             <div className='loading-screen'>
               <div className='animation'>
                 <div className="inside"/>
               </div>
             </div>
-          }
-          {
-            isAuthenticated && !logInPending?
+            :
+            isAuthenticated?
             <Fragment>
               <Switch>
                 <Route exact path="/sign-in" render={() => <Redirect to="/" />} />

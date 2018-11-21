@@ -1,14 +1,16 @@
 @import "src/styles/_variables";
 
 div.Auth {
-  height: 70% !important;
-  width: 360px;
-  min-width: 360px;
+  height: auto !important;
+  width: 340px;
+  min-width: 340px;
   position: relative;
-  background: $darkGrey;
+  background: $darkGreyO;
   border-radius: 15px;
   margin-left: 20px;
-  margin-top: 10vh;
+  margin-top: 50vh;
+  padding-bottom: 50px;
+  transform: translateY(-50%);
   div.titles {
     position: relative;
     margin: 0px auto;
@@ -18,7 +20,7 @@ div.Auth {
     h1{
       font-size: 28px;
       font-weight: 400;
-      padding-top: 80px;
+      padding: 90px 0 30px 0;
       letter-spacing: 0.9px;
       color: white;
       // margin: 15px 0;
@@ -33,25 +35,28 @@ div.Auth {
   }
   div.Message {
     display: block;
-    position: relative;
-    margin: 30px auto 0px auto;
-    height: 20px;
-    display: flex;
-    justify-content: center;
-    align-items:flex-end;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    left: 350px;
+    width: 320px;
+    padding: 10px;
     p {
-      width: 90%;
+      // width: 100%;
+      border-radius: 10px;
       text-align: center;
       line-height: 28px;
-      color: $green;
+      background: $green;
+      color: white;
       font-weight: 300;
-      font-size: 16px;
-      padding: 10px 0;
+      font-size: 15px;
+      padding: 5px 10px;
+      opacity: 0.92;
       span {
         font-weight: 700;
       }
       &.error {
-        color: $pink;
+        background: $pink;
       }
     }
   }
@@ -140,42 +145,111 @@ div.Auth {
   }
 }
 
-@media screen and (max-width: 720px) {
-  // div.Auth {
-  //   div.titles {
-  //     // width: 88%;
-  //     h1{
-  //       font-size: 32px;
-  //       font-weight: 400;
-  //       padding-top: 70px;
-  //       letter-spacing: 0.9px;
-  //       color: white;
-  //     }
-  //     h2 {
-  //       margin: 24px 0 0px 0;
-  //       font-size: 18px !important;
-  //     }
-  //   }
-  //   div.card {
-  //     width: 100%;
-  //     input {
-  //       width: 92%;
-  //       min-width: 280px;
-  //     }
-  //   }
-  //   div.CTAButton {
-  //     width: 92% !important;
-  //     min-width: 280px;
-  //   }
-  // }
-  // div.Message {
-  //   padding-top: 20px !important;
-  // }
+div.backgroundImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-size:cover;
+  background-position:center center;
+  background-repeat:no-repeat;
+  img {
+    height: 100%;
+    width: 100%;
+  }
 }
 
-@keyframes createBox{
-  0%   {max-width: 0px;}
-  10%   {max-width: 1000px;}
-  90%  {max-width: 1000px;}
-  100% {max-width: 0px;}
+@media screen and (max-width: 720px) {
+  div.Auth {
+    // div.titles {
+    //   // width: 88%;
+    //   h1{
+    //     font-size: 32px;
+    //     font-weight: 400;
+    //     padding-top: 70px;
+    //     letter-spacing: 0.9px;
+    //     color: white;
+    //   }
+    //   h2 {
+    //     margin: 24px 0 0px 0;
+    //     font-size: 18px !important;
+    //   }
+    // }
+    width: calc(100% - 100px);
+    margin: 50vh 50px;
+    min-width:auto;
+
+  }
+  div.Message {
+    top: 20% !important;
+    transform: translate(-50%, -50%) !important;
+    left: 50% !important;
+    width: calc(70%) !important;
+    padding: 10px;
+    z-index: 100;
+    // p {
+    //   // width: 100%;
+    //   border-radius: 10px;
+    //   text-align: center;
+    //   line-height: 28px;
+    //   background: $green;
+    //   color: white;
+    //   font-weight: 300;
+    //   font-size: 15px;
+    //   padding: 5px 10px;
+    //   opacity: 0.92;
+    //   span {
+    //     font-weight: 700;
+    //   }
+    //   &.error {
+    //     background: $pink;
+    //   }
+    // }
+  }
+}
+
+
+@media screen and (max-width: 480px) {
+  div.Auth {
+    // div.titles {
+    //   // width: 88%;
+    //   h1{
+    //     font-size: 32px;
+    //     font-weight: 400;
+    //     padding-top: 70px;
+    //     letter-spacing: 0.9px;
+    //     color: white;
+    //   }
+    //   h2 {
+    //     margin: 24px 0 0px 0;
+    //     font-size: 18px !important;
+    //   }
+    // }
+    width: calc(100%);
+    margin: 0vh 0px;
+    min-width:auto;
+    transform: translateY(0%);
+    height: 100% !important;
+    padding-top: 5vh;
+    border-radius: 0px;
+    div.card {
+      // width: 100%;
+      // input {
+      //   width: 92%;
+      //   min-width: 280px;
+      // }
+    }
+    div.CTAButton {
+      // width: 92% !important;
+      // min-width: 280px;
+    }
+  }
+  div.Message {
+    width: 90% !important;
+  }
 }
